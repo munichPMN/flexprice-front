@@ -128,6 +128,8 @@ const Revenue = () => {
 	].some((value) => Number(value ?? 0) > 0);
 	const showGlobalEmpty = !isLoading && !hasRows && !hasAnyMetricData;
 
+	const showVoiceColumns = summary != null && (summary.cpm != null || summary.voice_minutes != null);
+
 	const normalizedSummary = {
 		netRevenue: toNumberOrNull(summary?.total_revenue),
 		fixedContractRevenue: toNumberOrNull(summary?.total_fixed_revenue),
@@ -160,7 +162,7 @@ const Revenue = () => {
 				<div className='relative'>
 					<div className={showGlobalEmpty ? 'blur-[3px] select-none pointer-events-none' : ''}>
 						<div className='rounded-xl border border-gray-200 bg-white overflow-hidden'>
-							<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5'>
+							<div className={`grid grid-cols-1 sm:grid-cols-2 ${showVoiceColumns ? 'lg:grid-cols-5' : 'lg:grid-cols-3'}`}>
 								<MetricTile
 									title='Net Revenue'
 									value={formatCurrency(normalizedSummary.netRevenue, normalizedSummary.currency)}
@@ -175,9 +177,14 @@ const Revenue = () => {
 									title='Usage Revenue'
 									value={formatCurrency(normalizedSummary.usageRevenue, normalizedSummary.currency)}
 									loading={isLoading}
+									isLast={!showVoiceColumns}
 								/>
-								<MetricTile title='Voice Minutes' value={formatInteger(normalizedSummary.totalMinutes)} loading={isLoading} />
-								<MetricTile title='Cost / Minute' value={formatDecimal(normalizedSummary.cpm)} loading={isLoading} isLast />
+								{showVoiceColumns && (
+									<MetricTile title='Voice Minutes' value={formatInteger(normalizedSummary.totalMinutes)} loading={isLoading} />
+								)}
+								{showVoiceColumns && (
+									<MetricTile title='Cost / Minute' value={formatDecimal(normalizedSummary.cpm)} loading={isLoading} isLast />
+								)}
 							</div>
 						</div>
 					</div>
@@ -249,9 +256,15 @@ const Revenue = () => {
 									<TableHead className='rounded-tl-md pl-4 font-semibold text-gray-700 text-[13px]'>Customer</TableHead>
 									<TableHead className='font-semibold text-gray-700 text-[13px]'>Net Revenue</TableHead>
 									<TableHead className='font-semibold text-gray-700 text-[13px]'>Contract Revenue</TableHead>
-									<TableHead className='font-semibold text-gray-700 text-[13px]'>Usage Revenue</TableHead>
-									<TableHead className='font-semibold text-gray-700 text-[13px]'>Voice Minutes</TableHead>
-									<TableHead className='rounded-tr-md font-semibold text-gray-700 text-[13px]'>Cost / Minute</TableHead>
+									<TableHead className={`font-semibold text-gray-700 text-[13px] ${!showVoiceColumns ? 'rounded-tr-md' : ''}`}>
+										Usage Revenue
+									</TableHead>
+									{showVoiceColumns && (
+										<TableHead className='font-semibold text-gray-700 text-[13px]'>Voice Minutes</TableHead>
+									)}
+									{showVoiceColumns && (
+										<TableHead className='rounded-tr-md font-semibold text-gray-700 text-[13px]'>Cost / Minute</TableHead>
+									)}
 								</TableRow>
 							</TableHeader>
 							<TableBody>
@@ -277,15 +290,19 @@ const Revenue = () => {
 										<TableCell className='py-2.5 font-normal text-gray-600 text-[13px]'>
 											{formatCurrency(toNumberOrNull(row.total_usage_revenue), normalizedSummary.currency)}
 										</TableCell>
-										<TableCell className='py-2.5 font-normal text-gray-600 text-[13px]'>
-											{formatInteger(toNumberOrNull(row.voice_minutes))}
-										</TableCell>
-										<TableCell className='py-2.5 font-normal text-gray-600 text-[13px]'>{formatDecimal(toNumberOrNull(row.cpm))}</TableCell>
+										{showVoiceColumns && (
+											<TableCell className='py-2.5 font-normal text-gray-600 text-[13px]'>
+												{formatInteger(toNumberOrNull(row.voice_minutes))}
+											</TableCell>
+										)}
+										{showVoiceColumns && (
+											<TableCell className='py-2.5 font-normal text-gray-600 text-[13px]'>{formatDecimal(toNumberOrNull(row.cpm))}</TableCell>
+										)}
 									</TableRow>
 								))}
 								{pagedItems.length === 0 && (
 									<TableRow className='bg-white'>
-										<TableCell colSpan={6} className='pl-4 py-4 font-normal text-gray-500 text-[13px]'>
+										<TableCell colSpan={showVoiceColumns ? 6 : 4} className='pl-4 py-4 font-normal text-gray-500 text-[13px]'>
 											{search.trim() ? 'No customers match your search.' : '--'}
 										</TableCell>
 									</TableRow>
