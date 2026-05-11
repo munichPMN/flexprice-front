@@ -1,8 +1,7 @@
 import { FC, useMemo } from 'react';
-import { Subscription, SUBSCRIPTION_STATUS, SUBSCRIPTION_TYPE } from '@/models/Subscription';
+import { Subscription, SUBSCRIPTION_HIERARCHY_DISPLAY_KIND, SUBSCRIPTION_STATUS, SUBSCRIPTION_TYPE } from '@/models/Subscription';
 import { ColumnData, FlexpriceTable } from '@/components/molecules';
 import { Chip, Tooltip } from '@/components/atoms';
-import { isInheritedSubscription } from '@/utils/subscription/isInheritedSubscription';
 import { formatBillingPeriodForDisplay } from '@/utils/common/helper_functions';
 import formatDate from '@/utils/common/format_date';
 import SubscriptionActionButton from './SubscriptionActionButton';
@@ -15,10 +14,12 @@ export interface SubscriptionTableProps {
 	subscriptionOverrides?: Map<string, boolean>;
 }
 
-function subscriptionHierarchyKind(row: Subscription): 'inherited' | 'parent' | null {
-	if (isInheritedSubscription(row)) return 'inherited';
+function subscriptionHierarchyKind(row: Subscription): SUBSCRIPTION_HIERARCHY_DISPLAY_KIND | null {
 	const t = row.subscription_type?.toLowerCase();
-	if (t === SUBSCRIPTION_TYPE.PARENT) return 'parent';
+	if (t === SUBSCRIPTION_TYPE.INHERITED) return SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.INHERITED;
+	if (t === SUBSCRIPTION_TYPE.PARENT) return SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.PARENT;
+	if (t === SUBSCRIPTION_TYPE.GROUPED_INVOICING) return SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.GROUPED_INVOICING;
+	if (t === SUBSCRIPTION_TYPE.DELEGATED_INVOICING) return SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.DELEGATED_INVOICING;
 	return null;
 }
 
@@ -64,7 +65,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 			title: 'Hierarchy',
 			render: (row) => {
 				const kind = subscriptionHierarchyKind(row);
-				if (kind === 'inherited') {
+				if (kind === SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.INHERITED) {
 					const chip = <Chip variant='info' label='Inherited' />;
 					return (
 						<Tooltip
@@ -82,7 +83,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 						</Tooltip>
 					);
 				}
-				if (kind === 'parent') {
+				if (kind === SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.PARENT) {
 					return (
 						<Tooltip
 							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
@@ -97,6 +98,44 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 							delayDuration={0}>
 							<span className='inline-flex cursor-default'>
 								<Chip variant='default' label='Parent' />
+							</span>
+						</Tooltip>
+					);
+				}
+				if (kind === SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.GROUPED_INVOICING) {
+					return (
+						<Tooltip
+							delayDuration={0}
+							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							content={
+								<div className='space-y-1'>
+									<div className='font-semibold'>Grouped invoicing</div>
+									<div className='text-sm font-normal opacity-90'>
+										This subscription has its own charges; billing can be consolidated on the parent subscription invoice.
+									</div>
+								</div>
+							}>
+							<span className='inline-flex cursor-default'>
+								<Chip variant='default' label='Grouped invoicing' />
+							</span>
+						</Tooltip>
+					);
+				}
+				if (kind === SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.DELEGATED_INVOICING) {
+					return (
+						<Tooltip
+							delayDuration={0}
+							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							content={
+								<div className='space-y-1'>
+									<div className='font-semibold'>Delegated invoicing</div>
+									<div className='text-sm font-normal opacity-90'>
+										Charges accrue on this subscription, but invoices are issued to another customer (invoicing customer).
+									</div>
+								</div>
+							}>
+							<span className='inline-flex cursor-default'>
+								<Chip variant='default' label='Delegated invoicing' />
 							</span>
 						</Tooltip>
 					);

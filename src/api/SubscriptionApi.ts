@@ -257,7 +257,7 @@ class SubscriptionApi {
 	}
 
 	// =============================================================================
-	// SUBSCRIPTION MODIFY METHODS (mid-cycle inheritance / quantity)
+	// SUBSCRIPTION MODIFY METHODS (inheritance | quantity_change | grouped_invoicing)
 	// =============================================================================
 
 	/**
@@ -272,7 +272,7 @@ class SubscriptionApi {
 	}
 
 	/**
-	 * Execute mid-cycle subscription modification (inheritance or quantity change).
+	 * Execute mid-cycle subscription modification (`inheritance`, `quantity_change`, or `grouped_invoicing`).
 	 * POST /subscriptions/:id/modify/execute
 	 */
 	public static async executeSubscriptionModify(

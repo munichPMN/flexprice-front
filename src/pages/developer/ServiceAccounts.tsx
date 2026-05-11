@@ -34,7 +34,7 @@ const ServiceAccountsPage = () => {
 	const serviceAccountColumns: ColumnData<User>[] = [
 		{
 			title: 'ID',
-			render(rowData: User) {
+			render: (rowData: User) => {
 				const displayId = rowData.id;
 				const prefix = displayId.slice(0, 8);
 				const suffix = displayId.slice(-4);
@@ -49,20 +49,18 @@ const ServiceAccountsPage = () => {
 		},
 		{
 			title: 'Type',
-			render() {
-				return (
-					<div className='flex gap-2 items-center'>
-						<div className='flex items-center gap-1.5 text-purple-600'>
-							<Bot size={16} />
-							<span className='text-sm font-medium'>Service Account</span>
-						</div>
+			render: () => (
+				<div className='flex gap-2 items-center'>
+					<div className='flex items-center gap-1.5 text-purple-600'>
+						<Bot size={16} />
+						<span className='text-sm font-medium'>Service Account</span>
 					</div>
-				);
-			},
+				</div>
+			),
 		},
 		{
 			title: 'Roles',
-			render(rowData: User) {
+			render: (rowData: User) => {
 				if (!rowData.roles || rowData.roles.length === 0) {
 					return <span className='text-gray-500 text-sm'>No Roles</span>;
 				}
@@ -82,9 +80,9 @@ const ServiceAccountsPage = () => {
 			title: 'Created At',
 			width: 150,
 			align: 'right',
-			render(rowData) {
-				return <span className='text-gray-600'>{formatDateShort(rowData.tenant?.created_at || rowData.tenant?.updated_at || '')}</span>;
-			},
+			render: (rowData) => (
+				<span className='text-gray-600'>{formatDateShort(rowData.tenant?.created_at || rowData.tenant?.updated_at || '')}</span>
+			),
 		},
 	];
 

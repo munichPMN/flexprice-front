@@ -3,6 +3,7 @@ import {
 	LineItem as InvoiceLineItem,
 	BILLING_CYCLE,
 	SUBSCRIPTION_STATUS,
+	GROUPED_INVOICING_MODIFY_ACTION,
 	SUBSCRIPTION_MODIFY_LINE_ITEM_ACTION,
 	SUBSCRIPTION_MODIFY_SUBSCRIPTION_RESOURCE_ACTION,
 	SUBSCRIPTION_MODIFY_INVOICE_RESOURCE_ACTION,
@@ -32,6 +33,7 @@ import { QueryFilter, TimeRangeFilter } from './base';
 import { AddAddonToSubscriptionRequest, ADDON_CADENCE, ADDON_PRORATION_BEHAVIOR } from './Addon';
 export { ADDON_CADENCE as AddonCadence, ADDON_PRORATION_BEHAVIOR as ProrationBehavior } from './Addon';
 import { Invoice } from '@/models/Invoice';
+import type { WalletTransaction } from '@/models/WalletTransaction';
 import { Coupon } from '@/models/Coupon';
 import Customer from '@/models/Customer';
 
@@ -157,7 +159,7 @@ export interface ExecuteSubscriptionChangeResponse {
 }
 
 // =============================================================================
-// SUBSCRIPTION MID-CYCLE MODIFICATION (inheritance / quantity_change)
+// SUBSCRIPTION MID-CYCLE MODIFICATION (inheritance | quantity_change | grouped_invoicing)
 // POST /subscriptions/:id/modify/preview | /modify/execute
 // Enums live in @/models/Subscription; re-exported here for dto module consumers.
 // =============================================================================
@@ -165,6 +167,7 @@ export interface ExecuteSubscriptionChangeResponse {
 export type { SubscriptionModifyType } from '@/models';
 export {
 	SUBSCRIPTION_MODIFY_TYPE,
+	GROUPED_INVOICING_MODIFY_ACTION,
 	SUBSCRIPTION_MODIFY_LINE_ITEM_ACTION,
 	SUBSCRIPTION_MODIFY_SUBSCRIPTION_RESOURCE_ACTION,
 	SUBSCRIPTION_MODIFY_INVOICE_RESOURCE_ACTION,
@@ -188,11 +191,20 @@ export interface SubModifyQuantityChangeRequest {
 	line_items: LineItemQuantityChange[];
 }
 
-/** Unified body for modify preview and execute. */
+/** Payload when type is `grouped_invoicing` — add or remove grouped-invoicing child subscriptions. */
+export interface SubModifyGroupedInvoicingParams {
+	action: GROUPED_INVOICING_MODIFY_ACTION;
+	/** Required when `action` is `add`. */
+	parent_subscription_id?: string;
+	child_subscription_ids: string[];
+}
+
+/** Unified body for modify preview and execute (exactly one params object must match `type`). */
 export interface ExecuteSubscriptionModifyRequest {
 	type: SubscriptionModifyType;
 	inheritance_params?: SubModifyInheritanceRequest;
 	quantity_change_params?: SubModifyQuantityChangeRequest;
+	grouped_invoicing_params?: SubModifyGroupedInvoicingParams;
 }
 
 export interface ChangedLineItem {
@@ -214,6 +226,9 @@ export interface ChangedInvoice {
 	id: string;
 	action: SUBSCRIPTION_MODIFY_INVOICE_RESOURCE_ACTION;
 	status: string;
+	/** Present when backend returns invoice payload with proration or preview invoice. */
+	invoice?: Invoice | null;
+	wallet_transaction?: WalletTransaction | null;
 }
 
 export interface ChangedResources {
@@ -257,6 +272,8 @@ export interface SubscriptionInheritanceConfig {
 	external_customer_ids_to_inherit_subscription?: string[];
 	parent_subscription_id?: string;
 	invoicing_customer_external_id?: string | null;
+	/** Standalone subscriptions to attach as `grouped_invoicing` under a new parent; mutually exclusive with inherited-child fields per backend validation. */
+	subscriptions_ids_for_grouped_invoicing?: string[];
 }
 
 export interface CreateSubscriptionRequest {

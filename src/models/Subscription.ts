@@ -55,7 +55,7 @@ export interface Subscription extends BaseModel {
 	readonly invoicing_customer_id?: string;
 	/** Parent subscription ID when this subscription is a child (e.g. in parent-child subscription hierarchy) */
 	readonly parent_subscription_id?: string;
-	/** Hierarchy role: standalone, parent (aggregates child usage), or inherited (child mirror subscription). */
+	/** Hierarchy role: standalone, delegated_invoicing, parent, inherited (mirror), or grouped_invoicing. */
 	readonly subscription_type?: SUBSCRIPTION_TYPE;
 	readonly plan_id: string;
 	readonly environment_id: string;
@@ -189,14 +189,33 @@ export enum SUBSCRIPTION_STATUS {
 /** How this subscription participates in subscription hierarchy (backend subscription_type). */
 export enum SUBSCRIPTION_TYPE {
 	STANDALONE = 'standalone',
+	/** Invoice raised to another customer; no parent subscription. */
+	DELEGATED_INVOICING = 'delegated_invoicing',
 	PARENT = 'parent',
 	INHERITED = 'inherited',
+	/** Own line items; invoice rolled into parent subscription. */
+	GROUPED_INVOICING = 'grouped_invoicing',
+}
+
+/** Values shown in the subscription table “Hierarchy” column (maps from {@link SUBSCRIPTION_TYPE}; standalone → no chip). */
+export enum SUBSCRIPTION_HIERARCHY_DISPLAY_KIND {
+	INHERITED = 'inherited',
+	PARENT = 'parent',
+	GROUPED_INVOICING = 'grouped_invoicing',
+	DELEGATED_INVOICING = 'delegated_invoicing',
 }
 
 /** Mid-cycle modify API: `POST /subscriptions/:id/modify/preview|execute` body `type`. */
 export enum SUBSCRIPTION_MODIFY_TYPE {
 	INHERITANCE = 'inheritance',
 	QUANTITY_CHANGE = 'quantity_change',
+	GROUPED_INVOICING = 'grouped_invoicing',
+}
+
+/** Payload `grouped_invoicing_params.action` for {@link SUBSCRIPTION_MODIFY_TYPE.GROUPED_INVOICING}. */
+export enum GROUPED_INVOICING_MODIFY_ACTION {
+	ADD = 'add',
+	REMOVE = 'remove',
 }
 
 /** Type alias for DTO fields that carry {@link SUBSCRIPTION_MODIFY_TYPE}. */

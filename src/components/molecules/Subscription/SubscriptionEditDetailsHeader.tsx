@@ -11,6 +11,7 @@ import { Link } from 'react-router';
 import type { SubscriptionResponse, UpdateSubscriptionRequest } from '@/types/dto/Subscription';
 import { SUBSCRIPTION_STATUS } from '@/models/Subscription';
 import { isInheritedSubscription } from '@/utils/subscription/isInheritedSubscription';
+import { formatSubscriptionTypeDisplayLabel } from '@/utils/subscription/formatSubscriptionTypeDisplay';
 
 /** Subscription edit page: details header and update drawer. */
 export interface SubscriptionEditDetailsHeaderProps {
@@ -41,9 +42,7 @@ const SubscriptionEditDetailsHeader: FC<SubscriptionEditDetailsHeaderProps> = ({
 			},
 			{
 				label: 'Subscription type',
-				value: subscription?.subscription_type
-					? subscription.subscription_type.charAt(0).toUpperCase() + subscription.subscription_type.slice(1)
-					: 'Standalone',
+				value: formatSubscriptionTypeDisplayLabel(subscription?.subscription_type),
 			},
 			{ label: 'Billing Cycle', value: subscription?.billing_cycle || '--' },
 			{ label: 'Start Date', value: formatDate(subscription?.start_date ?? '') },

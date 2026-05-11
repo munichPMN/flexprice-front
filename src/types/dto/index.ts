@@ -160,6 +160,7 @@ export type {
 	SubModifyInheritanceRequest,
 	LineItemQuantityChange,
 	SubModifyQuantityChangeRequest,
+	SubModifyGroupedInvoicingParams,
 	ExecuteSubscriptionModifyRequest,
 	ChangedLineItem,
 	ChangedSubscription,
@@ -174,6 +175,7 @@ export type {
 export type { SubscriptionModifyType } from '@/models';
 export {
 	SUBSCRIPTION_MODIFY_TYPE,
+	GROUPED_INVOICING_MODIFY_ACTION,
 	SUBSCRIPTION_MODIFY_LINE_ITEM_ACTION,
 	SUBSCRIPTION_MODIFY_SUBSCRIPTION_RESOURCE_ACTION,
 	SUBSCRIPTION_MODIFY_INVOICE_RESOURCE_ACTION,
