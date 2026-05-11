@@ -26,8 +26,7 @@ yarn.lock
 package-lock.json
 .env
 .vercel
-tsconfig.tsbuildinfo
-tsconfig.app.tsbuildinfo
+*.tsbuildinfo
 # Sentry Config File
 .env.sentry-build-plugin
 .dev
@@ -37,6 +36,14 @@ tsconfig.app.tsbuildinfo
 # build
 vite.config.js
 
+# Storybook (build-storybook / Chromatic)
+storybook-static
+
+# Vitest
+coverage
+
+# ESLint flat-config cache (eslint --cache)
+.eslintcache
 
 # env files
 .env.*

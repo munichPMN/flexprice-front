@@ -162,7 +162,7 @@ const Revenue = () => {
 				<div className='relative'>
 					<div className={showGlobalEmpty ? 'blur-[3px] select-none pointer-events-none' : ''}>
 						<div className='rounded-xl border border-gray-200 bg-white overflow-hidden'>
-							<div className={`grid grid-cols-1 sm:grid-cols-2 ${showVoiceColumns ? 'lg:grid-cols-5' : 'lg:grid-cols-3'}`}>
+							<div className={cn('grid grid-cols-1 sm:grid-cols-2', showVoiceColumns ? 'lg:grid-cols-5' : 'lg:grid-cols-3')}>
 								<MetricTile
 									title='Net Revenue'
 									value={formatCurrency(normalizedSummary.netRevenue, normalizedSummary.currency)}
