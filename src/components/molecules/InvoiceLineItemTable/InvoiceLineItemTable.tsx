@@ -44,7 +44,9 @@ const InvoiceLineItemTable: FC<Props> = ({
 	total_prepaid_credits_applied,
 }) => {
 	const [showZeroCharges, setShowZeroCharges] = useState(false);
-	const filteredData = data.filter((item) => showZeroCharges || Number(item.amount) !== 0);
+	const filteredData = data
+		.filter((item) => showZeroCharges || Number(item.amount ?? 0) !== 0)
+		.sort((a, b) => Number(b.amount ?? 0) - Number(a.amount ?? 0));
 
 	return (
 		<div className='bg-white'>
