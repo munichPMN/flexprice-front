@@ -35,6 +35,13 @@ describe('config', () => {
 			const { config } = await import('./index');
 			expect(config.app.env).toBe('local');
 		});
+
+		it('prefers VITE_APP_ENVIRONMENT over VITE_ENVIRONMENT when both set', async () => {
+			vi.stubEnv('VITE_APP_ENVIRONMENT', 'prod');
+			vi.stubEnv('VITE_ENVIRONMENT', 'development');
+			const { config } = await import('./index');
+			expect(config.app.env).toBe('production'); // prod normalized to production, not development
+		});
 	});
 
 	describe('app.isProd', () => {

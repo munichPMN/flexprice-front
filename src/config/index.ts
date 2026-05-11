@@ -65,7 +65,7 @@ export interface Config {
 }
 
 function parseAppEnv(): APP_ENV {
-	const raw = import.meta.env.VITE_APP_ENV ?? import.meta.env.VITE_ENVIRONMENT ?? import.meta.env.VITE_APP_ENVIRONMENT;
+	const raw = import.meta.env.VITE_APP_ENV ?? import.meta.env.VITE_APP_ENVIRONMENT ?? import.meta.env.VITE_ENVIRONMENT;
 
 	if (!raw) return APP_ENV.Local;
 	if (raw === 'prod') return APP_ENV.Production;
