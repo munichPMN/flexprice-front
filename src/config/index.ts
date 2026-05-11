@@ -78,9 +78,7 @@ const appEnv = parseAppEnv();
 export const config: Config = {
 	app: {
 		env: appEnv,
-		get isProd() {
-			return this.env === APP_ENV.Production;
-		},
+		isProd: appEnv === APP_ENV.Production,
 	},
 	api: {
 		baseUrl: import.meta.env.VITE_API_URL ?? 'http://localhost:8080/v1',

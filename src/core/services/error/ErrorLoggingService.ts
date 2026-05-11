@@ -8,7 +8,9 @@ import posthog from 'posthog-js';
  */
 export class ErrorLoggingService {
 	private static instance: ErrorLoggingService;
-	private get isProd() { return config.app.isProd; }
+	private get isProd() {
+		return config.app.isProd;
+	}
 
 	private constructor() {
 		// Private constructor for singleton pattern
