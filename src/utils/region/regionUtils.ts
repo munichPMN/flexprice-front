@@ -1,5 +1,5 @@
 import { includes } from 'lodash';
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { Region } from '@/types/enums/Region';
 
 export interface DashboardUrls {

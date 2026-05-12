@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { PostHogProvider } from 'posthog-js/react';
 import posthog from 'posthog-js';
 import PosthogErrorBoundary from './PosthogErrorBoundary';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 interface Props {
 	children: ReactNode;

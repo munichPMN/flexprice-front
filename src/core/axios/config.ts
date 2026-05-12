@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import EnvironmentApi from '@/api/EnvironmentApi';
 import AuthService from '@/core/auth/AuthService';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 interface RuntimeCredentials {
 	sessionToken: string;

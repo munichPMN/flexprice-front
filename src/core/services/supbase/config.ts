@@ -1,4 +1,4 @@
-import { config, APP_ENV } from '@/config';
+import { config, APP_ENV } from '@/config/config';
 import { createClient } from '@supabase/supabase-js';
 
 const isSelfHosted = config.app.env === APP_ENV.SelfHosted;

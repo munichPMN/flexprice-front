@@ -1,7 +1,7 @@
 // src/components/ErrorBoundary.tsx
 import React, { Component, ReactNode } from 'react';
 import posthog from 'posthog-js';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 interface Props {
 	children: ReactNode;

@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms';
 import { RouteNames } from '@/core/routes/Routes';
 import { Link } from 'react-router';
 import * as Sentry from '@sentry/react';
-import { config } from '@/config';
+import { config } from '@/config/config';
 import toast from 'react-hot-toast';
 
 interface ErrorInfo {

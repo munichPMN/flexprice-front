@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Button } from '@/components/atoms';

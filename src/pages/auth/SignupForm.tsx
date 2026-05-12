@@ -8,7 +8,7 @@ import { EyeOff } from 'lucide-react';
 import { EyeIcon } from 'lucide-react';
 import { RouteNames } from '@/core/routes/Routes';
 import { useNavigate, useSearchParams } from 'react-router';
-import { config, APP_ENV } from '@/config';
+import { config, APP_ENV } from '@/config/config';
 import GoogleSignin from './GoogleSignin';
 import { AuthTab } from './authTabs';
 

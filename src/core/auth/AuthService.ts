@@ -1,4 +1,4 @@
-import { config, APP_ENV } from '@/config';
+import { config, APP_ENV } from '@/config/config';
 import supabase from '../services/supbase/config';
 import { RouteNames } from '../routes/Routes';
 

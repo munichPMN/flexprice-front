@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Sentry from '@sentry/react';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 interface Props {
 	children: React.ReactNode;

@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import * as Sentry from '@sentry/react';
 import posthog from 'posthog-js';
 

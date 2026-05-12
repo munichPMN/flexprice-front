@@ -4,7 +4,7 @@ import './index.css';
 import PosthogProvider from './core/services/posthog/PosthogProvider.tsx';
 import SentryProvider from './core/services/sentry/SentryProvider.tsx';
 import VercelSpeedInsights from './core/services/vercel/vercel.tsx';
-import { config } from './config';
+import { config } from './config/config.ts';
 import { registerWebMCPTools } from './agent/webmcp.ts';
 
 registerWebMCPTools();

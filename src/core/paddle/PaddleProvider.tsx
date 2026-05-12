@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { CHECKOUT_PATH, PADDLE_URL_PARAMS } from './constants';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 /**
  * PaddleProvider — routing guard + demo init only.

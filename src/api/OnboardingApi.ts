@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { AxiosClient } from '@/core/axios/verbs';
 import { FireEventsPayload } from '@/types/dto';
 

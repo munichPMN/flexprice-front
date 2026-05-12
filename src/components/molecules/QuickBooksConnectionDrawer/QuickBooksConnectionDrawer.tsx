@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { FC, useState, useEffect } from 'react';
 import { Button, Input, Sheet, Spacer } from '@/components/atoms';
 import { Switch } from '@/components/ui';

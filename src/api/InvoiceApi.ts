@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { AxiosClient } from '@/core/axios/verbs';
 import { Invoice } from '@/models';
 import { generateQueryParams } from '@/utils/common/api_helper';

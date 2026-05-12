@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { config } from '@/config';
+import { config } from '@/config/config';
 
 /** Raw parsed env config: tenant_id -> { environment_id -> ISO date or "suspended" } */
 export type RestrictedEnvsConfig = Record<string, Record<string, string>>;

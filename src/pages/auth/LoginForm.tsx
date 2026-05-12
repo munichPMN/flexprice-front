@@ -7,7 +7,7 @@ import { Button, Input } from '@/components/atoms';
 import { EyeIcon, EyeOff } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import AuthApi from '@/api/AuthApi';
-import { config, APP_ENV } from '@/config';
+import { config, APP_ENV } from '@/config/config';
 import { RouteNames } from '@/core/routes/Routes';
 import GoogleSignin from './GoogleSignin';
 import { AuthTab } from './authTabs';

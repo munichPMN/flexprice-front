@@ -1,4 +1,4 @@
-import { config } from '@/config';
+import { config } from '@/config/config';
 import { FC, useEffect, useState } from 'react';
 import { Button, Input, Sheet, Spacer } from '@/components/atoms';
 import { useMutation } from '@tanstack/react-query';

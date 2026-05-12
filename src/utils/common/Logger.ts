@@ -1,4 +1,4 @@
-import { config as appConfig, APP_ENV } from '@/config';
+import { config as appConfig, APP_ENV } from '@/config/config';
 
 export enum LogLevel {
 	INFO = 'info',
