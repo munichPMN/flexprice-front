@@ -113,12 +113,9 @@ export type SubscriptionFormState = {
 	addedSubscriptionLineItems: AddedSubscriptionLineItem[];
 	/** Customers that should receive inherited child subscriptions (serialized as external IDs on create) */
 	inheritanceCustomers: Customer[];
-	/** When true, create payload sends `trial_period_days`; when false, omit (inherit from plan). */
-	subscriptionTrialEnabled: boolean;
-	/** Day count when `subscriptionTrialEnabled`; empty when disabled. */
+	/** Set to send `trial_period_days`; leave empty to omit (inherit from plan). */
 	subscriptionTrialPeriodDays: string;
-	/** When true, create payload sends `auto_invoice_threshold` if plan charges include no FIXED prices. */
-	autoInvoiceThresholdEnabled: boolean;
+	/** Set to send `auto_invoice_threshold` when plan has no FIXED charges; leave empty to omit. */
 	autoInvoiceThreshold: string;
 };
 
@@ -286,9 +283,7 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 		hasModifiedPlanCreditGrants: false,
 		addedSubscriptionLineItems: [],
 		inheritanceCustomers: [],
-		subscriptionTrialEnabled: false,
 		subscriptionTrialPeriodDays: '',
-		autoInvoiceThresholdEnabled: false,
 		autoInvoiceThreshold: '',
 	});
 
@@ -360,16 +355,16 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 				...(() => {
 					const tpd = (subscriptionData.details as { trial_period_days?: number | null }).trial_period_days;
 					if (typeof tpd === 'number' && tpd > 0) {
-						return { subscriptionTrialEnabled: true, subscriptionTrialPeriodDays: String(tpd) };
+						return { subscriptionTrialPeriodDays: String(tpd) };
 					}
-					return { subscriptionTrialEnabled: false, subscriptionTrialPeriodDays: '' };
+					return { subscriptionTrialPeriodDays: '' };
 				})(),
 				...(() => {
 					const ait = (subscriptionData.details as { auto_invoice_threshold?: number | null }).auto_invoice_threshold;
 					if (typeof ait === 'number' && Number.isFinite(ait)) {
-						return { autoInvoiceThresholdEnabled: true, autoInvoiceThreshold: String(ait) };
+						return { autoInvoiceThreshold: String(ait) };
 					}
-					return { autoInvoiceThresholdEnabled: false, autoInvoiceThreshold: '' };
+					return { autoInvoiceThreshold: '' };
 				})(),
 			}));
 		}
@@ -460,14 +455,11 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 			return 'Please save your changes before submitting.';
 		}
 
-		if (subscriptionState.subscriptionTrialEnabled) {
-			const raw = subscriptionState.subscriptionTrialPeriodDays.trim();
-			if (!raw) {
-				return 'Trial period is required when a custom trial is enabled.';
-			}
-			const n = parseInt(raw, 10);
+		const trialRaw = subscriptionState.subscriptionTrialPeriodDays.trim();
+		if (trialRaw !== '') {
+			const n = parseInt(trialRaw, 10);
 			if (!Number.isFinite(n) || n < 1) {
-				return 'Enter a valid trial length in days (at least 1).';
+				return 'Enter a valid trial length in days (at least 1), or leave empty to use the plan default.';
 			}
 		}
 
@@ -477,17 +469,14 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 			subscriptionState.currency,
 			isPriceActive,
 		);
-		if (subscriptionState.autoInvoiceThresholdEnabled) {
+		const thresholdRaw = subscriptionState.autoInvoiceThreshold.trim();
+		if (thresholdRaw !== '') {
 			if (hasFixedCharges) {
 				return 'Auto invoice threshold is not available when the plan includes fixed charges.';
 			}
-			const raw = subscriptionState.autoInvoiceThreshold.trim();
-			if (!raw) {
-				return 'Auto invoice threshold is required when enabled.';
-			}
-			const n = parseFloat(raw);
+			const n = parseFloat(thresholdRaw);
 			if (!Number.isFinite(n) || n < 0) {
-				return 'Enter a valid auto invoice threshold (0 or greater).';
+				return 'Enter a valid auto invoice threshold (0 or greater), or leave empty to omit.';
 			}
 		}
 
@@ -527,9 +516,7 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 			addedSubscriptionLineItems,
 			customerId: formCustomerId,
 			inheritanceCustomers,
-			subscriptionTrialEnabled,
 			subscriptionTrialPeriodDays,
-			autoInvoiceThresholdEnabled,
 			autoInvoiceThreshold,
 		} = subscriptionState;
 
@@ -611,12 +598,19 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 				? invoicingCustomer.external_id.trim()
 				: undefined;
 
-		const trial_period_days: number | undefined =
-			subscriptionTrialEnabled && subscriptionTrialPeriodDays.trim() !== '' ? parseInt(subscriptionTrialPeriodDays.trim(), 10) : undefined;
+		const trialTrimmed = subscriptionTrialPeriodDays.trim();
+		let trial_period_days: number | undefined;
+		if (trialTrimmed !== '') {
+			const n = parseInt(trialTrimmed, 10);
+			if (Number.isFinite(n) && n >= 1) {
+				trial_period_days = n;
+			}
+		}
 
 		let auto_invoice_threshold: number | undefined;
-		if (autoInvoiceThresholdEnabled && !hasFixedSubscriptionChargePrice && autoInvoiceThreshold.trim() !== '') {
-			const parsed = parseFloat(autoInvoiceThreshold.trim());
+		const thresholdTrimmed = autoInvoiceThreshold.trim();
+		if (thresholdTrimmed !== '' && !hasFixedSubscriptionChargePrice) {
+			const parsed = parseFloat(thresholdTrimmed);
 			if (Number.isFinite(parsed) && parsed >= 0) {
 				auto_invoice_threshold = parsed;
 			}
