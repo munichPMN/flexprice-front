@@ -1,10 +1,10 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { FlexpriceTable, ColumnData } from '@/components/molecules';
 import { Chip, Select, ShortPagination, Spacer, ActionButton } from '@/components/atoms';
 import TaskRunApi, { TaskRun } from '@/api/TaskRunApi';
 import { formatDistanceToNow } from 'date-fns';
-import usePagination from '@/hooks/usePagination';
+import usePagination, { PAGINATION_PREFIX } from '@/hooks/usePagination';
 import { Download } from 'lucide-react';
 import { TaskApi } from '@/api';
 import toast from 'react-hot-toast';
@@ -14,10 +14,12 @@ interface TaskRunsTableProps {
 	taskType?: 'IMPORT' | 'EXPORT';
 }
 
+const TASK_RUNS_PAGE_SIZE = 10;
+
 const TaskRunsTable: FC<TaskRunsTableProps> = ({ scheduledTaskId, taskType = 'EXPORT' }) => {
 	const [statusFilter, setStatusFilter] = useState<string>('all');
 	const [dateRangeFilter, setDateRangeFilter] = useState<string>('all');
-	const { limit, offset, page, reset } = usePagination();
+	const { limit, offset, page, reset } = usePagination({ initialLimit: TASK_RUNS_PAGE_SIZE, prefix: PAGINATION_PREFIX.TASK_RUNS });
 
 	// Download task file mutation
 	const { mutate: downloadFile } = useMutation({
@@ -36,10 +38,13 @@ const TaskRunsTable: FC<TaskRunsTableProps> = ({ scheduledTaskId, taskType = 'EX
 		downloadFile(taskId);
 	};
 
-	// Reset pagination when filters change
+	// Stable ref so we only reset page when filter values change,
+	// not when reset's identity changes after a page navigation (e.g. after setPage(2))
+	const resetRef = useRef(reset);
+	resetRef.current = reset;
 	useEffect(() => {
-		reset();
-	}, [statusFilter, dateRangeFilter, reset]);
+		resetRef.current();
+	}, [statusFilter, dateRangeFilter]);
 
 	const { data: runsResponse, isLoading } = useQuery({
 		queryKey: ['task-runs', scheduledTaskId, taskType, statusFilter, page],
@@ -252,7 +257,7 @@ const TaskRunsTable: FC<TaskRunsTableProps> = ({ scheduledTaskId, taskType = 'EX
 			{totalItems > 0 && dateRangeFilter === 'all' && (
 				<>
 					<Spacer className='!h-4' />
-					<ShortPagination unit='Task Runs' totalItems={totalItems} />
+					<ShortPagination unit='Task Runs' totalItems={totalItems} pageSize={limit} prefix={PAGINATION_PREFIX.TASK_RUNS} />
 				</>
 			)}
 		</div>
