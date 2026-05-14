@@ -145,6 +145,15 @@
 			"emptyHeading": "إصدار إشعار دائن",
 			"emptyDescription": "أضف إشعاراً دائناً لتعديل فواتير العملاء أو استرداد مبالغها."
 		},
+		"table": {
+			"creditNoteId": "رقم الإشعار الدائن",
+			"amount": "المبلغ",
+			"status": "الحالة",
+			"type": "النوع",
+			"invoice": "الفاتورة",
+			"customer": "العميل",
+			"createdDate": "تاريخ الإنشاء"
+		},
 		"detailPage": {
 			"title": "تفاصيل الإشعار الدائن",
 			"creditNoteNumber": "رقم الإشعار الدائن",

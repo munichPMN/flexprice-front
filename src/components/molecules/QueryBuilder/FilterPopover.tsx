@@ -16,6 +16,7 @@ import { sanitizeFilterConditions } from '@/types/formatters/QueryBuilder';
 import FilterMultiSelect from './FilterMultiSelect';
 import FilterAsyncSelect from './FilterAsyncSelect';
 import FilterAsyncMultiSelect from './FilterAsyncMultiSelect';
+import { getOperatorDisplayLabel } from './operatorLabels';
 
 interface Props {
 	fields: FilterField[];
@@ -485,10 +486,7 @@ const FilterPopover: React.FC<Props> = ({ fields, value = [], onChange, classNam
 															.filter((operator) => operator != null)
 															.map((operator) => ({
 																value: operator,
-																label: operator
-																	.toLowerCase()
-																	.replace(/_/g, ' ')
-																	.replace(/\b\w/g, (char) => char.toUpperCase()),
+																label: getOperatorDisplayLabel(t, operator),
 															}))}
 														value={filter.operator}
 														onChange={(value) => handleFilterUpdate(filter.id, { operator: value as FilterOperator })}

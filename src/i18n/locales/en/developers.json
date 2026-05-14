@@ -219,6 +219,20 @@
 		"listPage": {
 			"title": "Events"
 		},
+		"queryBuilder": {
+			"filters": {
+				"eventId": "Event ID",
+				"eventName": "Event name",
+				"externalCustomerId": "External customer ID",
+				"source": "Source",
+				"startTime": "Start time",
+				"endTime": "End time"
+			},
+			"sort": {
+				"createdAt": "Created at",
+				"updatedAt": "Updated at"
+			}
+		},
 		"debugger": {
 			"processedEventsTitle": "Processed Events",
 			"eventDetailsTitle": "Event Details",
@@ -273,7 +287,25 @@
 		},
 		"query": {
 			"pageTitle": "Query",
-			"selectMeteredFeaturePlaceholder": "Select a metered feature"
+			"selectMeteredFeaturePlaceholder": "Select a metered feature",
+			"filters": {
+				"customerId": "Customer ID",
+				"startTime": "Start time",
+				"endTime": "End time"
+			},
+			"windowSizes": {
+				"MINUTE": "Minute",
+				"15MIN": "15 minutes",
+				"30MIN": "30 minutes",
+				"HOUR": "Hour",
+				"3HOUR": "3 hours",
+				"6HOUR": "6 hours",
+				"12HOUR": "12 hours",
+				"DAY": "Day",
+				"WEEK": "Week"
+			},
+			"sortTimeWindow": "Time window",
+			"chartSeriesUsage": "Usage"
 		}
 	}
 }

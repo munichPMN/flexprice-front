@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import PaymentApi from '@/api/PaymentApi';
 import usePagination from '@/hooks/usePagination';
 import { Loader, ShortPagination, Card } from '@/components/atoms';
 import toast from 'react-hot-toast';
 import { InvoicePaymentsTable } from '@/components/molecules';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -14,6 +15,8 @@ const DEFAULT_PAYMENTS_TUTORIAL_IMAGE = 'https://mintlify.s3.us-west-1.amazonaws
 
 const PaymentList = () => {
 	const { t } = useTranslation(['billing', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const { limit, offset, page } = usePagination();
 
 	const {
@@ -43,9 +46,9 @@ const PaymentList = () => {
 						{t('payments.recordFirstDescription')}
 					</div>
 				</div>
-				{GUIDES.payments.tutorials && GUIDES.payments.tutorials.length > 0 && (
+				{guides.payments.tutorials && guides.payments.tutorials.length > 0 && (
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
-						{GUIDES.payments.tutorials.map((item, index) => {
+						{guides.payments.tutorials.map((item, index) => {
 							const imageUrl = item.imageUrl && item.imageUrl.trim() !== '' ? item.imageUrl : DEFAULT_PAYMENTS_TUTORIAL_IMAGE;
 							return (
 								<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} key={index}>

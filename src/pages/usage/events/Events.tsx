@@ -88,74 +88,6 @@ const createEmptyPropertyFilter = (): PropertyFilterRow => ({
 	value: '',
 });
 
-const sortingOptions: SortOption[] = [
-	{
-		field: 'name',
-		label: 'Name',
-		direction: SortDirection.ASC,
-	},
-	{
-		field: 'email',
-		label: 'Email',
-		direction: SortDirection.ASC,
-	},
-	{
-		field: 'created_at',
-		label: 'Created At',
-		direction: SortDirection.DESC,
-	},
-	{
-		field: 'updated_at',
-		label: 'Updated At',
-		direction: SortDirection.DESC,
-	},
-];
-
-const filterOptions: FilterField[] = [
-	{
-		field: 'event_id',
-		label: 'EventID',
-		fieldType: FilterFieldType.INPUT,
-		operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
-		dataType: DataType.STRING,
-	},
-	{
-		field: 'event_name',
-		label: 'Events Name',
-		fieldType: FilterFieldType.INPUT,
-		operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
-		dataType: DataType.STRING,
-	},
-	{
-		field: 'external_customer_id',
-		label: 'External Customer ID',
-		fieldType: FilterFieldType.INPUT,
-		operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
-		dataType: DataType.STRING,
-	},
-	{
-		field: 'source',
-		label: 'Source',
-		fieldType: FilterFieldType.INPUT,
-		operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
-		dataType: DataType.STRING,
-	},
-	{
-		field: 'start_time',
-		label: 'Start Time',
-		fieldType: FilterFieldType.DATEPICKER,
-		operators: [FilterOperator.AFTER],
-		dataType: DataType.DATE,
-	},
-	{
-		field: 'end_time',
-		label: 'End Time',
-		fieldType: FilterFieldType.DATEPICKER,
-		operators: [FilterOperator.BEFORE],
-		dataType: DataType.DATE,
-	},
-];
-
 const EventsPage: React.FC = () => {
 	const { t } = useTranslation('developers');
 	const { reset } = usePagination();
@@ -165,6 +97,70 @@ const EventsPage: React.FC = () => {
 	const [iterLastKey, setIterLastKey] = useState<string | undefined>(undefined);
 	const [propertyFilters, setPropertyFilters] = useState<PropertyFilterRow[]>(() => [createEmptyPropertyFilter()]);
 	const observer = useRef<IntersectionObserver | null>(null);
+
+	const sortingOptions: SortOption[] = useMemo(
+		() => [
+			{
+				field: 'created_at',
+				label: t('events.queryBuilder.sort.createdAt'),
+				direction: SortDirection.DESC,
+			},
+			{
+				field: 'updated_at',
+				label: t('events.queryBuilder.sort.updatedAt'),
+				direction: SortDirection.DESC,
+			},
+		],
+		[t],
+	);
+
+	const filterOptions: FilterField[] = useMemo(
+		() => [
+			{
+				field: 'event_id',
+				label: t('events.queryBuilder.filters.eventId'),
+				fieldType: FilterFieldType.INPUT,
+				operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
+				dataType: DataType.STRING,
+			},
+			{
+				field: 'event_name',
+				label: t('events.queryBuilder.filters.eventName'),
+				fieldType: FilterFieldType.INPUT,
+				operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
+				dataType: DataType.STRING,
+			},
+			{
+				field: 'external_customer_id',
+				label: t('events.queryBuilder.filters.externalCustomerId'),
+				fieldType: FilterFieldType.INPUT,
+				operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
+				dataType: DataType.STRING,
+			},
+			{
+				field: 'source',
+				label: t('events.queryBuilder.filters.source'),
+				fieldType: FilterFieldType.INPUT,
+				operators: DEFAULT_OPERATORS_PER_DATA_TYPE[DataType.STRING],
+				dataType: DataType.STRING,
+			},
+			{
+				field: 'start_time',
+				label: t('events.queryBuilder.filters.startTime'),
+				fieldType: FilterFieldType.DATEPICKER,
+				operators: [FilterOperator.AFTER],
+				dataType: DataType.DATE,
+			},
+			{
+				field: 'end_time',
+				label: t('events.queryBuilder.filters.endTime'),
+				fieldType: FilterFieldType.DATEPICKER,
+				operators: [FilterOperator.BEFORE],
+				dataType: DataType.DATE,
+			},
+		],
+		[t],
+	);
 
 	const initialFilters = useMemo(() => {
 		return [
@@ -213,15 +209,20 @@ const EventsPage: React.FC = () => {
 		];
 	}, []);
 
-	const { filters, sorts, setFilters, setSorts, sanitizedFilters, sanitizedSorts } = useFilterSorting({
-		initialFilters: initialFilters,
-		initialSorts: [
+	const initialSorts: SortOption[] = useMemo(
+		() => [
 			{
 				field: 'updated_at',
-				label: 'Updated At',
+				label: t('events.queryBuilder.sort.updatedAt'),
 				direction: SortDirection.DESC,
 			},
 		],
+		[t],
+	);
+
+	const { filters, sorts, setFilters, setSorts, sanitizedFilters, sanitizedSorts } = useFilterSorting({
+		initialFilters: initialFilters,
+		initialSorts,
 		debounceTime: 300,
 	});
 

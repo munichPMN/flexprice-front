@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { ActionButton, Chip, Tooltip } from '@/components/atoms';
 import FlexpriceTable, { ColumnData } from '../Table';
 import formatDate from '@/utils/common/format_date';
@@ -17,90 +17,93 @@ interface Props {
 	onEdit?: (subscription: Subscription) => void;
 }
 const SubscriptionTable: FC<Props> = ({ data, onEdit }) => {
-	const { t } = useTranslation('common');
+	const { t } = useTranslation(['billing', 'common']);
 	const navigate = useNavigate();
 	const [cancelSubscriptionId, setCancelSubscriptionId] = useState<string | null>(null);
 
 	const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS) => {
 		switch (status) {
 			case SUBSCRIPTION_STATUS.ACTIVE:
-				return <Chip variant='success' label={t('status.active')} />;
+				return <Chip variant='success' label={t('common:status.active')} />;
 			case SUBSCRIPTION_STATUS.CANCELLED:
-				return <Chip variant='failed' label={t('status.cancelled')} />;
+				return <Chip variant='failed' label={t('common:status.cancelled')} />;
 			case SUBSCRIPTION_STATUS.INCOMPLETE:
-				return <Chip variant='warning' label={t('status.incomplete')} />;
+				return <Chip variant='warning' label={t('common:status.incomplete')} />;
 			case SUBSCRIPTION_STATUS.TRIALING:
-				return <Chip variant='warning' label={t('status.trialing')} />;
+				return <Chip variant='warning' label={t('common:status.trialing')} />;
 			case SUBSCRIPTION_STATUS.DRAFT:
-				return <Chip variant='warning' label={t('status.draft')} />;
+				return <Chip variant='warning' label={t('common:status.draft')} />;
 			default:
-				return <Chip variant='default' label={t('status.inactive')} />;
+				return <Chip variant='default' label={t('common:status.inactive')} />;
 		}
 	};
 
-	const columns: ColumnData<SubscriptionResponse>[] = [
-		{
-			title: 'Customer',
-			render: (row) => (
-				<RedirectCell redirectUrl={`${RouteNames.customers}/${row.customer_id}`}>{row.customer?.name || row.customer_id}</RedirectCell>
-			),
-		},
-		{
-			title: 'Plan',
-			render: (row) => <RedirectCell redirectUrl={`${RouteNames.plan}/${row.plan_id}`}>{row.plan?.name || row.plan_id}</RedirectCell>,
-		},
+	const columns: ColumnData<SubscriptionResponse>[] = useMemo(
+		() => [
+			{
+				title: t('subscriptions.listPage.columns.customer'),
+				render: (row) => (
+					<RedirectCell redirectUrl={`${RouteNames.customers}/${row.customer_id}`}>{row.customer?.name || row.customer_id}</RedirectCell>
+				),
+			},
+			{
+				title: t('subscriptions.listPage.columns.plan'),
+				render: (row) => <RedirectCell redirectUrl={`${RouteNames.plan}/${row.plan_id}`}>{row.plan?.name || row.plan_id}</RedirectCell>,
+			},
 
-		{
-			title: 'Status',
-			render: (row) => {
-				const label = getSubscriptionStatusChip(row.subscription_status);
-				return label;
+			{
+				title: t('subscriptions.listPage.columns.status'),
+				render: (row) => {
+					const label = getSubscriptionStatusChip(row.subscription_status);
+					return label;
+				},
 			},
-		},
-		{
-			title: 'Start Date',
-			render: (row) => formatDate(row.start_date),
-		},
-		{
-			title: 'Renewal Date',
-			render: (row) => formatDate(row.current_period_end),
-		},
-		{
-			fieldVariant: 'interactive',
-			render: (row) => {
-				if (isInheritedSubscription(row)) {
+			{
+				title: t('subscriptions.listPage.columns.startDate'),
+				render: (row) => formatDate(row.start_date),
+			},
+			{
+				title: t('subscriptions.listPage.columns.renewalDate'),
+				render: (row) => formatDate(row.current_period_end),
+			},
+			{
+				fieldVariant: 'interactive',
+				render: (row) => {
+					if (isInheritedSubscription(row)) {
+						return (
+							<Tooltip delayDuration={0} content={t('subscriptions.listPage.inheritedReadOnlyTooltip')}>
+								<span className='inline-flex cursor-default text-muted-foreground tabular-nums'>—</span>
+							</Tooltip>
+						);
+					}
 					return (
-						<Tooltip delayDuration={0} content='Inherited subscriptions are read-only. Make changes on the parent subscription.'>
-							<span className='inline-flex cursor-default text-muted-foreground tabular-nums'>—</span>
-						</Tooltip>
+						<ActionButton
+							id={row.id}
+							deleteMutationFn={async () => Promise.resolve()}
+							refetchQueryKey='fetchSubscriptions'
+							entityName={t('subscriptions.listPage.entityNameForActions')}
+							edit={{
+								path: `${RouteNames.subscriptions}/${row.id}/edit`,
+								onClick: () => onEdit?.(row),
+							}}
+							archive={{
+								enabled: false,
+							}}
+							customActions={[
+								{
+									text: t('subscriptions.listPage.cancelAction'),
+									icon: <Trash2 />,
+									enabled: row.subscription_status !== SUBSCRIPTION_STATUS.CANCELLED,
+									onClick: () => setCancelSubscriptionId(row.id),
+								},
+							]}
+						/>
 					);
-				}
-				return (
-					<ActionButton
-						id={row.id}
-						deleteMutationFn={async () => Promise.resolve()}
-						refetchQueryKey='fetchSubscriptions'
-						entityName='Subscription'
-						edit={{
-							path: `${RouteNames.subscriptions}/${row.id}/edit`,
-							onClick: () => onEdit?.(row),
-						}}
-						archive={{
-							enabled: false,
-						}}
-						customActions={[
-							{
-								text: t('actions.cancel'),
-								icon: <Trash2 />,
-								enabled: row.subscription_status !== SUBSCRIPTION_STATUS.CANCELLED,
-								onClick: () => setCancelSubscriptionId(row.id),
-							},
-						]}
-					/>
-				);
+				},
 			},
-		},
-	];
+		],
+		[t, onEdit],
+	);
 
 	return (
 		<>

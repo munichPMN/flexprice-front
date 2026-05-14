@@ -128,7 +128,18 @@
 		"addPropertyFilter": "Add Property filter",
 		"removePropertyFilterAria": "Remove property filter",
 		"noOptionsFound": "No options found.",
-		"selectedCount": "{{count}} selected"
+		"selectedCount": "{{count}} selected",
+		"operators": {
+			"eq": "Equals",
+			"contains": "Contains",
+			"not_contains": "Does not contain",
+			"gt": "Greater than",
+			"lt": "Less than",
+			"in": "In",
+			"not_in": "Not in",
+			"before": "Before",
+			"after": "After"
+		}
 	},
 	"actionButton": {
 		"confirmActionOnEntity": "Are you sure you want to {{action}} this {{entity}}?",

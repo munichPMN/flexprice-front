@@ -14,6 +14,7 @@ const namespaces = [
   'customer-portal',
   'customers',
   'developers',
+  'guides',
   'settings',
 ];
 

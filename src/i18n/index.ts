@@ -3,7 +3,17 @@ import { initReactI18next } from 'react-i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { Direction } from '@/config/branding';
 
-export const NAMESPACES = ['auth', 'common', 'billing', 'catalog', 'customers', 'developers', 'settings', 'customer-portal'] as const;
+export const NAMESPACES = [
+	'auth',
+	'common',
+	'billing',
+	'catalog',
+	'customers',
+	'developers',
+	'settings',
+	'customer-portal',
+	'guides',
+] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
 

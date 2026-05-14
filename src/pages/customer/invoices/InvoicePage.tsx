@@ -3,7 +3,7 @@ import { ApiDocsContent, RedirectCell } from '@/components/molecules';
 import { ColumnData } from '@/components/molecules/Table';
 import InvoiceTableMenu from '@/components/molecules/InvoiceTable/InvoiceTableMenu';
 import { QueryableDataArea } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import InvoiceApi from '@/api/InvoiceApi';
 import CustomerApi from '@/api/CustomerApi';
@@ -125,6 +125,8 @@ function invoiceHasDistinctSubscriptionCustomer(inv: Invoice): boolean {
 const InvoicesPage = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation(['billing', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [showSubscriptionCustomerColumn, setShowSubscriptionCustomerColumn] = useState(false);
 
 	const onInvoicesDataChange = useCallback((d: { items: EnrichedInvoice[]; pagination: { total?: number } } | undefined) => {
@@ -374,7 +376,7 @@ const InvoicesPage = () => {
 					heading: t('invoices.title'),
 					description: t('invoices.list.emptyDescription'),
 					tags: API_DOCS_TAGS.Invoices,
-					tutorials: GUIDES.invoices.tutorials,
+					tutorials: guides.invoices.tutorials,
 				}}
 			/>
 		</Page>

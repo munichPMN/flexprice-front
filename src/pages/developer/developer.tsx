@@ -9,7 +9,7 @@ import { Plus, Loader, TrashIcon, User2, Bot, LucideIcon, Eye, ShieldCheck, EyeO
 import { useMemo, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { EmptyPage } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import ActionButton from '@/components/atoms/ActionButton/ActionButton';
 import { useTranslation } from 'react-i18next';
@@ -75,6 +75,8 @@ export const getPermissionColor = (permissions: readonly string[]): string => {
 
 const DeveloperPage = () => {
 	const { t } = useTranslation(['developers', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const { page, limit, offset } = usePagination();
 	const [isSecretKeyDrawerOpen, setIsSecretKeyDrawerOpen] = useState(false);
 
@@ -222,7 +224,7 @@ const DeveloperPage = () => {
 						buttonLabel: t('apiKeys.emptyCard.button'),
 						buttonAction: handleAddSecretKey,
 					}}
-					tutorials={GUIDES.secrets.tutorials}
+					tutorials={guides.secrets.tutorials}
 					tags={API_DOCS_TAGS.Secrets}
 				/>
 			)}

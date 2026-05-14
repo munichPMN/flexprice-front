@@ -219,6 +219,20 @@
 		"listPage": {
 			"title": "الأحداث"
 		},
+		"queryBuilder": {
+			"filters": {
+				"eventId": "معرّف الحدث",
+				"eventName": "اسم الحدث",
+				"externalCustomerId": "المعرّف الخارجي للعميل",
+				"source": "المصدر",
+				"startTime": "وقت البداية",
+				"endTime": "وقت النهاية"
+			},
+			"sort": {
+				"createdAt": "تاريخ الإنشاء",
+				"updatedAt": "تاريخ التحديث"
+			}
+		},
 		"debugger": {
 			"processedEventsTitle": "أحداث معالجة",
 			"eventDetailsTitle": "تفاصيل الحدث",
@@ -273,7 +287,25 @@
 		},
 		"query": {
 			"pageTitle": "الاستعلام",
-			"selectMeteredFeaturePlaceholder": "اختر ميزة مقياسية"
+			"selectMeteredFeaturePlaceholder": "اختر ميزة مقياسية",
+			"filters": {
+				"customerId": "معرّف العميل",
+				"startTime": "وقت البداية",
+				"endTime": "وقت النهاية"
+			},
+			"windowSizes": {
+				"MINUTE": "دقيقة",
+				"15MIN": "15 دقيقة",
+				"30MIN": "30 دقيقة",
+				"HOUR": "ساعة",
+				"3HOUR": "3 ساعات",
+				"6HOUR": "6 ساعات",
+				"12HOUR": "12 ساعة",
+				"DAY": "يوم",
+				"WEEK": "أسبوع"
+			},
+			"sortTimeWindow": "النافذة الزمنية",
+			"chartSeriesUsage": "الاستخدام"
 		}
 	}
 }

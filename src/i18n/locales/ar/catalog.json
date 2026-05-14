@@ -101,7 +101,28 @@
 	},
 	"costSheets": {
 		"listPage": {
-			"title": "أوراق التكلفة"
+			"title": "أوراق التكلفة",
+			"paginationUnit": "أوراق التكلفة",
+			"sortLabels": {
+				"name": "الاسم",
+				"createdAt": "تاريخ الإنشاء",
+				"updatedAt": "تاريخ التحديث"
+			},
+			"filterLabels": {
+				"name": "الاسم",
+				"lookupKey": "مفتاح البحث",
+				"createdAt": "تاريخ الإنشاء",
+				"status": "الحالة"
+			},
+			"filterStatus": {
+				"active": "نشط",
+				"inactive": "غير نشط"
+			},
+			"emptyState": {
+				"heading": "أوراق التكلفة",
+				"description": "أنشئ أول ورقة تكلفة لتعريف هياكل التسعير والرسوم.",
+				"createButton": "إنشاء ورقة تكلفة"
+			}
 		},
 		"drawer": {
 			"editTitle": "تعديل جدول التكلفة",
@@ -138,7 +159,28 @@
 	},
 	"coupons": {
 		"listPage": {
-			"title": "الكوبونات"
+			"title": "الكوبونات",
+			"paginationUnit": "الكوبونات",
+			"sortLabels": {
+				"name": "الاسم",
+				"createdAt": "تاريخ الإنشاء",
+				"updatedAt": "تاريخ التحديث"
+			},
+			"filterLabels": {
+				"name": "الاسم",
+				"createdAt": "تاريخ الإنشاء",
+				"status": "الحالة",
+				"type": "النوع"
+			},
+			"filterStatus": {
+				"active": "نشط",
+				"inactive": "غير نشط"
+			},
+			"emptyState": {
+				"heading": "الكوبونات",
+				"description": "أنشئ أول قسيمة لتقديم خصومات للعملاء.",
+				"createButton": "إنشاء قسيمة"
+			}
 		},
 		"drawer": {
 			"editTitle": "تعديل القسيمة",
@@ -218,7 +260,24 @@
 	},
 	"groups": {
 		"listPage": {
-			"title": "المجموعات"
+			"title": "المجموعات",
+			"sortLabels": {
+				"name": "الاسم",
+				"createdAt": "تاريخ الإنشاء",
+				"updatedAt": "تاريخ التحديث"
+			},
+			"filterLabels": {
+				"name": "الاسم",
+				"lookupKey": "مفتاح البحث",
+				"createdAt": "تاريخ الإنشاء",
+				"entityType": "نوع الكيان"
+			},
+			"paginationUnit": "مجموعات",
+			"emptyState": {
+				"heading": "المجموعات",
+				"description": "أنشئ مجموعة لتنظيم كيانات التسعير.",
+				"createButton": "إنشاء مجموعة"
+			}
 		},
 		"drawer": {
 			"editTitle": "تعديل المجموعة",
@@ -269,6 +328,8 @@
 			"name": "الاسم",
 			"lookupKey": "مفتاح البحث",
 			"entityType": "نوع الكيان",
+			"type": "النوع",
+			"status": "الحالة",
 			"updatedAt": "تاريخ التحديث",
 			"entityName": "مجموعة"
 		}
@@ -317,6 +378,7 @@
 				"status": "الحالة",
 				"updatedAt": "تاريخ التحديث"
 			},
+			"entityName": "خطة",
 			"paginationUnit": "خطط التسعير",
 			"rowActions": {
 				"edit": "تعديل",
@@ -415,13 +477,41 @@
 				"end": "النهاية",
 				"noDateInformation": "لا توجد معلومات عن التواريخ",
 				"fallbackName": "--",
-				"charges": "الرسوم"
+				"charges": "الرسوم",
+				"queryBuilder": {
+					"displayName": "اسم العرض",
+					"amount": "المبلغ",
+					"billingPeriod": "فترة الفوترة"
+				}
 			}
 		}
 	},
 	"priceUnits": {
 		"listPage": {
-			"title": "وحدات السعر"
+			"title": "وحدات السعر",
+			"paginationUnit": "وحدات السعر",
+			"sortLabels": {
+				"name": "الاسم",
+				"code": "الرمز",
+				"createdAt": "تاريخ الإنشاء",
+				"updatedAt": "تاريخ التحديث"
+			},
+			"filterLabels": {
+				"name": "الاسم",
+				"code": "الرمز",
+				"baseCurrency": "العملة الأساسية",
+				"status": "الحالة",
+				"createdAt": "تاريخ الإنشاء"
+			},
+			"filterStatus": {
+				"active": "نشط",
+				"inactive": "غير نشط"
+			},
+			"emptyState": {
+				"heading": "وحدات السعر",
+				"description": "أنشئ وحدة سعر لتعريف عملات مخصصة أو رموز للتسعير.",
+				"createButton": "إنشاء وحدة سعر"
+			}
 		},
 		"drawer": {
 			"editTitle": "تعديل وحدة السعر",

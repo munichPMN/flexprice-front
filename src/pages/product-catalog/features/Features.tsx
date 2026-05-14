@@ -3,7 +3,7 @@ import { ApiDocsContent, FeatureDrawer, RedirectCell } from '@/components/molecu
 import { ColumnData } from '@/components/molecules/Table';
 import { QueryableDataArea } from '@/components/organisms';
 import { RouteNames } from '@/core/routes/Routes';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import FeatureApi from '@/api/FeatureApi';
 import { Link, useNavigate } from 'react-router';
@@ -45,6 +45,8 @@ const initialFilters: FilterCondition[] = [
 
 const FeaturesPage = () => {
 	const { t } = useTranslation('catalog');
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
 	const navigate = useNavigate();
@@ -277,7 +279,7 @@ const FeaturesPage = () => {
 					buttonLabel: t('features.listPage.emptyState.createButton'),
 					buttonAction: () => navigate(RouteNames.createFeature),
 					tags: API_DOCS_TAGS.Features,
-					tutorials: GUIDES.features.tutorials,
+					tutorials: guides.features.tutorials,
 				}}
 			/>
 			{selectedFeature && (

@@ -2,7 +2,7 @@ import { Page, ActionButton, Chip, Tooltip } from '@/components/atoms';
 import { ApiDocsContent, RedirectCell } from '@/components/molecules';
 import { ColumnData } from '@/components/molecules/Table';
 import { QueryableDataArea } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import SubscriptionApi from '@/api/SubscriptionApi';
 import {
@@ -77,6 +77,8 @@ const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS, t: TFunction) =>
 const SubscriptionsPage = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation(['billing', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [cancelSubscriptionId, setCancelSubscriptionId] = useState<string | null>(null);
 
 	const sortingOptions: SortOption[] = useMemo(
@@ -291,7 +293,7 @@ const SubscriptionsPage = () => {
 						buttonLabel: t('subscriptions.listPage.emptyState.createButton'),
 						buttonAction: handleEmptyCreate,
 						tags: API_DOCS_TAGS.Subscriptions,
-						tutorials: GUIDES.customers.tutorials,
+						tutorials: guides.customers.tutorials,
 					}}
 				/>
 			</Page>

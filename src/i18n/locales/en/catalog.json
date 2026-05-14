@@ -101,7 +101,28 @@
 	},
 	"costSheets": {
 		"listPage": {
-			"title": "Cost Sheets"
+			"title": "Cost Sheets",
+			"paginationUnit": "Cost Sheets",
+			"sortLabels": {
+				"name": "Name",
+				"createdAt": "Created At",
+				"updatedAt": "Updated At"
+			},
+			"filterLabels": {
+				"name": "Name",
+				"lookupKey": "Lookup Key",
+				"createdAt": "Created At",
+				"status": "Status"
+			},
+			"filterStatus": {
+				"active": "Active",
+				"inactive": "Inactive"
+			},
+			"emptyState": {
+				"heading": "Cost Sheets",
+				"description": "Create your first cost sheet to define pricing structures and charges.",
+				"createButton": "Create Cost Sheet"
+			}
 		},
 		"drawer": {
 			"editTitle": "Edit Cost Sheet",
@@ -138,7 +159,28 @@
 	},
 	"coupons": {
 		"listPage": {
-			"title": "Coupons"
+			"title": "Coupons",
+			"paginationUnit": "Coupons",
+			"sortLabels": {
+				"name": "Name",
+				"createdAt": "Created At",
+				"updatedAt": "Updated At"
+			},
+			"filterLabels": {
+				"name": "Name",
+				"createdAt": "Created At",
+				"status": "Status",
+				"type": "Type"
+			},
+			"filterStatus": {
+				"active": "Active",
+				"inactive": "Inactive"
+			},
+			"emptyState": {
+				"heading": "Coupons",
+				"description": "Create your first coupon to offer discounts to customers.",
+				"createButton": "Create Coupon"
+			}
 		},
 		"drawer": {
 			"editTitle": "Edit Coupon",
@@ -218,7 +260,24 @@
 	},
 	"groups": {
 		"listPage": {
-			"title": "Groups"
+			"title": "Groups",
+			"sortLabels": {
+				"name": "Name",
+				"createdAt": "Created At",
+				"updatedAt": "Updated At"
+			},
+			"filterLabels": {
+				"name": "Name",
+				"lookupKey": "Lookup Key",
+				"createdAt": "Created At",
+				"entityType": "Entity Type"
+			},
+			"paginationUnit": "Groups",
+			"emptyState": {
+				"heading": "Groups",
+				"description": "Create a group to organize your pricing entities.",
+				"createButton": "Create Group"
+			}
 		},
 		"drawer": {
 			"editTitle": "Edit Group",
@@ -269,6 +328,8 @@
 			"name": "Name",
 			"lookupKey": "Lookup Key",
 			"entityType": "Entity Type",
+			"type": "Type",
+			"status": "Status",
 			"updatedAt": "Updated at",
 			"entityName": "Group"
 		}
@@ -317,6 +378,7 @@
 				"status": "Status",
 				"updatedAt": "Updated at"
 			},
+			"entityName": "Plan",
 			"paginationUnit": "Pricing Plans",
 			"rowActions": {
 				"edit": "Edit",
@@ -415,13 +477,41 @@
 				"end": "End",
 				"noDateInformation": "No date information",
 				"fallbackName": "--",
-				"charges": "Charges"
+				"charges": "Charges",
+				"queryBuilder": {
+					"displayName": "Display name",
+					"amount": "Amount",
+					"billingPeriod": "Billing period"
+				}
 			}
 		}
 	},
 	"priceUnits": {
 		"listPage": {
-			"title": "Price Units"
+			"title": "Price Units",
+			"paginationUnit": "Price Units",
+			"sortLabels": {
+				"name": "Name",
+				"code": "Code",
+				"createdAt": "Created At",
+				"updatedAt": "Updated At"
+			},
+			"filterLabels": {
+				"name": "Name",
+				"code": "Code",
+				"baseCurrency": "Base Currency",
+				"status": "Status",
+				"createdAt": "Created At"
+			},
+			"filterStatus": {
+				"active": "Active",
+				"inactive": "Inactive"
+			},
+			"emptyState": {
+				"heading": "Price Units",
+				"description": "Create a price unit to define custom currencies or tokens for pricing.",
+				"createButton": "Create Price Unit"
+			}
 		},
 		"drawer": {
 			"editTitle": "Edit Price Unit",

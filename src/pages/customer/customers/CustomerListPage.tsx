@@ -2,7 +2,7 @@ import { AddButton, Page, ActionButton, Chip } from '@/components/atoms';
 import { CreateCustomerDrawer, ApiDocsContent } from '@/components/molecules';
 import { ColumnData } from '@/components/molecules/Table';
 import { QueryableDataArea } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import Customer from '@/models/Customer';
 import CustomerApi from '@/api/CustomerApi';
@@ -56,6 +56,8 @@ const ActionButtonWithPortal: FC<{ customer: Customer; onEdit: (customer: Custom
 
 const CustomerListPage = () => {
 	const { t } = useTranslation(['customers', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [activeCustomer, setactiveCustomer] = useState<Customer>();
 	const [customerDrawerOpen, setcustomerDrawerOpen] = useState(false);
 	const navigate = useNavigate();
@@ -275,7 +277,7 @@ const CustomerListPage = () => {
 					buttonLabel: t('list.createCustomer'),
 					buttonAction: handleCreateCustomer,
 					tags: API_DOCS_TAGS.Customers,
-					tutorials: GUIDES.customers.tutorials,
+					tutorials: guides.customers.tutorials,
 				}}
 			/>
 			<CreateCustomerDrawer open={customerDrawerOpen} onOpenChange={setcustomerDrawerOpen} data={activeCustomer} />

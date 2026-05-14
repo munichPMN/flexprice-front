@@ -107,6 +107,7 @@ const NAMESPACE_GLOBS = {
 		'src/components/molecules/ChargebeeConnectionDrawer/**/*.tsx',
 	],
 	'customer-portal': ['src/components/customer-portal/**/*.tsx', 'src/pages/customer-portal/**/*.tsx'],
+	guides: ['src/constants/guides.tsx'],
 };
 
 const namespace = args.namespace;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Page, Spacer, Loader, ShortPagination, AddButton } from '@/components/atoms';
 import { ApiDocsContent } from '@/components/molecules';
 import { useQuery } from '@tanstack/react-query';
@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import usePagination from '@/hooks/usePagination';
 import TaxApi from '@/api/TaxApi';
 import { EmptyPage } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import TaxTable from '@/components/molecules/TaxTable/TaxTable';
 import TaxDrawer from '@/components/molecules/TaxDrawer/TaxDrawer';
@@ -16,6 +16,8 @@ import { useTranslation } from 'react-i18next';
 
 const TaxPage = () => {
 	const { t } = useTranslation('billing');
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const { limit, offset, page } = usePagination();
 	const [taxDrawerOpen, setTaxDrawerOpen] = useState(false);
 	const [activeTax, setActiveTax] = useState<TaxRateResponse | null>(null);
@@ -65,7 +67,7 @@ const TaxPage = () => {
 					buttonLabel: t('taxes.list.createTaxRate'),
 					buttonAction: handleCreateNew,
 				}}
-				tutorials={GUIDES.taxes.tutorials}
+				tutorials={guides.taxes.tutorials}
 				onAddClick={handleCreateNew}>
 				<TaxDrawer
 					data={activeTax as TaxRate | null}

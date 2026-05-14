@@ -115,7 +115,18 @@
 		"addPropertyFilter": "إضافة عامل تصفية خاصية",
 		"removePropertyFilterAria": "إزالة عامل تصفية الخاصية",
 		"noOptionsFound": "لم يتم العثور على خيارات.",
-		"selectedCount": "{{count}} محدد"
+		"selectedCount": "{{count}} محدد",
+		"operators": {
+			"eq": "يساوي",
+			"contains": "يحتوي على",
+			"not_contains": "لا يحتوي على",
+			"gt": "أكبر من",
+			"lt": "أصغر من",
+			"in": "ضمن",
+			"not_in": "ليس ضمن",
+			"before": "قبل",
+			"after": "بعد"
+		}
 	},
 	"actionButton": {
 		"confirmActionOnEntity": "هل أنت متأكد أنك تريد {{action}} هذا {{entity}}؟",

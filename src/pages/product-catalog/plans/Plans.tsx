@@ -4,7 +4,7 @@ import type { DropdownMenuOption } from '@/components/molecules';
 import { ColumnData } from '@/components/molecules/Table';
 import { Plan } from '@/models/Plan';
 import { QueryableDataArea } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import { useState, useMemo, useCallback } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -54,6 +54,8 @@ const initialFilters: FilterCondition[] = [
 
 const PlansPage = () => {
 	const { t, i18n } = useTranslation(['catalog', 'common']);
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [activePlan, setActivePlan] = useState<Plan | null>(null);
 	const [planDrawerOpen, setPlanDrawerOpen] = useState(false);
 	const [duplicateDialogOpen, setDuplicateDialogOpen] = useState(false);
@@ -342,7 +344,7 @@ const PlansPage = () => {
 					emptyStateConfig={{
 						customComponent: emptyStateCustom,
 						tags: API_DOCS_TAGS.Plans,
-						tutorials: GUIDES.plans.tutorials,
+						tutorials: guides.plans.tutorials,
 					}}
 				/>
 			</div>

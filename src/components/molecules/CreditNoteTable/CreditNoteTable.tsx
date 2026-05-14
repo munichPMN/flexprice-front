@@ -43,24 +43,24 @@ const CreditNoteTable: FC<Props> = ({ data }) => {
 
 	const columns: ColumnData<CreditNote>[] = [
 		{
-			title: 'Credit Note ID',
+			title: t('creditNotes.table.creditNoteId'),
 
 			render: (row: CreditNote) => row.credit_note_number || row.id.slice(0, 8),
 		},
 		{
-			title: 'Amount',
+			title: t('creditNotes.table.amount'),
 			render: (row: CreditNote) => <span>{`${getCurrencySymbol(row.currency)}${row.total_amount}`}</span>,
 		},
 		{
-			title: 'Status',
+			title: t('creditNotes.table.status'),
 			render: (row: CreditNote) => getStatusChip(row.credit_note_status, t),
 		},
 		{
-			title: 'Type',
+			title: t('creditNotes.table.type'),
 			render: (row: CreditNote) => getTypeChip(row.credit_note_type, t),
 		},
 		{
-			title: 'Invoice',
+			title: t('creditNotes.table.invoice'),
 			render: (row: CreditNote) => {
 				if (!row.invoice_id) return '--';
 
@@ -72,7 +72,7 @@ const CreditNoteTable: FC<Props> = ({ data }) => {
 			},
 		},
 		{
-			title: 'Customer',
+			title: t('creditNotes.table.customer'),
 			render: (row: CreditNote) => {
 				if (!row.customer?.id) return '--';
 
@@ -84,7 +84,7 @@ const CreditNoteTable: FC<Props> = ({ data }) => {
 			},
 		},
 		{
-			title: 'Created Date',
+			title: t('creditNotes.table.createdDate'),
 			render: (row: CreditNote) => <span>{formatDateShort(row.created_at)}</span>,
 		},
 	];

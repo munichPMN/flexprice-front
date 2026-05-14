@@ -3,7 +3,7 @@ import { ApiDocsContent, AddonDrawer } from '@/components/molecules';
 import { ColumnData } from '@/components/molecules/Table';
 import { QueryableDataArea } from '@/components/organisms';
 import Addon from '@/models/Addon';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import { useState, useMemo, useCallback } from 'react';
 import AddonApi from '@/api/AddonApi';
@@ -42,6 +42,8 @@ const initialFilters: FilterCondition[] = [
 
 const AddonsPage = () => {
 	const { t } = useTranslation('catalog');
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [activeAddon, setActiveAddon] = useState<Addon | null>(null);
 	const [addonDrawerOpen, setAddonDrawerOpen] = useState(false);
 	const navigate = useNavigate();
@@ -217,7 +219,7 @@ const AddonsPage = () => {
 						buttonLabel: t('addons.listPage.emptyState.createButton'),
 						buttonAction: handleOnAdd,
 						tags: API_DOCS_TAGS.Addons,
-						tutorials: GUIDES.addons.tutorials,
+						tutorials: guides.addons.tutorials,
 					}}
 				/>
 			</div>

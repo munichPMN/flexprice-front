@@ -1,7 +1,7 @@
 import { Button, Chip, Loader, Page, ShortPagination } from '@/components/atoms';
 import { ApiDocsContent, ColumnData, FlexpriceTable, ImportFileDrawer } from '@/components/molecules';
 import { EmptyPage } from '@/components/organisms';
-import GUIDES from '@/constants/guides';
+import { buildGuides } from '@/constants/guides';
 import { API_DOCS_TAGS } from '@/constants/apiDocsTags';
 import usePagination from '@/hooks/usePagination';
 import { ImportTask } from '@/models/ImportTask';
@@ -23,6 +23,8 @@ const mapStatusLabel = (status: string, tSuccessful: () => string, tFailed: () =
 
 const ImportExport = () => {
 	const { t } = useTranslation('settings');
+	const { t: tGuide } = useTranslation('guides');
+	const guides = useMemo(() => buildGuides(tGuide), [tGuide]);
 	const [drawerOpen, setdrawerOpen] = useState(false);
 	const { limit, offset, page } = usePagination();
 	const [activeTask, setactiveTask] = useState();
@@ -113,7 +115,7 @@ const ImportExport = () => {
 						setdrawerOpen(true);
 					},
 				}}
-				tutorials={GUIDES.importExport.tutorials}
+				tutorials={guides.importExport.tutorials}
 				tags={API_DOCS_TAGS.Tasks}>
 				<ImportFileDrawer taskId={activeTask} isOpen={drawerOpen} onOpenChange={(value) => setdrawerOpen(value)} />
 			</EmptyPage>

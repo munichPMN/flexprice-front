@@ -145,6 +145,15 @@
 			"emptyHeading": "Issue a credit note",
 			"emptyDescription": "Add a credit note to adjust or refund customer invoices."
 		},
+		"table": {
+			"creditNoteId": "Credit Note ID",
+			"amount": "Amount",
+			"status": "Status",
+			"type": "Type",
+			"invoice": "Invoice",
+			"customer": "Customer",
+			"createdDate": "Created Date"
+		},
 		"detailPage": {
 			"title": "Credit Note Details",
 			"creditNoteNumber": "Credit Note Number",
