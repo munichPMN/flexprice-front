@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TestimonialCard } from '@/components/molecules';
 import { Testimonial } from '@/types';
-const authBg = '';
+import authBg from '../../../../../assets/toolright.jpg';
 import { LandingContentAlign, LandingTheme, useBrand } from '@/config/branding';
 import { Template1Config } from '@/config/authTemplates';
 import { cn } from '@/lib/utils';
