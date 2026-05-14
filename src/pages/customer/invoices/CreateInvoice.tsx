@@ -52,6 +52,9 @@ const CreateInvoicePage: FC = () => {
 	const [taxOverrides, setTaxOverrides] = useState<TaxRateOverride[]>([]);
 
 	const [issueDate, setIssueDate] = useState<Date | undefined>(new Date());
+	// Calculate period start as today at midnight UTC
+	const today = new Date();
+	today.setUTCHours(0, 0, 0, 0);
 
 	useEffect(() => {
 		if (customer?.name) {
@@ -147,7 +150,7 @@ const CreateInvoicePage: FC = () => {
 				currency,
 				payment_status: PAYMENT_STATUS.PENDING,
 				amount_due: finalTotal,
-				period_start: resolvedIssueDate.toISOString(),
+				period_start: today.toISOString(),
 				issue_date: resolvedIssueDate.toISOString(),
 				line_items: invoiceLineItems,
 				total: finalTotal,
