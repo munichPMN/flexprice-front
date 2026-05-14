@@ -41,6 +41,20 @@ export interface FlexpriceTableProps<T> {
 	tableClassName?: string;
 }
 
+// Map physical alignment values to logical Tailwind classes
+const alignClass = (align: 'left' | 'center' | 'right' | 'justify'): string => {
+	if (align === 'left') return 'text-start';
+	if (align === 'right') return 'text-end';
+	return `text-${align}`;
+};
+
+// Map physical alignment values to logical CSS textAlign values
+const alignStyle = (align: 'left' | 'center' | 'right' | 'justify'): React.CSSProperties['textAlign'] => {
+	if (align === 'left') return 'start';
+	if (align === 'right') return 'end';
+	return align;
+};
+
 // Helper Functions
 const isInteractiveElement = (element: HTMLElement | null): boolean => {
 	if (!element) return false;
@@ -97,10 +111,10 @@ const TableHead = React.forwardRef<
 >(({ className, style, align = 'left', width, variant = 'default', ...props }, ref) => (
 	<th
 		ref={ref}
-		style={{ textAlign: align, width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined, ...style }}
+		style={{ textAlign: alignStyle(align), width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined, ...style }}
 		className={cn(
 			'h-12 px-4 text-[14px] font-medium text-[#64748B]',
-			`text-${align}`,
+			alignClass(align),
 			'align-middle',
 			className,
 			variant === 'default' && 'border-b border-[#E2E8F0]',
@@ -116,8 +130,8 @@ const TableCell = React.forwardRef<
 >(({ className, style, align = 'left', width, ...props }, ref) => (
 	<td
 		ref={ref}
-		style={{ textAlign: align, width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined, ...style }}
-		className={cn('px-4 py-2 !max-h-9 text-[14px] font-medium', `text-${align}`, 'align-middle', className)}
+		style={{ textAlign: alignStyle(align), width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined, ...style }}
+		className={cn('px-4 py-2 !max-h-9 text-[14px] font-medium', alignClass(align), 'align-middle', className)}
 		{...props}
 	/>
 ));
@@ -204,8 +218,8 @@ const FlexpriceTable: FC<FlexpriceTableProps<any>> = ({
 						className={cn(
 							color ? `text-[${color}] !text-black` : 'text-black',
 							'font-sans font-medium px-3',
-							variant === 'default' && index === 0 ? 'rounded-tl-[6px]' : '',
-							variant === 'default' && index === columns.length - 1 ? 'rounded-tr-[6px]' : '',
+							variant === 'default' && index === 0 ? 'rounded-ss-[6px]' : '',
+							variant === 'default' && index === columns.length - 1 ? 'rounded-se-[6px]' : '',
 							variant === 'no-bordered' && 'border-b-0',
 							className,
 						)}>
