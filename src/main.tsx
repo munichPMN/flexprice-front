@@ -8,14 +8,26 @@ import { config } from './config/config.ts';
 import { registerWebMCPTools } from './agent/webmcp.ts';
 import { initBranding } from './config/branding.ts';
 import { initI18n } from './i18n/index.ts';
+import { DirectionProvider } from '@radix-ui/react-direction';
+import { useLocaleStore } from './store/useLocaleStore.ts';
+import React from 'react';
 
 registerWebMCPTools();
+
+// Reads direction from Zustand store — subscribes so Radix primitives re-render on locale change
+function DirectionWrapper({ children }: { children: React.ReactNode }) {
+	const direction = useLocaleStore((s) => s.direction);
+	return <DirectionProvider dir={direction}>{children}</DirectionProvider>;
+}
 
 (async () => {
 	initBranding();
 
+	// Use persisted locale (from localStorage via Zustand) rather than the config default
+	const { locale, direction } = useLocaleStore.getState();
+
 	try {
-		await initI18n(config.i18n.locale, config.i18n.direction);
+		await initI18n(locale, direction);
 	} catch (err) {
 		console.error('[main] i18n initialization failed, rendering without translations:', err);
 	}
@@ -25,12 +37,16 @@ registerWebMCPTools();
 			{config.app.isProd ? (
 				<SentryProvider>
 					<PosthogProvider>
-						<App />
+						<DirectionWrapper>
+							<App />
+						</DirectionWrapper>
 						<VercelSpeedInsights />
 					</PosthogProvider>
 				</SentryProvider>
 			) : (
-				<App />
+				<DirectionWrapper>
+					<App />
+				</DirectionWrapper>
 			)}
 		</div>,
 	);
