@@ -10,8 +10,10 @@ import formatDate from '@/utils/common/format_date';
 import toast from 'react-hot-toast';
 import formatCadenceChip from '@/utils/common/format_cadence_chip';
 import { getCurrencySymbol } from '@/utils/common/helper_functions';
+import { useTranslation } from 'react-i18next';
 
 const CouponDetails = () => {
+	const { t } = useTranslation(['catalog']);
 	const { id } = useParams<{ id: string }>();
 
 	const {
@@ -33,7 +35,7 @@ const CouponDetails = () => {
 		return (
 			<Page heading='Error'>
 				<div className='flex items-center justify-center h-64'>
-					<div className='text-muted-foreground'>Failed to load coupon details</div>
+					<div className='text-muted-foreground'>{t('catalog:coupons.details.loadError')}</div>
 				</div>
 			</Page>
 		);
@@ -42,7 +44,12 @@ const CouponDetails = () => {
 	const details: Detail[] = [
 		{
 			label: 'Type',
-			value: <Chip variant='default' label={coupon.type === COUPON_TYPE.FIXED ? 'Fixed Amount' : 'Percentage'} />,
+			value: (
+				<Chip
+					variant='default'
+					label={coupon.type === COUPON_TYPE.FIXED ? t('catalog:coupons.drawer.fixedAmount') : t('catalog:coupons.drawer.percentage')}
+				/>
+			),
 		},
 		{
 			label: 'Discount',
@@ -100,7 +107,7 @@ const CouponDetails = () => {
 
 			<div className='space-y-6'>
 				<Card variant='notched'>
-					<CardHeader title='Details' />
+					<CardHeader title={t('catalog:coupons.details.detailsTitle')} />
 					<div className='p-6'>
 						<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 							<div className='space-y-4'>

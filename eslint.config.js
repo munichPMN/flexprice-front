@@ -51,6 +51,7 @@ export default tseslint.config(
 					callees: {
 						exclude: [
 							'^t$', // react-i18next translation function — keys are fine
+							'^tc$', // common namespace alias (useTranslation('common'))
 							'^i18n\\.t$',
 							'window\\..*',
 							'console\\..*',

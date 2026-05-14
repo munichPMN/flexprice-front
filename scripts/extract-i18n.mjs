@@ -26,6 +26,8 @@ const NAMESPACE_GLOBS = {
 		'src/pages/customer/creditnotes/**/*.tsx',
 		'src/pages/customer/subscriptions/**/*.tsx',
 		'src/pages/customer/taxes/**/*.tsx',
+		'src/components/molecules/TaxDrawer/**/*.tsx',
+		'src/components/molecules/TaxTable/**/*.tsx',
 		'src/components/molecules/InvoiceTable/**/*.tsx',
 		'src/components/molecules/InvoiceLine*/**/*.tsx',
 		'src/components/molecules/InvoiceTax*/**/*.tsx',

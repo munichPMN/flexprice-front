@@ -6,6 +6,7 @@ import { Check, ChevronDown, Circle, Loader2 } from 'lucide-react';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import { SelectOption } from './SearchableSelect';
 
 export interface SearchConfig<T = any> {
@@ -88,12 +89,13 @@ const AsyncSearchableSelect = <T = any,>({
 	onChange,
 	disabled = false,
 }: AsyncSearchableSelectProps<T>) => {
-	const { searchFn, debounceTime = 300, placeholder: searchPlaceholder = 'Search...', initialOptions = [] } = search;
+	const { t } = useTranslation('common');
+	const { searchFn, debounceTime = 300, placeholder: searchPlaceholder = t('search.placeholderShort'), initialOptions = [] } = search;
 
 	const { valueExtractor, labelExtractor, descriptionExtractor } = extractors;
 
 	const {
-		placeholder = 'Select an option',
+		placeholder = t('selectUi.selectAnOption'),
 		label = '',
 		description,
 		error,
@@ -105,7 +107,12 @@ const AsyncSearchableSelect = <T = any,>({
 		sideOffset = 4,
 	} = display;
 
-	const { noOptionsText = 'No options found', emptyText = 'No results found.', hideSelectedTick = true, isRadio = false } = options;
+	const {
+		noOptionsText = t('selectUi.noOptionsFound'),
+		emptyText = t('selectUi.noResultsFound'),
+		hideSelectedTick = true,
+		isRadio = false,
+	} = options;
 	const [open, setOpen] = useState(defaultOpen);
 	const [searchQuery, setSearchQuery] = useState('');
 	const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -313,12 +320,12 @@ const AsyncSearchableSelect = <T = any,>({
 							{isLoading && (
 								<div className='flex items-center justify-center py-6'>
 									<Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-									<span className='ms-2 text-sm text-muted-foreground'>Searching...</span>
+									<span className='ms-2 text-sm text-muted-foreground'>{t('search.searching')}</span>
 								</div>
 							)}
 							{isError && (
 								<CommandEmpty>
-									<div className='text-sm text-destructive'>{queryError.message || 'Error loading options'}</div>
+									<div className='text-sm text-destructive'>{queryError.message || t('search.errorLoadingOptions')}</div>
 								</CommandEmpty>
 							)}
 							{!isLoading && !isError && (

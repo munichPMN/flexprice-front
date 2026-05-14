@@ -1,5 +1,5 @@
 import { Outlet, useNavigate, useParams, useLocation } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useBreadcrumbsStore } from '@/store';
 import { useQuery } from '@tanstack/react-query';
 import { GroupApi } from '@/api/GroupApi';
@@ -8,22 +8,27 @@ import { cn } from '@/lib/utils';
 import { ApiDocsContent } from '@/components/molecules';
 import GroupHeader from '@/pages/product-catalog/groups/GroupHeader';
 import { RouteNames } from '@/core/routes/Routes';
+import { useTranslation } from 'react-i18next';
 
-const tabs = [
-	{ id: '', label: 'Overview' },
-	{ id: 'information', label: 'Information' },
-] as const;
-
-type TabId = (typeof tabs)[number]['id'];
-
-const getActiveTab = (pathTabId: string): TabId => {
-	const validTabId = tabs.find((tab) => tab.id === pathTabId);
-	return validTabId ? validTabId.id : '';
-};
+type TabId = '' | 'information';
 
 const GroupProfilePage = () => {
 	const { id: groupId } = useParams();
 	const location = useLocation();
+	const { t } = useTranslation(['catalog', 'common']);
+	const tabs = useMemo(
+		() =>
+			[
+				{ id: '' as const, label: t('catalog:groups.profile.tabOverview') },
+				{ id: 'information' as const, label: t('catalog:groups.profile.tabInformation') },
+			] as const,
+		[t],
+	);
+
+	const getActiveTab = (pathTabId: string): TabId => {
+		const validTabId = tabs.find((tab) => tab.id === pathTabId);
+		return validTabId ? validTabId.id : '';
+	};
 	const [activeTab, setActiveTab] = useState<TabId>(tabs[0]?.id);
 	const navigate = useNavigate();
 
@@ -70,7 +75,7 @@ const GroupProfilePage = () => {
 		return (
 			<Page heading='Group'>
 				<div className='flex items-center justify-center h-64'>
-					<p className='text-muted-foreground'>Group not found.</p>
+					<p className='text-muted-foreground'>{t('catalog:groups.profile.notFound')}</p>
 				</div>
 			</Page>
 		);
@@ -82,7 +87,7 @@ const GroupProfilePage = () => {
 			<GroupHeader groupId={groupId!} />
 
 			<div className='border-b border-border mt-4 mb-6'>
-				<nav className='flex space-x-4' aria-label='Tabs'>
+				<nav className='flex space-x-4' aria-label={t('common:labels.tabs')}>
 					{tabs.map((tab, index) => (
 						<button
 							key={tab.id}

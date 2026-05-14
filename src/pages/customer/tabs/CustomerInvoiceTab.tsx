@@ -9,8 +9,10 @@ import { RouteNames } from '@/core/routes/Routes';
 import { useMemo } from 'react';
 import Customer from '@/models/Customer';
 import usePagination from '@/hooks/usePagination';
+import { useTranslation } from 'react-i18next';
 
 const CustomerInvoiceTab = () => {
+	const { t } = useTranslation('customers');
 	const { id: customerId } = useParams();
 	const navigate = useNavigate();
 	const { limit, offset, page } = usePagination();
@@ -70,12 +72,12 @@ const CustomerInvoiceTab = () => {
 	if (data?.items?.length === 0) {
 		return (
 			<NoDataCard
-				title='Invoices'
-				subtitle='No invoices found'
+				title={t('tabPanels.invoice.title')}
+				subtitle={t('tabPanels.invoice.emptySubtitle')}
 				cta={
 					!isArchived && (
 						<AddButton
-							label='Add Invoice'
+							label={t('tabPanels.invoice.addInvoice')}
 							onClick={() => {
 								navigate(`${RouteNames.customers}/${customerId}/invoices/create`);
 							}}
@@ -90,11 +92,11 @@ const CustomerInvoiceTab = () => {
 			<ApiDocsContent tags={['Invoices']} />
 			<Card variant='notched'>
 				<CardHeader
-					title='Invoices'
+					title={t('tabPanels.invoice.title')}
 					cta={
 						!isArchived && (
 							<AddButton
-								label='Add Invoice'
+								label={t('tabPanels.invoice.addInvoice')}
 								onClick={() => {
 									navigate(`${RouteNames.customers}/${customerId}/invoices/create`);
 								}}
@@ -103,7 +105,7 @@ const CustomerInvoiceTab = () => {
 					}
 				/>
 				<CustomerInvoiceTable onRowClick={handleShowDetails} customerId={customerId} data={enrichedInvoices} />
-				<ShortPagination unit='Invoices' totalItems={data?.pagination.total ?? 0} />
+				<ShortPagination unit={t('tabPanels.invoice.paginationUnit')} totalItems={data?.pagination.total ?? 0} />
 			</Card>
 		</div>
 	);

@@ -2,6 +2,7 @@ import { FormHeader } from '@/components/atoms';
 import { cn } from '@/lib/utils';
 import { getTypographyClass } from '@/lib/typography';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface Detail {
 	label?: string;
@@ -17,6 +18,18 @@ export interface Detail {
 	valueClassName?: string;
 	valueVariant?: 'default' | 'muted' | 'foreground';
 	colSpan?: 1 | 2 | 3 | 4;
+}
+
+const DETAIL_LABEL_TYPOGRAPHY_TOKEN: Record<NonNullable<Detail['labelStyle']>, 'label-default' | 'label-semibold'> = {
+	normal: 'label-default',
+	semibold: 'label-semibold',
+};
+
+function getDetailLabelTypographyClass(labelStyle: Detail['labelStyle']) {
+	if (labelStyle === 'semibold') {
+		return getTypographyClass(DETAIL_LABEL_TYPOGRAPHY_TOKEN.semibold);
+	}
+	return getTypographyClass(DETAIL_LABEL_TYPOGRAPHY_TOKEN.normal);
 }
 
 interface Props {
@@ -57,6 +70,8 @@ const DetailsCard: FC<Props> = ({
 	children,
 	childrenAtTop = false,
 }) => {
+	const { t } = useTranslation('common');
+	const na = t('labels.na');
 	const cardClasses = {
 		default: 'card bg-white border rounded-lg p-6',
 		borderless: 'bg-white',
@@ -103,7 +118,7 @@ const DetailsCard: FC<Props> = ({
 						return <div key={index} className={cn('col-span-full h-[1px] bg-gray-200 my-6', detail.className)} />;
 					}
 
-					const labelClasses = getTypographyClass(detail.labelStyle === 'semibold' ? 'label-semibold' : 'label-default');
+					const labelClasses = getDetailLabelTypographyClass(detail.labelStyle);
 					const colSpanClass = detail.colSpan ? `col-span-${detail.colSpan}` : '';
 
 					if (variant === 'stacked') {
@@ -111,7 +126,7 @@ const DetailsCard: FC<Props> = ({
 							<div key={index} className={cn('flex flex-col space-y-0', colSpanClass, detail.className)}>
 								<div className={cn(getValueClasses(detail), 'text-[#09090B] text-sm font-medium')}>{detail.label}</div>
 								<div className={cn(labelClasses, 'text-muted-foreground text-sm')}>
-									<span>{detail.value || '--'}</span>
+									<span>{detail.value || na}</span>
 									{detail.tag && <Tag tag={detail.tag} />}
 								</div>
 							</div>
@@ -122,7 +137,7 @@ const DetailsCard: FC<Props> = ({
 						<div key={index} className={cn('grid grid-cols-2 gap-4', colSpanClass, detail.className)}>
 							<div className={labelClasses}>{detail.label}</div>
 							<div className={getValueClasses(detail)}>
-								<span>{detail.value || '--'}</span>
+								<span>{detail.value || na}</span>
 								{detail.tag && <Tag tag={detail.tag} />}
 							</div>
 						</div>

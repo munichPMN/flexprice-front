@@ -15,7 +15,8 @@
     "start": "vite --port 3000 --host 0.0.0.0",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "validate:i18n": "node scripts/validate-i18n-locales.mjs"
   },
   "dependencies": {
     "@csvbox/react": "^1.1.11",

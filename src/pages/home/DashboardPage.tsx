@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Page } from '@/components/atoms';
 import { Skeleton } from '@/components/ui';
@@ -44,6 +45,7 @@ const getTimeRangeForPeriod = (period: TIME_PERIOD): { startDate: Date; endDate:
 };
 
 const DashboardPage = () => {
+	const { t } = useTranslation('common');
 	const [timePeriod, setTimePeriod] = useState<TIME_PERIOD>(TIME_PERIOD.LAST_DAY);
 	const [windowSize, setWindowSize] = useState<WindowSize>(WindowSize.HOUR);
 
@@ -110,7 +112,7 @@ const DashboardPage = () => {
 
 	// Format "Updated just now" timestamp
 	const getUpdatedTime = () => {
-		return 'Updated just now';
+		return t('dashboardHome.updatedJustNow');
 	};
 
 	// Handle errors
@@ -143,9 +145,9 @@ const DashboardPage = () => {
 			<CardHeader className='pb-4'>
 				<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
 					<div>
-						<CardTitle className={getTypographyClass('section-title', 'font-medium')}>Events Monitoring</CardTitle>
+						<CardTitle className={getTypographyClass('section-title', 'font-medium')}>{t('dashboardHome.eventsMonitoring')}</CardTitle>
 						<CardDescription className={getTypographyClass('helper-text', 'mt-1')}>
-							Event processing metrics and lag information
+							{t('dashboardHome.eventsMonitoringDescription')}
 						</CardDescription>
 					</div>
 				</div>
@@ -153,9 +155,7 @@ const DashboardPage = () => {
 			<CardContent className='pt-0'>
 				<div className='flex flex-col items-center justify-center py-12'>
 					<AlertCircle className='h-10 w-10 text-red-500 mb-3' />
-					<p className={getTypographyClass('body-default', 'text-zinc-600 text-center')}>
-						Failed to load monitoring data. Please try again later.
-					</p>
+					<p className={getTypographyClass('body-default', 'text-zinc-600 text-center')}>{t('dashboardHome.monitoringLoadFailed')}</p>
 				</div>
 			</CardContent>
 		</Card>
@@ -184,7 +184,7 @@ const DashboardPage = () => {
 						monitoringData && (
 							<EventsMonitoringChart
 								data={monitoringData}
-								title='Events Monitoring'
+								title={t('dashboardHome.eventsMonitoring')}
 								description={getUpdatedTime()}
 								onViewLatestData={() => setTimePeriod(TIME_PERIOD.LAST_30_DAYS)}
 							/>

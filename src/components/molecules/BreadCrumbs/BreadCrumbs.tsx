@@ -11,10 +11,12 @@ import { Search } from 'lucide-react';
 import { Button } from '@/components/atoms';
 import { useLocaleStore } from '@/store/useLocaleStore';
 import { Direction } from '@/config/branding';
+import { useTranslation } from 'react-i18next';
 
 const COMMAND_PALETTE_EVENT = 'open-command-palette';
 
 const BreadCrumbsSearchTrigger: React.FC = () => {
+	const { t } = useTranslation('common');
 	const handleClick = () => window.dispatchEvent(new CustomEvent(COMMAND_PALETTE_EVENT));
 
 	return (
@@ -24,13 +26,13 @@ const BreadCrumbsSearchTrigger: React.FC = () => {
 			variant='outline'
 			size='sm'
 			className='flex w-full min-w-[180px] sm:min-w-[220px] items-center border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-200 !ps-3 !pe-2 [&>div]:w-full [&>div]:min-w-0 [&>div]:gap-2'
-			aria-label='Search or run a command (command symbol + k)'>
+			aria-label={t('commandPalette.searchAriaLabel')}>
 			<Search className='h-4 w-4 shrink-0 text-gray-400 order-first' />
-			<span className='flex-1 min-w-0 truncate text-start text-muted-foreground order-2'>Search...</span>
+			<span className='flex-1 min-w-0 truncate text-start text-muted-foreground order-2'>{t('commandPalette.searchPlaceholder')}</span>
 			<kbd
 				className='pointer-events-none order-last ms-auto hidden h-6 shrink-0 items-center justify-center rounded border border-gray-200 bg-gray-50 px-1.5 font-mono text-xs font-medium text-gray-500 sm:inline-flex'
-				title='command symbol + k'>
-				⌘ + K
+				title={t('commandPalette.keyboardShortcutTitle')}>
+				{t('commandPalette.kbdDisplay')}
 			</kbd>
 		</Button>
 	);

@@ -10,54 +10,65 @@ import formatDate from '@/utils/common/format_date';
 import { toSentenceCase } from '@/utils/common/helper_functions';
 import { useQuery } from '@tanstack/react-query';
 import { Import, RefreshCw } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
-const mapStatusChips = (status: string) => {
-	if (status === 'COMPLETED') {
-		return 'Successful';
-	} else if (status === 'FAILED') {
-		return 'Failed';
-	} else if (status === 'PROCESSING' || status === 'PENDING') {
-		return 'Queued';
-	}
+const mapStatusLabel = (status: string, tSuccessful: () => string, tFailed: () => string, tQueued: () => string): string => {
+	if (status === 'COMPLETED') return tSuccessful();
+	if (status === 'FAILED') return tFailed();
+	if (status === 'PROCESSING' || status === 'PENDING') return tQueued();
+	return '';
 };
 
-const columns: ColumnData<ImportTask>[] = [
-	{
-		title: 'File Name',
-		render(rowData) {
-			return <div>{rowData.file_name || '--'}</div>;
-		},
-	},
-	{
-		title: 'Entity Type',
-		render(rowData) {
-			return <div>{toSentenceCase(rowData.entity_type)}</div>;
-		},
-	},
-	{
-		title: 'Status',
-
-		render(rowData) {
-			return (
-				<Chip variant={rowData?.task_status === 'COMPLETED' ? 'success' : 'default'} label={mapStatusChips(rowData?.task_status || '')} />
-			);
-		},
-	},
-	{
-		title: 'Started At',
-		render: (rowData) => formatDate(rowData.started_at),
-	},
-	{
-		title: 'Updated At',
-		render: (rowData) => formatDate(rowData.updated_at),
-	},
-];
 const ImportExport = () => {
+	const { t } = useTranslation('settings');
 	const [drawerOpen, setdrawerOpen] = useState(false);
 	const { limit, offset, page } = usePagination();
 	const [activeTask, setactiveTask] = useState();
+
+	const columns: ColumnData<ImportTask>[] = useMemo(
+		() => [
+			{
+				title: t('bulkImports.columns.fileName'),
+				render(rowData) {
+					return <div>{rowData.file_name || t('bulkImports.placeholders.noFileName')}</div>;
+				},
+			},
+			{
+				title: t('bulkImports.columns.entityType'),
+				render(rowData) {
+					return <div>{toSentenceCase(rowData.entity_type)}</div>;
+				},
+			},
+			{
+				title: t('bulkImports.columns.status'),
+
+				render(rowData) {
+					return (
+						<Chip
+							variant={rowData?.task_status === 'COMPLETED' ? 'success' : 'default'}
+							label={mapStatusLabel(
+								rowData?.task_status ?? '',
+								() => t('import.taskStatus.successful'),
+								() => t('import.taskStatus.failed'),
+								() => t('import.taskStatus.queued'),
+							)}
+						/>
+					);
+				},
+			},
+			{
+				title: t('bulkImports.columns.startedAt'),
+				render: (rowData) => formatDate(rowData.started_at),
+			},
+			{
+				title: t('bulkImports.columns.updatedAt'),
+				render: (rowData) => formatDate(rowData.updated_at),
+			},
+		],
+		[t],
+	);
 
 	useEffect(() => {
 		if (!drawerOpen) {
@@ -86,18 +97,18 @@ const ImportExport = () => {
 	}
 
 	if (error) {
-		toast.error('Failed to fetch data');
+		toast.error(t('bulkImports.errors.fetchFailed'));
 	}
 
 	if (data?.items.length === 0) {
 		return (
 			<EmptyPage
-				heading='Bulk Imports'
+				heading={t('bulkImports.title')}
 				onAddClick={() => setdrawerOpen(true)}
 				emptyStateCard={{
-					heading: 'Ready to Import Data?',
-					description: 'Upload your first import file to bring in customer or events data.',
-					buttonLabel: 'Create Import Task',
+					heading: t('bulkImports.empty.readyTitle'),
+					description: t('bulkImports.empty.readyDescription'),
+					buttonLabel: t('bulkImports.empty.createTaskButton'),
 					buttonAction: () => {
 						setdrawerOpen(true);
 					},
@@ -111,7 +122,7 @@ const ImportExport = () => {
 
 	return (
 		<Page
-			heading='Bulk Imports'
+			heading={t('bulkImports.title')}
 			headingCTA={
 				<>
 					<Button
@@ -123,7 +134,7 @@ const ImportExport = () => {
 					</Button>
 					<Button onClick={() => setdrawerOpen(true)} className='flex gap-2 items-center '>
 						<Import />
-						<span>Import File</span>
+						<span>{t('bulkImports.importFile')}</span>
 					</Button>
 				</>
 			}>
@@ -142,7 +153,7 @@ const ImportExport = () => {
 					showEmptyRow
 				/>
 
-				<ShortPagination unit='Import Tasks' totalItems={data?.pagination.total ?? 0} />
+				<ShortPagination unit={t('bulkImports.paginationUnit')} totalItems={data?.pagination.total ?? 0} />
 			</div>
 		</Page>
 	);

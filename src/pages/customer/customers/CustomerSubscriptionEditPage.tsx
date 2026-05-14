@@ -16,6 +16,7 @@ import CreditGrantApi from '@/api/CreditGrantApi';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { LineItem, SUBSCRIPTION_LINE_ITEM_EDIT_MODE, SUBSCRIPTION_STATUS } from '@/models/Subscription';
 import { PRICE_TYPE } from '@/models/Price';
@@ -57,6 +58,7 @@ type Params = {
 
 const CustomerSubscriptionEditPage: React.FC = () => {
 	const params = useParams<Params>();
+	const { t } = useTranslation('customers');
 	const subscriptionId = params.subscription_id ?? params.id;
 	const [editingLineItem, setEditingLineItem] = useState<EditingLineItemState>(null);
 	const [overriddenPrices, setOverriddenPrices] = useState<Record<string, ExtendedPriceOverride>>({});
@@ -135,11 +137,11 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await SubscriptionApi.updateSubscriptionLineItem(lineItemId, updateData);
 		},
 		onSuccess: () => {
-			toast.success('Line item updated successfully');
+			toast.success(t('subscriptionEdit.toast.lineItemUpdated'));
 			invalidateSubscriptionEdit();
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to update line item');
+			toast.error(error.message || t('subscriptionEdit.toast.lineItemUpdateFailed'));
 		},
 	});
 
@@ -152,11 +154,11 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await SubscriptionApi.deleteSubscriptionLineItem(lineItemId, payload);
 		},
 		onSuccess: () => {
-			toast.success('Line item terminated successfully');
+			toast.success(t('subscriptionEdit.toast.lineItemTerminated'));
 			invalidateSubscriptionEdit();
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to terminate line item');
+			toast.error(error.message || t('subscriptionEdit.toast.lineItemTerminateFailed'));
 		},
 	});
 
@@ -165,12 +167,12 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await SubscriptionApi.createSubscriptionLineItem(subscriptionId!, payload);
 		},
 		onSuccess: () => {
-			toast.success('Charge added successfully');
+			toast.success(t('subscriptionEdit.toast.chargeAdded'));
 			invalidateSubscriptionEdit();
 			setIsAddChargeDialogOpen(false);
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to add charge');
+			toast.error(error.message || t('subscriptionEdit.toast.chargeAddFailed'));
 		},
 	});
 
@@ -179,13 +181,13 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await SubscriptionApi.updateSubscription(subscriptionId!, payload);
 		},
 		onSuccess: () => {
-			toast.success('Subscription updated successfully');
+			toast.success(t('subscriptionEdit.toast.subscriptionUpdated'));
 			invalidateSubscriptionEdit();
 			refetchQueries(['subscriptions']);
 			setUpdateSubscriptionDrawerOpen(false);
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to update subscription');
+			toast.error(error.message || t('subscriptionEdit.toast.subscriptionUpdateFailed'));
 		},
 	});
 
@@ -194,12 +196,12 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await CreditGrantApi.create(data);
 		},
 		onSuccess: () => {
-			toast.success('Credit grant created successfully');
+			toast.success(t('subscriptionEdit.toast.creditGrantCreated'));
 			invalidateSubscriptionEdit();
 			setIsAddCreditGrantModalOpen(false);
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to create credit grant');
+			toast.error(error.message || t('subscriptionEdit.toast.creditGrantCreateFailed'));
 		},
 	});
 
@@ -209,30 +211,34 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 			return await CreditGrantApi.delete(creditGrantId, deleteRequest);
 		},
 		onSuccess: () => {
-			toast.success('Credit grant deleted successfully');
+			toast.success(t('subscriptionEdit.toast.creditGrantDeleted'));
 			invalidateSubscriptionEdit();
 			setCreditGrantToCancel(null);
 		},
 		onError: (error: Error) => {
-			toast.error(error.message || 'Failed to delete credit grant');
+			toast.error(error.message || t('subscriptionEdit.toast.creditGrantDeleteFailed'));
 		},
 	});
 
 	useEffect(() => {
 		if (subscriptionDetails?.plan?.name) {
-			updateBreadcrumb(2, `Subscription`, `${RouteNames.customers}/${customer?.id}/subscription/${subscriptionId}`);
+			updateBreadcrumb(
+				2,
+				t('subscriptionDetail.breadcrumbSubscription'),
+				`${RouteNames.customers}/${customer?.id}/subscription/${subscriptionId}`,
+			);
 		}
 
 		if (customer?.external_id) {
 			updateBreadcrumb(1, customer.external_id, `${RouteNames.customers}/${customer.id}`);
 		}
-	}, [subscriptionDetails, updateBreadcrumb, customer, subscriptionId]);
+	}, [subscriptionDetails, updateBreadcrumb, customer, subscriptionId, t]);
 
 	useEffect(() => {
 		if (isCoreError) {
-			toast.error('Error loading subscription data');
+			toast.error(t('subscriptionEdit.toast.loadError'));
 		}
-	}, [isCoreError]);
+	}, [isCoreError, t]);
 
 	const handleEditLineItem = useCallback((lineItem: LineItem) => {
 		const priceType = getPriceTypeFromLineItem(lineItem);
@@ -315,7 +321,7 @@ const CustomerSubscriptionEditPage: React.FC = () => {
 	const subscriptionReadOnly = subscriptionDetails ? isInheritedSubscription(subscriptionDetails) : false;
 
 	return (
-		<Page documentTitle='Edit Subscription' heading='Edit Subscription'>
+		<Page documentTitle={t('subscriptionEdit.pageTitle')} heading={t('subscriptionEdit.pageHeading')}>
 			<div className='space-y-6'>
 				{isCoreLoading && !subscriptionDetails ? (
 					<>

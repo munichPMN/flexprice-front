@@ -51,6 +51,8 @@ for (const [file, fileReplacements] of Object.entries(byFile)) {
 
 	for (const r of fileReplacements) {
 		const { originalString, suggestedKey } = r;
+		// Skip entries explicitly marked as skip or with null suggestedKey
+		if (r.skip || suggestedKey === null || suggestedKey === undefined) continue;
 		const tCall = `t('${suggestedKey}')`;
 		const lineIdx = r.line - 1;
 		const line = lines[lineIdx] ?? '';

@@ -29,7 +29,8 @@
 		"apply": "تطبيق",
 		"reset": "إعادة تعيين",
 		"clear": "مسح",
-		"keep": "احتفظ"
+		"keep": "احتفظ",
+		"view": "عرض"
 	},
 	"status": {
 		"active": "نشط",
@@ -48,7 +49,9 @@
 		"scheduled": "مجدول",
 		"incomplete": "غير مكتمل",
 		"trialing": "فترة تجريبية",
-		"cancelled_short": "ملغي"
+		"cancelled_short": "ملغي",
+		"paused": "موقوف مؤقتاً",
+		"disconnecting": "جارٍ قطع الاتصال…"
 	},
 	"validation": {
 		"required": "هذا الحقل مطلوب",
@@ -66,9 +69,118 @@
 	"pagination": {
 		"previous": "السابق",
 		"next": "التالي",
-		"page": "الصفحة {{current}} من {{total}}"
+		"page": "الصفحة {{current}} من {{total}}",
+		"showingRange": "عرض {{start}} إلى {{end}} من {{total}} {{unit}}",
+		"unitItems": "عناصر",
+		"unitCustomers": "عملاء"
+	},
+	"actionButton": {
+		"confirmActionOnEntity": "هل أنت متأكد أنك تريد {{action}} هذا {{entity}}؟",
+		"archiveFailed": "تعذّر أرشفة {{entity}}. يرجى المحاولة مجدداً.",
+		"actionFailedGeneric": "تعذّر إكمال هذا الإجراء لـ {{entity}}. يرجى المحاولة مجدداً."
+	},
+	"commandPalette": {
+		"searchAriaLabel": "بحث أو تنفيذ أمر (⌘K)",
+		"searchPlaceholder": "بحث...",
+		"searchPlaceholderExtended": "بحث في الميزات والخطط والعملاء…",
+		"searchCommandsAriaLabel": "بحث في الأوامر",
+		"keyboardShortcutsSrOnly": "اختصارات لوحة المفاتيح:",
+		"keyboardShortcutsHint": "↑↓ للتنقل · Enter للاختيار · Esc للإغلاق · {{shortcut}} للفتح في أي وقت",
+		"shortcutToast": "اضغط {{shortcut}} لفتح لوحة الأوامر في أي وقت",
+		"keyboardShortcutTitle": "أمر + K",
+		"kbdDisplay": "⌘ + K"
+	},
+	"emptyPage": {
+		"learnMore": "اعرف المزيد"
+	},
+	"chrome": {
+		"help": "مساعدة",
+		"posthogErrorTitle": "حدث خطأ ما.",
+		"posthogErrorDescription": "يرجى التحديث أو المحاولة لاحقاً."
+	},
+	"selectUi": {
+		"selectAnOption": "اختر خياراً",
+		"selectOptions": "اختر خيارات",
+		"noOptionsFound": "لم يتم العثور على خيارات",
+		"noResultsFound": "لا توجد نتائج.",
+		"searchOptionsPlaceholder": "بحث في الخيارات..."
+	},
+	"multiSelectUi": {
+		"selectAll": "(تحديد الكل)",
+		"clear": "مسح",
+		"close": "إغلاق",
+		"addChipAria": "إضافة وسيمة"
+	},
+	"features": {
+		"title": "الميزات",
+		"selectFeatures": "اختر الميزات",
+		"selectFeature": "اختر ميزة",
+		"searchPlaceholder": "بحث في الميزات...",
+		"noFeaturesAddedYet": "لم تُضف ميزات بعد",
+		"noneFound": "لم يتم العثور على ميزات.",
+		"loadFailedShort": "خطأ",
+		"noneFoundFull": "لم يتم العثور على ميزات",
+		"selectedSingular": "تم تحديد {{count}} ميزة",
+		"selectedPlural": "تم تحديد {{count}} ميزات"
+	},
+	"paymentLink": {
+		"dialogTitle": "تم إنشاء رابط الدفع",
+		"successBanner": "تم إنشاء رابط الدفع بنجاح!",
+		"goToLink": "الانتقال إلى رابط الدفع",
+		"getLink": "الحصول على الرابط"
+	},
+	"errorPage": {
+		"title": "حدث خطأ ما",
+		"description": "نعمل على إصلاح هذه المشكلة. حاول تحديث الصفحة أو العودة إلى الصفحة الرئيسية.",
+		"errorIdLabel": "معرّف الخطأ",
+		"errorIdCopied": "تم نسخ معرّف الخطأ!",
+		"copyErrorIdAria": "نسخ معرّف الخطأ إلى الحافظة",
+		"copyErrorIdTitle": "نسخ معرّف الخطأ",
+		"tryAgain": "حاول مجدداً",
+		"home": "الرئيسية",
+		"back": "رجوع",
+		"goBackAria": "الرجوع إلى الصفحة السابقة",
+		"getHelp": "احصل على مساعدة",
+		"emailSupport": "دعم البريد الإلكتروني",
+		"emailSupportSubtitle": "مساعدة مباشرة",
+		"slackCommunity": "مجتمع Slack",
+		"slackSubtitle": "انضم للنقاش",
+		"githubIssues": "قضايا GitHub",
+		"githubSubtitle": "الإبلاغ عن أخطاء",
+		"linkedin": "LinkedIn",
+		"linkedinSubtitle": "تواصل معنا",
+		"emailSupportAria": "مراسلة الدعم مع تفاصيل الخطأ",
+		"slackAria": "الانضمام إلى مجتمع Slack",
+		"githubAria": "الإبلاغ عن مشكلة على GitHub",
+		"linkedinAria": "الاتصال على LinkedIn",
+		"showDevDetails": "إظهار تفاصيل المطور",
+		"hideDevDetails": "إخفاء تفاصيل المطور",
+		"errorMessage": "رسالة الخطأ",
+		"stackTrace": "تتبع المكدس",
+		"componentStack": "مكدس المكوّنات",
+		"keyboardTip": "اضغط Tab للتنقل و Enter للاختيار",
+		"notFoundTitle": "صفحة خطأ 404",
+		"notFoundSubtitle": "عذراً! يبدو أنك سلكت مساراً خاطئاً",
+		"notFoundBackToHome": "العودة إلى الرئيسية"
+	},
+	"copyId": {
+		"toastFallback": "تم نسخ المعرّف إلى الحافظة",
+		"toastWithType": "تم نسخ معرّف {{type}} إلى الحافظة",
+		"titleWithType": "نسخ معرّف {{type}}",
+		"defaultEntityType": "المعرّف"
+	},
+	"dateTime": {
+		"placeholderFormat": "MM/DD/YYYY hh:mm aa",
+		"am": "ص",
+		"pm": "م",
+		"timeLabel": "الوقت",
+		"hourPlaceholder": "HH",
+		"minutePlaceholder": "MM",
+		"timezoneLocal": "محلي",
+		"timezoneUtc": "UTC"
 	},
 	"toast": {
+		"codeCopied": "تم نسخ الكود إلى الحافظة!",
 		"createSuccess": "تم إنشاء {{entity}} بنجاح",
 		"updateSuccess": "تم تحديث {{entity}} بنجاح",
 		"archiveSuccess": "تم أرشفة {{entity}} بنجاح",
@@ -96,7 +208,10 @@
 		"noOptionsAvailable": "لا توجد خيارات متاحة",
 		"tryDifferentTerm": "جرّب مصطلح بحث مختلف",
 		"items": "{{count}} عنصر",
-		"selectAll": "اختر الكل"
+		"selectAll": "اختر الكل",
+		"placeholderShort": "بحث...",
+		"resultsCountSingular": "{{count}} نتيجة",
+		"resultsCountPlural": "{{count}} نتائج"
 	},
 	"form": {
 		"key": "المفتاح",
@@ -108,6 +223,8 @@
 		"payload": "الحمولة",
 		"sort": "ترتيب",
 		"na": "--",
+		"notApplicable": "غير منطبق",
+		"unknown": "غير معروف",
 		"creditGrants": "منح الرصيد",
 		"taxRateOverrides": "تجاوزات معدل الضريبة",
 		"taxes": "الضرائب",
@@ -182,7 +299,75 @@
 		"companyLogo": "شعار الشركة",
 		"addCoupon": "إضافة كوبون",
 		"describeYourPricing": "صف تسعيرك. دع الذكاء الاصطناعي يبنيه.",
-		"label": "تسمية"
+		"label": "تسمية",
+		"comingSoon": "قريباً",
+		"copyToClipboard": "نسخ إلى الحافظة"
+	},
+	"dashboardHome": {
+		"eventsMonitoring": "مراقبة الأحداث",
+		"eventsMonitoringDescription": "مؤشرات معالجة الأحداث ومعلومات التأخر",
+		"monitoringLoadFailed": "تعذّر تحميل بيانات المراقبة. يرجى المحاولة لاحقاً.",
+		"updatedJustNow": "تم التحديث للتو"
+	},
+	"checkoutPage": {
+		"loadingPaymentForm": "جارٍ تحميل نموذج الدفع…",
+		"completePaymentTitle": "أكمل عملية الدفع",
+		"completePaymentDescription": "أكمل الدفع في النموذج أعلاه. إذا لم يظهر، قد يكون الرابط منتهياً الصلاحية.",
+		"paymentLinkExpiredTitle": "انتهت صلاحية رابط الدفع",
+		"paymentLinkExpiredDescription": "انتهت صلاحية رابط الدفع هذا. يُرجى طلب رابط دفع جديد من مقدّم الخدمة.",
+		"invalidPaymentLinkTitle": "رابط دفع غير صالح",
+		"invalidPaymentLinkDescription": "رابط الدفع هذا غير صالح أو تقتصر عليه معلومات. يُرجى التحقق من الرابط أو طلب رابط جديد.",
+		"refreshPage": "تحديث الصفحة"
+	},
+	"onboardingLanding": {
+		"welcomeHeading": "مرحباً بك في Flexprice!",
+		"welcomeSubtext": "لنبدأ بتسعيرك وفوترتك!",
+		"bookDemo": "حجز عرض تجريبي",
+		"heroImageAlt": "صورة تعريفية للإعداد",
+		"quickStart": "بدء سريع",
+		"learnMore": "اعرف المزيد"
+	},
+	"tenantSetup": {
+		"loadingWorkspaceAria": "جارٍ تحميل مساحة العمل",
+		"flexpriceLogoAlt": "Flexprice",
+		"welcomeHeading": "مرحباً بك في Flexprice",
+		"welcomeSubtext": "لنكمّل إعداد مساحة عملك وأكمل هذا النموذج للبدء.",
+		"orgNameLabel": "اسم المنظمة",
+		"orgNamePlaceholder": "أدخل اسم منظمتك",
+		"websiteUrlLabel": "رابط الموقع الإلكتروني",
+		"websiteUrlPlaceholder": "مثال: https://example.com",
+		"websiteUrlDescription": "أدخل رابط موقع منظمتك",
+		"roleQuestion": "ما الدور الذي تؤديه في منظمتك؟",
+		"rolePlaceholder": "دورك",
+		"teamSizeQuestion": "كم حجم فريقك؟",
+		"teamSizePlaceholder": "حجم الفريق",
+		"pricingModelQuestion": "ما نموذج التسعير الذي تختاره لـ Flexprice؟",
+		"pricingModelPlaceholder": "كيف تسعّر اليوم؟",
+		"referralQuestion": "كيف عرفت عنا؟",
+		"referralPlaceholder": "من أين سمعت بنا؟"
+	},
+	"pricingSetupPage": {
+		"closeReturnDashboardAria": "إغلاق والعودة إلى لوحة التحكم",
+		"analyzingPrompt": "جارٍ تحليل الوصف…",
+		"title": "إعداد التسعير",
+		"subtitle": "صف نموذج التسعير، أو ابدأ من قالب.",
+		"usingTemplate": "استخدام قالب {{name}}",
+		"templateLogoAlt": "شعار {{label}}",
+		"clearTemplateAria": "مسح القالب",
+		"promptPlaceholder": "مثال: التطبيق يقدّم خطة مجانية وخطة احترافية بسعر شهري تشمل عدداً محدوداً من طلبات واجهة البرمجة…",
+		"generatePreviewAria": "إنشاء معاينة التسعير",
+		"templatesHeading": "القوالب",
+		"skipToDashboard": "أو عد إلى لوحة التحكم",
+		"schemaFeatureCount_one": "ميزة واحدة",
+		"schemaFeatureCount_other": "{{count}} ميزات",
+		"schemaPlanCount_one": "خطة واحدة",
+		"schemaPlanCount_other": "{{count}} خطط",
+		"schemaCreditGrantCount_one": "منحة رصيد واحدة",
+		"schemaCreditGrantCount_other": "{{count}} منح رصيد",
+		"buildingPricing": "جاري بناء التسعير",
+		"creatingSubtitle": "يستغرق هذا عادةً بضع ثوانٍ",
+		"setupProgressAria": "تقدّم الإعداد",
+		"redirectingToPlans": "جاري التوجيه إلى خططك…"
 	},
 	"nav": {
 		"home": "الرئيسية",
@@ -214,5 +399,9 @@
 		"integrations": "التكاملات",
 		"pricingWidget": "أداة التسعير",
 		"settings": "الإعدادات"
+	},
+	"queryableDataArea": {
+		"errorFetching": "خطأ في جلب البيانات",
+		"defaultPromoImageUrl": "https://mintlify.s3.us-west-1.amazonaws.com/flexprice/UsageBaseMetering(1).jpg"
 	}
 }

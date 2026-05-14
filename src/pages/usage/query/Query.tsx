@@ -16,6 +16,7 @@ import { Card, CardContent, ChartConfig, ChartContainer, ChartTooltipContent } f
 import { formatDateTime } from '@/utils';
 import SelectFeature from '@/components/atoms/SelectFeature/SelectFeature';
 import Feature, { FEATURE_TYPE } from '@/models/Feature';
+import { useTranslation } from 'react-i18next';
 
 // Helper function to convert sanitized filters to Usage API parameters
 const convertFiltersToUsageParams = (filters: TypedBackendFilter[]): Partial<GetUsageByMeterPayload> => {
@@ -111,6 +112,7 @@ const filterOptions: FilterField[] = [
 ];
 
 const QueryPage: React.FC = () => {
+	const { t } = useTranslation('developers');
 	const [usageData, setUsageData] = useState<any>(null);
 	const [selectedMeter, setSelectedMeter] = useState<string | undefined>(undefined);
 	const [selectedFeature, setSelectedFeature] = useState<Feature | undefined>(undefined);
@@ -239,7 +241,7 @@ const QueryPage: React.FC = () => {
 							}
 						}}
 						value={selectedFeature?.id}
-						placeholder='Select a metered feature'
+						placeholder={t('usage.query.selectMeteredFeaturePlaceholder')}
 					/>
 				</div>
 				<div className='flex flex-col justify-end min-w-32'>

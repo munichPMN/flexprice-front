@@ -29,7 +29,8 @@
 		"apply": "Apply",
 		"reset": "Reset",
 		"clear": "Clear",
-		"keep": "Keep"
+		"keep": "Keep",
+		"view": "View"
 	},
 	"status": {
 		"active": "Active",
@@ -48,7 +49,9 @@
 		"scheduled": "Scheduled",
 		"incomplete": "Incomplete",
 		"trialing": "Trialing",
-		"cancelled_short": "Canceled"
+		"cancelled_short": "Canceled",
+		"paused": "Paused",
+		"disconnecting": "Disconnecting…"
 	},
 	"validation": {
 		"required": "This field is required",
@@ -65,7 +68,10 @@
 		"noOptionsAvailable": "No options available",
 		"tryDifferentTerm": "Try a different search term",
 		"items": "{{count}} items",
-		"selectAll": "Select all"
+		"selectAll": "Select all",
+		"placeholderShort": "Search...",
+		"resultsCountSingular": "{{count}} result",
+		"resultsCountPlural": "{{count}} results"
 	},
 	"table": {
 		"noResults": "No results found",
@@ -76,9 +82,122 @@
 	"pagination": {
 		"previous": "Previous",
 		"next": "Next",
-		"page": "Page {{current}} of {{total}}"
+		"page": "Page {{current}} of {{total}}",
+		"showingRange": "Showing {{start}} to {{end}} of {{total}} {{unit}}",
+		"unitItems": "items",
+		"unitCustomers": "Customers"
+	},
+	"actionButton": {
+		"confirmActionOnEntity": "Are you sure you want to {{action}} this {{entity}}?",
+		"archiveFailed": "Could not archive {{entity}}. Please try again.",
+		"actionFailedGeneric": "Could not complete this action for {{entity}}. Please try again."
+	},
+	"commandPalette": {
+		"searchAriaLabel": "Search or run a command (⌘K)",
+		"searchPlaceholder": "Search...",
+		"searchPlaceholderExtended": "Search features, plans, customers...",
+		"searchCommandsAriaLabel": "Search commands",
+		"keyboardShortcutsSrOnly": "Keyboard:",
+		"keyboardShortcutsHint": "↑↓ Navigate · Enter Select · Esc Close · {{shortcut}} to open anytime",
+		"shortcutToast": "Press {{shortcut}} to open the command palette anytime",
+		"keyboardShortcutTitle": "Command + K",
+		"kbdDisplay": "⌘ + K"
+	},
+	"emptyPage": {
+		"learnMore": "Learn More"
+	},
+	"queryableDataArea": {
+		"errorFetching": "Error fetching data",
+		"defaultPromoImageUrl": "https://mintlify.s3.us-west-1.amazonaws.com/flexprice/UsageBaseMetering(1).jpg"
+	},
+	"chrome": {
+		"help": "Help",
+		"posthogErrorTitle": "Something went wrong.",
+		"posthogErrorDescription": "Please refresh or try again later."
+	},
+	"selectUi": {
+		"selectAnOption": "Select an option",
+		"selectOptions": "Select options",
+		"noOptionsFound": "No options found",
+		"noResultsFound": "No results found.",
+		"searchOptionsPlaceholder": "Search options..."
+	},
+	"multiSelectUi": {
+		"selectAll": "(Select All)",
+		"clear": "Clear",
+		"close": "Close",
+		"addChipAria": "Add a chip"
+	},
+	"features": {
+		"title": "Features",
+		"selectFeatures": "Select features",
+		"selectFeature": "Select feature",
+		"searchPlaceholder": "Search features...",
+		"noFeaturesAddedYet": "No features added yet",
+		"noneFound": "No features found.",
+		"loadFailedShort": "Error",
+		"noneFoundFull": "No Features found",
+		"selectedSingular": "{{count}} feature selected",
+		"selectedPlural": "{{count}} features selected"
+	},
+	"paymentLink": {
+		"dialogTitle": "Payment Link Created",
+		"successBanner": "Your payment link has been successfully created!",
+		"goToLink": "Go to Payment Link",
+		"getLink": "Get Link"
+	},
+	"errorPage": {
+		"title": "Something went wrong",
+		"description": "We're working on fixing this issue. Please try refreshing the page or return to the homepage.",
+		"errorIdLabel": "Error ID",
+		"errorIdCopied": "Error ID copied!",
+		"copyErrorIdAria": "Copy error ID to clipboard",
+		"copyErrorIdTitle": "Copy error ID",
+		"tryAgain": "Try Again",
+		"home": "Home",
+		"back": "Back",
+		"goBackAria": "Go back to previous page",
+		"getHelp": "Get Help",
+		"emailSupport": "Email Support",
+		"emailSupportSubtitle": "Get direct help",
+		"slackCommunity": "Slack Community",
+		"slackSubtitle": "Join discussion",
+		"githubIssues": "GitHub Issues",
+		"githubSubtitle": "Report bugs",
+		"linkedin": "LinkedIn",
+		"linkedinSubtitle": "Connect with us",
+		"emailSupportAria": "Email support with error details",
+		"slackAria": "Join our Slack community",
+		"githubAria": "Report issue on GitHub",
+		"linkedinAria": "Connect on LinkedIn",
+		"showDevDetails": "Show Developer Details",
+		"hideDevDetails": "Hide Developer Details",
+		"errorMessage": "Error Message",
+		"stackTrace": "Stack Trace",
+		"componentStack": "Component Stack",
+		"keyboardTip": "Press Tab to navigate, Enter to select",
+		"notFoundTitle": "404 Error Page",
+		"notFoundSubtitle": "Oops! Looks like you took a wrong turn",
+		"notFoundBackToHome": "Back to Home"
+	},
+	"copyId": {
+		"toastFallback": "ID copied to clipboard",
+		"toastWithType": "{{type}} ID copied to clipboard",
+		"titleWithType": "Copy {{type}} ID",
+		"defaultEntityType": "ID"
+	},
+	"dateTime": {
+		"placeholderFormat": "MM/DD/YYYY hh:mm aa",
+		"am": "AM",
+		"pm": "PM",
+		"timeLabel": "Time",
+		"hourPlaceholder": "HH",
+		"minutePlaceholder": "MM",
+		"timezoneLocal": "Local",
+		"timezoneUtc": "UTC"
 	},
 	"toast": {
+		"codeCopied": "Code copied to clipboard!",
 		"createSuccess": "{{entity}} created successfully",
 		"updateSuccess": "{{entity}} updated successfully",
 		"archiveSuccess": "{{entity}} archived successfully",
@@ -108,6 +227,8 @@
 		"payload": "Payload",
 		"sort": "Sort",
 		"na": "--",
+		"notApplicable": "N/A",
+		"unknown": "Unknown",
 		"creditGrants": "Credit Grants",
 		"taxRateOverrides": "Tax Rate Overrides",
 		"taxes": "Taxes",
@@ -182,7 +303,75 @@
 		"companyLogo": "company logo",
 		"addCoupon": "Add Coupon",
 		"describeYourPricing": "Describe your Pricing. Let AI Build It.",
-		"label": "label"
+		"label": "label",
+		"comingSoon": "Coming Soon",
+		"copyToClipboard": "Copy to clipboard"
+	},
+	"dashboardHome": {
+		"eventsMonitoring": "Events Monitoring",
+		"eventsMonitoringDescription": "Event processing metrics and lag information",
+		"monitoringLoadFailed": "Failed to load monitoring data. Please try again later.",
+		"updatedJustNow": "Updated just now"
+	},
+	"checkoutPage": {
+		"loadingPaymentForm": "Loading payment form…",
+		"completePaymentTitle": "Complete your payment",
+		"completePaymentDescription": "Complete your payment in the form above. If it doesn't appear, your link may have expired.",
+		"paymentLinkExpiredTitle": "Payment Link Expired",
+		"paymentLinkExpiredDescription": "This payment link has expired. Please request a new payment link from your provider.",
+		"invalidPaymentLinkTitle": "Invalid Payment Link",
+		"invalidPaymentLinkDescription": "This payment link is invalid or missing required information. Please check your link or request a new one.",
+		"refreshPage": "Refresh Page"
+	},
+	"onboardingLanding": {
+		"welcomeHeading": "Welcome to Flexprice!",
+		"welcomeSubtext": "Let's get your pricing and billing started!",
+		"bookDemo": "Book a Demo",
+		"heroImageAlt": "Onboarding Hero",
+		"quickStart": "Quick Start",
+		"learnMore": "Learn more"
+	},
+	"tenantSetup": {
+		"loadingWorkspaceAria": "Loading workspace",
+		"flexpriceLogoAlt": "Flexprice",
+		"welcomeHeading": "Welcome to Flexprice",
+		"welcomeSubtext": "Let's finish setting up your workspace — complete this form to get started.",
+		"orgNameLabel": "Organization name",
+		"orgNamePlaceholder": "Enter your organization name",
+		"websiteUrlLabel": "Website URL",
+		"websiteUrlPlaceholder": "e.g. https://example.com",
+		"websiteUrlDescription": "Enter your organization's website link",
+		"roleQuestion": "What role do you perform in your organization?",
+		"rolePlaceholder": "Your role",
+		"teamSizeQuestion": "What's your team size?",
+		"teamSizePlaceholder": "Team size",
+		"pricingModelQuestion": "What pricing model are you choosing for Flexprice?",
+		"pricingModelPlaceholder": "How do you price today?",
+		"referralQuestion": "How did you find us?",
+		"referralPlaceholder": "Where did you hear about us?"
+	},
+	"pricingSetupPage": {
+		"closeReturnDashboardAria": "Close and return to dashboard",
+		"analyzingPrompt": "Analyzing prompt..",
+		"title": "Set up your pricing",
+		"subtitle": "Describe your pricing model, or start from a template.",
+		"usingTemplate": "Using {{name}} template",
+		"templateLogoAlt": "{{label}} logo",
+		"clearTemplateAria": "Clear template",
+		"promptPlaceholder": "My app has a free plan and a pro plan at $20/month with 500 API calls included…",
+		"generatePreviewAria": "Generate pricing preview",
+		"templatesHeading": "Templates",
+		"skipToDashboard": "or get back to dashboard",
+		"schemaFeatureCount_one": "{{count}} feature",
+		"schemaFeatureCount_other": "{{count}} features",
+		"schemaPlanCount_one": "{{count}} plan",
+		"schemaPlanCount_other": "{{count}} plans",
+		"schemaCreditGrantCount_one": "{{count}} credit grant",
+		"schemaCreditGrantCount_other": "{{count}} credit grants",
+		"buildingPricing": "Building your pricing",
+		"creatingSubtitle": "This usually takes a few seconds",
+		"setupProgressAria": "Setup progress",
+		"redirectingToPlans": "Redirecting to your plans…"
 	},
 	"nav": {
 		"home": "Home",

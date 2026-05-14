@@ -19,7 +19,7 @@ interface FormErrors {
 }
 
 const CouponModal: React.FC<Props> = ({ isOpen, onOpenChange, onSave, onCancel, coupons, selectedCouponId }) => {
-	const { t } = useTranslation('common');
+	const { t } = useTranslation(['catalog', 'common']);
 	const [errors, setErrors] = useState<FormErrors>({});
 	const [selectedCoupon, setSelectedCoupon] = useState<string>(selectedCouponId || '');
 
@@ -27,14 +27,14 @@ const CouponModal: React.FC<Props> = ({ isOpen, onOpenChange, onSave, onCancel, 
 		const newErrors: FormErrors = {};
 
 		if (!selectedCoupon) {
-			newErrors.couponId = 'Please select a coupon';
+			newErrors.couponId = t('coupons.modal.selectCouponRequired');
 		}
 
 		return {
 			isValid: Object.keys(newErrors).length === 0,
 			errors: newErrors,
 		};
-	}, [selectedCoupon]);
+	}, [selectedCoupon, t]);
 
 	const handleSave = useCallback(() => {
 		const validation = validateForm();

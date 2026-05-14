@@ -8,8 +8,10 @@ import { EmptyPage } from '@/components/organisms';
 import { useMemo } from 'react';
 import useEnvironment from '@/hooks/useEnvironment';
 import { PREFETCH_REGISTRY, PrefetchQueryKey } from '@/config/prefetch';
+import { useTranslation } from 'react-i18next';
 
 const WebhookDashboard = () => {
+	const { t } = useTranslation(['developers', 'common']);
 	const { activeEnvironment } = useEnvironment();
 	const envId = activeEnvironment?.id;
 	const prefetch = PREFETCH_REGISTRY[PrefetchQueryKey.WebhookDashboardUrl];
@@ -22,7 +24,6 @@ const WebhookDashboard = () => {
 		enabled: !!envId,
 	});
 
-	// Memoize the AppPortal props to prevent unnecessary re-renders
 	const appPortalProps = useMemo(
 		() => ({
 			primaryColor: '#000000',
@@ -38,9 +39,11 @@ const WebhookDashboard = () => {
 		[data?.url],
 	);
 
+	const webhooksHeading = t('common:nav.webhooks');
+
 	if (isLoading) {
 		return (
-			<Page className='h-full w-full' heading='Webhooks'>
+			<Page className='h-full w-full' heading={webhooksHeading}>
 				<ApiDocsContent tags={['Webhooks']} />
 				<div className='flex items-center justify-center h-96'>
 					<Loader />
@@ -50,15 +53,19 @@ const WebhookDashboard = () => {
 	}
 
 	if (isError) {
-		toast.error(`Error fetching webhook dashboard: ${error?.message || 'Unknown error'}`);
+		toast.error(
+			t('developers:webhooks.toastFetchError', {
+				message: error?.message || t('developers:webhooks.unknownError'),
+			}),
+		);
 		return (
-			<Page className='h-full w-full' heading='Webhooks'>
+			<Page className='h-full w-full' heading={webhooksHeading}>
 				<ApiDocsContent tags={['Webhooks']} />
 				<EmptyPage
-					heading='Webhooks'
+					heading={webhooksHeading}
 					emptyStateCard={{
-						heading: 'Unable to Load Webhooks',
-						description: 'There was an error loading the webhook dashboard. Please try refreshing the page.',
+						heading: t('developers:webhooks.emptyLoadFailed.heading'),
+						description: t('developers:webhooks.emptyLoadFailed.description'),
 					}}
 				/>
 			</Page>
@@ -67,13 +74,13 @@ const WebhookDashboard = () => {
 
 	if (!data?.svix_enabled) {
 		return (
-			<Page className='h-full w-full' heading='Webhooks'>
+			<Page className='h-full w-full' heading={webhooksHeading}>
 				<ApiDocsContent tags={['Webhooks']} />
 				<EmptyPage
-					heading='Webhooks'
+					heading={webhooksHeading}
 					emptyStateCard={{
-						heading: 'Webhooks',
-						description: 'Webhooks are not enabled. Please contact support to enable webhooks.',
+						heading: t('developers:webhooks.disabled.heading'),
+						description: t('developers:webhooks.disabled.description'),
 					}}
 				/>
 			</Page>
@@ -81,7 +88,7 @@ const WebhookDashboard = () => {
 	}
 
 	return (
-		<Page className='h-full w-full' heading='Webhooks'>
+		<Page className='h-full w-full' heading={webhooksHeading}>
 			<ApiDocsContent tags={['Webhooks']} />
 			<AppPortal {...appPortalProps} />
 		</Page>

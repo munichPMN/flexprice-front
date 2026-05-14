@@ -8,6 +8,7 @@ import { FC, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface DuplicatePlanDialogProps {
 	planId: string;
@@ -26,6 +27,7 @@ const DuplicatePlanDialog: FC<DuplicatePlanDialogProps> = ({
 	onOpenChange,
 	refetchQueryKeys = ['fetchPlan', 'planEntitlements'],
 }) => {
+	const { t } = useTranslation(['catalog', 'common']);
 	const navigate = useNavigate();
 	const [name, setName] = useState('');
 	const [lookupKey, setLookupKey] = useState('');
@@ -118,13 +120,13 @@ const DuplicatePlanDialog: FC<DuplicatePlanDialogProps> = ({
 		<Dialog
 			isOpen={open}
 			onOpenChange={onOpenChange}
-			title='Duplicate plan'
-			description='Enter plan details for the duplicated plan. Entitlements, credit grants, and other settings will be copied.'
+			title={t('catalog:plans.duplicate.title')}
+			description={t('catalog:plans.duplicate.description')}
 			showCloseButton={true}>
 			<Input
-				label='Plan Name'
-				placeholder='Enter a name for the plan'
-				description='A descriptive name for this pricing plan.'
+				label={t('catalog:plans.drawer.planName')}
+				placeholder={t('catalog:plans.drawer.namePlaceholder')}
+				description={t('catalog:plans.drawer.nameHelp')}
 				value={name}
 				error={errors.name}
 				onChange={(e) => {
@@ -134,9 +136,9 @@ const DuplicatePlanDialog: FC<DuplicatePlanDialogProps> = ({
 			/>
 			<Spacer height='20px' />
 			<Input
-				label='Lookup Key'
-				placeholder='Enter a slug for the plan'
-				description='A system identifier used for API calls and integrations.'
+				label={t('catalog:shared.lookupKey')}
+				placeholder={t('catalog:plans.drawer.lookupPlaceholder')}
+				description={t('catalog:shared.lookupKeyDescription')}
 				value={lookupKey}
 				error={errors.lookup_key}
 				onChange={(e) => {
@@ -149,9 +151,9 @@ const DuplicatePlanDialog: FC<DuplicatePlanDialogProps> = ({
 				value={description}
 				onChange={(e) => setDescription(e)}
 				className='min-h-[100px]'
-				placeholder='Enter description'
-				label='Description'
-				description='Helps your team to understand the purpose of this plan.'
+				placeholder={t('catalog:shared.enterDescription')}
+				label={t('catalog:features.drawer.descriptionLabel')}
+				description={t('catalog:plans.drawer.purposeDescription')}
 			/>
 			<Spacer height='20px' />
 			<Textarea
@@ -162,17 +164,17 @@ const DuplicatePlanDialog: FC<DuplicatePlanDialogProps> = ({
 				}}
 				error={errors.metadata}
 				className='min-h-[100px]'
-				placeholder='{"key": "value"}'
-				label='Metadata (Optional)'
-				description='Additional metadata as JSON. All values must be strings.'
+				placeholder={t('catalog:shared.metadataPlaceholder')}
+				label={t('catalog:shared.metadataOptional')}
+				description={t('catalog:shared.metadataJsonStringsOnly')}
 			/>
 			<Spacer height='24px' />
 			<div className='flex justify-end gap-2'>
 				<Button variant='outline' onClick={() => onOpenChange(false)} disabled={isPending}>
-					Cancel
+					{t('common:actions.cancel')}
 				</Button>
 				<Button onClick={handleSubmit} disabled={isPending || !name?.trim() || !lookupKey?.trim()} isLoading={isPending}>
-					Duplicate
+					{t('catalog:plans.duplicate.duplicate')}
 				</Button>
 			</div>
 		</Dialog>

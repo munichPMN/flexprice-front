@@ -23,6 +23,7 @@ import { TypedBackendFilter } from '@/types/formatters/QueryBuilder';
 import { GetEventsPayload } from '@/types/dto/Events';
 import { logger } from '@/utils/common/Logger';
 import EmptyState from '@/components/customer-portal/EmptyState';
+import { useTranslation } from 'react-i18next';
 
 // Helper function to convert sanitized filters to Events API parameters
 const convertFiltersToEventParams = (filters: TypedBackendFilter[]): Partial<GetEventsPayload> => {
@@ -123,6 +124,7 @@ const filterOptions: FilterField[] = [
 ];
 
 const CustomerUsageEventsTab = () => {
+	const { t } = useTranslation('customers');
 	const { id: customerId } = useParams();
 	const { reset } = usePagination();
 	const [events, setEvents] = useState<Event[]>([]);
@@ -276,7 +278,7 @@ const CustomerUsageEventsTab = () => {
 	if (!customer?.external_id) {
 		return (
 			<Card className='bg-white border border-[#E9E9E9] rounded-xl p-6'>
-				<EmptyState title='Unable to load events' description='Customer information is missing' />
+				<EmptyState title={t('tabPanels.usageEvents.loadErrorTitle')} description={t('tabPanels.usageEvents.loadErrorDescription')} />
 			</Card>
 		);
 	}
@@ -306,7 +308,9 @@ const CustomerUsageEventsTab = () => {
 						<Skeleton className='h-8 w-full' />
 					</div>
 				)}
-				{!hasMore && events.length === 0 && <p className=' text-[#64748B] text-xs font-normal font-sans mt-4'>No events found</p>}
+				{!hasMore && events.length === 0 && (
+					<p className=' text-[#64748B] text-xs font-normal font-sans mt-4'>{t('tabPanels.usageEvents.noEventsFound')}</p>
+				)}
 			</div>
 		</>
 	);

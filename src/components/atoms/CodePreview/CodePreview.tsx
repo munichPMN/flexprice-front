@@ -3,6 +3,7 @@ import { HighlightProps, Highlight, themes } from 'prism-react-renderer';
 import { cn } from '@/lib/utils';
 import { Copy } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../Button';
 
 const CodeHighlighter = Highlight as unknown as FC<HighlightProps>;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const CodePreview: FC<Props> = ({ code, language, className: styles, title }) => {
+	const { t } = useTranslation('common');
 	return (
 		<>
 			<div className={cn('bg-[#FAFAFA] border rounded-[6px]')}>
@@ -23,7 +25,7 @@ const CodePreview: FC<Props> = ({ code, language, className: styles, title }) =>
 					<Button
 						onClick={() => {
 							navigator.clipboard.writeText(code);
-							toast.success('Copied to clipboard');
+							toast.success(t('toast.copySuccess'));
 						}}
 						className='text-muted-foreground cursor-pointer size-10'
 						variant={'ghost'}>

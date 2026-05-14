@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { Check, ChevronDown, Circle } from 'lucide-react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface SelectOption {
 	value: string;
@@ -38,21 +39,26 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({
 	disabled = false,
 	options,
 	value,
-	placeholder = 'Select an option',
+	placeholder: placeholderProp,
 	label = '',
 	description,
 	onChange,
 	error,
 	isRadio,
 	className,
-	noOptionsText = 'No options found',
+	noOptionsText: noOptionsTextProp,
 	defaultOpen = false,
 	hideSelectedTick = true,
 	trigger,
-	searchPlaceholder = 'Search options...',
-	emptyText = 'No options found.',
+	searchPlaceholder: searchPlaceholderProp,
+	emptyText: emptyTextProp,
 	maxHeight = 300,
 }) => {
+	const { t } = useTranslation('common');
+	const placeholder = placeholderProp ?? t('selectUi.selectAnOption');
+	const noOptionsText = noOptionsTextProp ?? t('selectUi.noOptionsFound');
+	const searchPlaceholder = searchPlaceholderProp ?? t('selectUi.searchOptionsPlaceholder');
+	const emptyText = emptyTextProp ?? t('selectUi.noResultsFound');
 	const [open, setOpen] = useState(defaultOpen);
 	const [searchQuery, setSearchQuery] = useState('');
 

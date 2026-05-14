@@ -29,6 +29,7 @@ import { formatAmount } from '@/components/atoms/Input/Input';
 import { refetchQueries } from '@/core/services/tanstack/ReactQueryProvider';
 import { logger } from '@/utils/common/Logger';
 import { PremiumFeatureIcon } from '@/components/molecules/PremiumFeature/PremiumFeature';
+import { useTranslation } from 'react-i18next';
 
 const formatWalletStatus = (status?: string) => {
 	const statusMap: Record<string, string> = {
@@ -58,6 +59,7 @@ const filterStringMetadata = (meta: Record<string, unknown> | undefined): Record
 };
 
 const CustomerWalletTab = () => {
+	const { t } = useTranslation('customers');
 	const { id: customerId } = useParams();
 
 	const { limit, offset } = usePagination();
@@ -305,9 +307,9 @@ const CustomerWalletTab = () => {
 
 			{!wallets?.length ? (
 				<NoDataCard
-					title='Wallets'
-					subtitle='No wallets linked to the customer'
-					cta={!isArchived && <AddButton label='Add Wallet' onClick={() => setShowCreateWalletModal(true)} />}
+					title={t('tabPanels.wallet.emptyTitle')}
+					subtitle={t('tabPanels.wallet.emptySubtitle')}
+					cta={!isArchived && <AddButton label={t('tabPanels.wallet.addWallet')} onClick={() => setShowCreateWalletModal(true)} />}
 				/>
 			) : (
 				<>
@@ -332,7 +334,7 @@ const CustomerWalletTab = () => {
 									{activeWallet && (
 										<Button onClick={() => setShowTopupModal(true)}>
 											<WalletIcon />
-											<span>Topup Wallet</span>
+											<span>{t('tabPanels.wallet.topupWallet')}</span>
 										</Button>
 									)}
 								</>
@@ -350,7 +352,7 @@ const CustomerWalletTab = () => {
 						<div>
 							<DetailsCard
 								variant='stacked'
-								title='Wallet Details'
+								title={t('tabPanels.wallet.detailsTitle')}
 								data={[
 									{ label: 'Wallet Name', value: activeWallet?.name || 'Prepaid wallet' },
 									{
@@ -396,7 +398,12 @@ const CustomerWalletTab = () => {
 											<div className='flex justify-between items-center mb-4'>
 												<div className='flex items-center space-x-2'>
 													<span className='text-gray-600 text-sm font-medium'>
-														{type === WALLET_BALANCE_TYPE.CURRENT ? 'Current' : 'Ongoing'} Balance
+														{t('tabPanels.wallet.balanceLabel', {
+															type:
+																type === WALLET_BALANCE_TYPE.CURRENT
+																	? t('tabPanels.wallet.currentBalanceShort')
+																	: t('tabPanels.wallet.ongoingBalanceShort'),
+														})}
 													</span>
 													<TooltipProvider delayDuration={0}>
 														<Tooltip>
@@ -404,7 +411,11 @@ const CustomerWalletTab = () => {
 																<Info className='size-4 text-gray-400 hover:text-gray-600 transition-colors' />
 															</TooltipTrigger>
 															<TooltipContent>
-																<p>{type === WALLET_BALANCE_TYPE.CURRENT ? 'Balance as per latest invoice' : 'Includes real-time usage'}</p>
+																<p>
+																	{type === WALLET_BALANCE_TYPE.CURRENT
+																		? t('tabPanels.wallet.currentBalanceTooltip')
+																		: t('tabPanels.wallet.ongoingBalanceTooltip')}
+																</p>
 															</TooltipContent>
 														</Tooltip>
 													</TooltipProvider>
@@ -428,7 +439,8 @@ const CustomerWalletTab = () => {
 													{type === WALLET_BALANCE_TYPE.CURRENT
 														? formatAmount(walletBalance?.credit_balance.toString() ?? '0')
 														: formatAmount(walletBalance?.real_time_credit_balance.toString() ?? '0')}
-													{'  credits'}
+													{'  '}
+													{t('tabPanels.wallet.creditsSuffix')}
 												</span>
 											</div>
 										</Card>
@@ -441,16 +453,23 @@ const CustomerWalletTab = () => {
 							{/* Transactions */}
 							{transactionsData?.items.length === 0 ? (
 								<div className='card'>
-									<FormHeader title='No transactions found' variant='sub-header' subtitle='No recent transactions' />
+									<FormHeader
+										title={t('tabPanels.wallet.noTransactionsTitle')}
+										variant='sub-header'
+										subtitle={t('tabPanels.wallet.noTransactionsSubtitle')}
+									/>
 								</div>
 							) : (
 								<div className='card'>
 									<div className='w-full flex justify-between items-center'>
-										<FormHeader title='Transactions' titleClassName='!font-semibold' variant='form-title' />
+										<FormHeader title={t('tabPanels.wallet.transactionsTitle')} titleClassName='!font-semibold' variant='form-title' />
 									</div>
 									<Spacer className='!h-6' />
 									<WalletTransactionsTable data={transactionsData?.items || []} />
-									<ShortPagination unit='Transactions' totalItems={transactionsData?.pagination.total ?? 0} />
+									<ShortPagination
+										unit={t('tabPanels.wallet.transactionsPaginationUnit')}
+										totalItems={transactionsData?.pagination.total ?? 0}
+									/>
 								</div>
 							)}
 
@@ -458,7 +477,7 @@ const CustomerWalletTab = () => {
 
 							<Card>
 								<CardHeader
-									title='Metadata'
+									title={t('tabPanels.common.metadata')}
 									cta={
 										!isArchived && (
 											<Button variant='outline' size='icon' onClick={() => setShowMetadataModal(true)}>
@@ -479,8 +498,8 @@ const CustomerWalletTab = () => {
 									/>
 								) : (
 									<div className='text-center py-8'>
-										<h3 className='text-lg font-medium text-gray-900 mb-1'>No metadata</h3>
-										<p className='text-sm text-gray-500 mb-4'>Add custom metadata to store additional information about this wallet.</p>
+										<h3 className='text-lg font-medium text-gray-900 mb-1'>{t('tabPanels.wallet.noMetadataTitle')}</h3>
+										<p className='text-sm text-gray-500 mb-4'>{t('tabPanels.wallet.noMetadataHint')}</p>
 									</div>
 								)}
 							</Card>

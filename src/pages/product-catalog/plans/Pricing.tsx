@@ -28,6 +28,7 @@ import {
 import CreditGrantApi from '@/api/CreditGrantApi';
 import { generateExpandQueryParams } from '@/utils/common/api_helper';
 import { EXPAND } from '@/models/expand';
+import { useTranslation } from 'react-i18next';
 
 type PriceType = {
 	currency: string;
@@ -172,6 +173,7 @@ const findBestPriceCombination = (
 };
 
 const PricingPage = () => {
+	const { t } = useTranslation(['catalog']);
 	const { limit, offset, page } = usePagination();
 	const [selectedBillingPeriod, setSelectedBillingPeriod] = useState<string>('');
 	const [selectedCurrency, setSelectedCurrency] = useState<string>('');
@@ -579,7 +581,9 @@ const PricingPage = () => {
 
 						{/* Empty State Message and Button */}
 						<div className='flex flex-col items-center'>
-							<h2 className='font-regular text-[16px] leading-normal text-gray-600 text-center mb-8'>No Pricing Widget Exists</h2>
+							<h2 className='font-regular text-[16px] leading-normal text-gray-600 text-center mb-8'>
+								{t('catalog:plans.pricing.noWidget')}
+							</h2>
 						</div>
 					</div>
 				</Page>

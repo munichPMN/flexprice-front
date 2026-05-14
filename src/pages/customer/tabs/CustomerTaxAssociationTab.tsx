@@ -10,12 +10,14 @@ import { TaxAssociationTable, TaxAssociationDialog } from '@/components/molecule
 import { CreateTaxAssociationRequest } from '@/types';
 import { useState } from 'react';
 import { EXPAND } from '@/models';
+import { useTranslation } from 'react-i18next';
 
 type ContextType = {
 	isArchived: boolean;
 };
 
 const CustomerTaxAssociationTab = () => {
+	const { t } = useTranslation('customers');
 	const { id: customerId } = useParams();
 	const { isArchived } = useOutletContext<ContextType>();
 	const { limit, offset, page } = usePagination();
@@ -87,8 +89,8 @@ const CustomerTaxAssociationTab = () => {
 					onCancel={handleCancelTaxAssociation}
 				/>
 				<NoDataCard
-					title='Tax'
-					subtitle='No tax rate assigned to this customer'
+					title={t('tabPanels.tax.emptyTitle')}
+					subtitle={t('tabPanels.tax.emptySubtitle')}
 					cta={!isArchived && <AddButton onClick={handleAddTaxAssociation} disabled={false} />}
 				/>
 			</div>
@@ -99,9 +101,12 @@ const CustomerTaxAssociationTab = () => {
 		<div className='space-y-6'>
 			<ApiDocsContent tags={['Tax Associations']} />
 			<Card variant='notched'>
-				<CardHeader title='Tax Associations' cta={!isArchived && <AddButton onClick={handleAddTaxAssociation} disabled={false} />} />
+				<CardHeader
+					title={t('tabPanels.tax.associationsTitle')}
+					cta={!isArchived && <AddButton onClick={handleAddTaxAssociation} disabled={false} />}
+				/>
 				<TaxAssociationTable data={taxAssociationsData.items} />
-				<ShortPagination unit='Tax Associations' totalItems={taxAssociationsData.pagination.total ?? 0} />
+				<ShortPagination unit={t('tabPanels.tax.associationsPaginationUnit')} totalItems={taxAssociationsData.pagination.total ?? 0} />
 			</Card>
 
 			<TaxAssociationDialog

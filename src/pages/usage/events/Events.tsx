@@ -20,6 +20,7 @@ import usePagination from '@/hooks/usePagination';
 import { TypedBackendFilter } from '@/types/formatters/QueryBuilder';
 import { GetEventsPayload } from '@/types/dto/Events';
 import { logger } from '@/utils/common/Logger';
+import { useTranslation } from 'react-i18next';
 
 // Helper function to convert sanitized filters to Events API parameters
 const convertFiltersToEventParams = (filters: TypedBackendFilter[]): Partial<GetEventsPayload> => {
@@ -155,6 +156,7 @@ const filterOptions: FilterField[] = [
 ];
 
 const EventsPage: React.FC = () => {
+	const { t } = useTranslation('developers');
 	const { reset } = usePagination();
 	const [events, setEvents] = useState<Event[]>([]);
 	const [hasMore, setHasMore] = useState(true);
@@ -330,7 +332,9 @@ const EventsPage: React.FC = () => {
 						<Skeleton className='h-8 w-full' />
 					</div>
 				)}
-				{!hasMore && events.length === 0 && <p className=' text-[#64748B] text-xs font-normal font-sans mt-4'>No events found</p>}
+				{!hasMore && events.length === 0 && (
+					<p className=' text-[#64748B] text-xs font-normal font-sans mt-4'>{t('events.list.noEventsFound')}</p>
+				)}
 			</div>
 		</Page>
 	);

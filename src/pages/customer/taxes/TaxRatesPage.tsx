@@ -11,8 +11,10 @@ import TaxTable from '@/components/molecules/TaxTable/TaxTable';
 import TaxDrawer from '@/components/molecules/TaxDrawer/TaxDrawer';
 import { TaxRateResponse } from '@/types/dto/tax';
 import { TaxRate } from '@/models/Tax';
+import { useTranslation } from 'react-i18next';
 
 const TaxPage = () => {
+	const { t } = useTranslation('billing');
 	const { limit, offset, page } = usePagination();
 	const [taxDrawerOpen, setTaxDrawerOpen] = useState(false);
 	const [activeTax, setActiveTax] = useState<TaxRateResponse | null>(null);
@@ -48,18 +50,18 @@ const TaxPage = () => {
 	}
 
 	if (isError) {
-		toast.error('Error fetching tax rates');
+		toast.error(t('taxes.toast.fetchListError'));
 	}
 
 	if ((taxData?.items ?? []).length === 0) {
 		return (
 			<EmptyPage
-				heading='Tax Rates'
+				heading={t('taxes.list.pageHeading')}
 				tags={['Taxes', 'Tax', 'Tax Rates']}
 				emptyStateCard={{
-					heading: 'Create Your First Tax Rate',
-					description: 'Set up tax rates to automatically calculate taxes on invoices and ensure compliance with local regulations.',
-					buttonLabel: 'Create Tax Rate',
+					heading: t('taxes.list.emptyHeading'),
+					description: t('taxes.list.emptyDescription'),
+					buttonLabel: t('taxes.list.createTaxRate'),
 					buttonAction: handleCreateNew,
 				}}
 				tutorials={GUIDES.taxes.tutorials}
@@ -75,12 +77,12 @@ const TaxPage = () => {
 	}
 
 	return (
-		<Page heading='Tax Rates' headingCTA={<AddButton onClick={handleCreateNew} />}>
+		<Page heading={t('taxes.list.pageHeading')} headingCTA={<AddButton onClick={handleCreateNew} />}>
 			<ApiDocsContent tags={['Taxes', 'Tax', 'Tax Rates']} />
 			<div className='px-0'>
 				<TaxTable data={taxData?.items || []} onEdit={handleEdit} />
 				<Spacer className='!h-4' />
-				<ShortPagination unit='Tax Rates' totalItems={taxData?.pagination.total ?? 0} />
+				<ShortPagination unit={t('taxes.list.paginationUnit')} totalItems={taxData?.pagination.total ?? 0} />
 			</div>
 			<TaxDrawer
 				data={activeTax as TaxRate | null}

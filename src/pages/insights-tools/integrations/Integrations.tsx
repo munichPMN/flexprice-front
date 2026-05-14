@@ -6,6 +6,7 @@ import { useMutation, useQueryClient, useQueries } from '@tanstack/react-query';
 import { Switch } from '@/components/ui/switch';
 import { ExternalLinkIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import ConnectionApi from '@/api/ConnectionApi';
 import { CONNECTION_PROVIDER_TYPE } from '@/models/Connection';
@@ -30,6 +31,7 @@ const getProviderTypeForIntegration = (integrationName: string): CONNECTION_PROV
 };
 
 const Integrations = () => {
+	const { t } = useTranslation('settings');
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [activeIntegration, setActiveIntegration] = useState<Integration | null>(null);
 	const [editingConnection, setEditingConnection] = useState<any | null>(null);
@@ -77,17 +79,17 @@ const Integrations = () => {
 	}
 
 	return (
-		<Page heading='Integrations'>
+		<Page heading={t('insightsTools.integrations.pageHeading')}>
 			<ApiDocsContent tags={['Integrations', 'secrets']} />
 			<div className='mt-6'>
-				<h2 className='mb-4 font-medium text-xl'>Available</h2>
+				<h2 className='mb-4 font-medium text-xl'>{t('insightsTools.integrations.availableSection')}</h2>
 				<div className='grid grid-cols-2 gap-4'>
 					{availableNonPremium.map((integration, index) => {
 						const previewConnected = !!PREVIEW_CONNECTED_PROVIDER && integration.name.toLowerCase() === previewProvider.toLowerCase();
 						const connected = hasConnection(integration) || previewConnected;
 						const connection =
 							connectionByProvider.get(integration.name.toLowerCase())?.[0] ??
-							(previewConnected ? { id: PREVIEW_MOCK_CONNECTION_ID, name: 'Preview connection' } : null);
+							(previewConnected ? { id: PREVIEW_MOCK_CONNECTION_ID, name: t('insightsTools.integrations.previewConnectionName') } : null);
 						return (
 							<div key={`${integration.name}-${index}`} className='min-w-0'>
 								<IntegrationCard
@@ -110,7 +112,7 @@ const Integrations = () => {
 				</div>
 			</div>
 			<div className='mt-16'>
-				<p className='mb-4 font-medium text-xl'>Premium add-ons</p>
+				<p className='mb-4 font-medium text-xl'>{t('insightsTools.integrations.premiumAddonsSection')}</p>
 				<div className='grid grid-cols-2 gap-4'>
 					{availablePremium.map((integration, index) => (
 						<div key={`${integration.name}-${index}`} className='min-w-0'>
@@ -324,6 +326,8 @@ type IntegrationCardProps = {
 
 const IntegrationCard = ({ integration, connected, connection, isPreviewConnection, onOpenDrawer, onDeleted }: IntegrationCardProps) => {
 	const queryClient = useQueryClient();
+	const { t } = useTranslation('settings');
+	const { i18n } = useTranslation();
 	const [disconnectDialogOpen, setDisconnectDialogOpen] = useState(false);
 
 	const providerKey = integration.name.toLowerCase();
@@ -374,12 +378,12 @@ const IntegrationCard = ({ integration, connected, connection, isPreviewConnecti
 								<h3 className='font-semibold text-lg text-foreground'>{integration.name}</h3>
 								{connected && (
 									<span className='inline-flex h-5 items-center rounded-sm bg-emerald-100 px-2 text-xs font-medium text-emerald-700'>
-										Connected
+										{t('insightsTools.integrations.badgeConnected')}
 									</span>
 								)}
 								{integration.premium && (
 									<span className='inline-flex h-5 items-center rounded-sm bg-amber-100 px-2 text-xs font-medium text-amber-700'>
-										Premium
+										{t('insightsTools.integrations.badgePremium')}
 									</span>
 								)}
 								<div className='ml-auto'>
@@ -389,8 +393,8 @@ const IntegrationCard = ({ integration, connected, connection, isPreviewConnecti
 											target='_blank'
 											rel='noopener noreferrer'
 											className='inline-flex h-5 items-center gap-1 text-xs text-slate-500 transition-colors hover:text-slate-700'
-											title={`Open ${integration.name} docs`}>
-											Docs
+											title={t('insightsTools.integrations.openDocsTitle', { name: integration.name })}>
+											{t('insightsTools.integrations.docsLink')}
 											<ExternalLinkIcon className='size-3.5' />
 										</a>
 									) : null}
@@ -452,15 +456,15 @@ const IntegrationCard = ({ integration, connected, connection, isPreviewConnecti
 			<Dialog
 				isOpen={disconnectDialogOpen}
 				onOpenChange={setDisconnectDialogOpen}
-				title={`Disconnect ${integration.name}?`}
-				description='This will remove the connection. You can reconnect from the integrations page at any time.'
+				title={t('insightsTools.integrations.disconnectTitle', { name: integration.name })}
+				description={t('insightsTools.integrations.disconnectDescription')}
 				descriptionClassName='mt-2'>
 				<div className='flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-0 sm:space-x-2'>
 					<Button variant='outline' onClick={() => setDisconnectDialogOpen(false)} disabled={isDeletingConnection}>
-						Cancel
+						{i18n.t('actions.cancel', { ns: 'common' })}
 					</Button>
 					<Button variant='destructive' onClick={handleConfirmDisconnect} disabled={isDeletingConnection || !connection?.id}>
-						{isDeletingConnection ? 'Disconnecting…' : 'Disconnect'}
+						{isDeletingConnection ? i18n.t('status.disconnecting', { ns: 'common' }) : t('insightsTools.integrations.disconnect')}
 					</Button>
 				</div>
 			</Dialog>

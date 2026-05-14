@@ -95,18 +95,28 @@ const ActionButton: FC<ActionProps> = ({
 
 	const archiveActionText = archiveConfig.text || t('actions.archive');
 	const editActionText = editConfig.text || t('actions.edit');
+	const usesDefaultArchiveLabel = archive?.text === undefined && archiveText === undefined;
+	const confirmArchiveVerb = archiveActionText.toLowerCase();
 
 	const { mutate: deleteEntity } = useMutation({
 		mutationFn: deleteMutationFn,
 		onSuccess: async () => {
 			if (!disableToast) {
-				toast.success(`Successfully ${archiveActionText.toLowerCase()}d ${entityName}`);
+				toast.success(
+					usesDefaultArchiveLabel ? t('toast.archiveSuccess', { entity: entityName }) : t('toast.updateSuccess', { entity: entityName }),
+				);
 			}
 			await refetchQueries(refetchQueryKey);
 		},
 		onError: (err: Error) => {
 			if (!disableToast) {
-				toast.error(err.message || `Failed to ${archiveActionText.toLowerCase()} ${entityName}. Please try again.`);
+				const message = err?.message;
+				toast.error(
+					message ||
+						(usesDefaultArchiveLabel
+							? t('actionButton.archiveFailed', { entity: entityName })
+							: t('actionButton.actionFailedGeneric', { entity: entityName })),
+				);
 			}
 		},
 	});
@@ -178,7 +188,7 @@ const ActionButton: FC<ActionProps> = ({
 			</div>
 
 			<Dialog
-				title={`Are you sure you want to ${archiveActionText.toLowerCase()} this ${entityName}?`}
+				title={t('actionButton.confirmActionOnEntity', { action: confirmArchiveVerb, entity: entityName })}
 				titleClassName='text-lg font-normal text-gray-800 w-[90%]'
 				isOpen={isDialogOpen}
 				onOpenChange={setIsDialogOpen}

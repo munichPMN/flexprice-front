@@ -27,6 +27,8 @@ import { Trash2 } from 'lucide-react';
 import { SubscriptionResponse } from '@/types/dto/Subscription';
 import { useMemo, useState } from 'react';
 import SubscriptionCancelDialog from '@/components/molecules/SubscriptionCancelDialog/SubscriptionCancelDialog';
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 import { isInheritedSubscription } from '@/utils/subscription/isInheritedSubscription';
 
 const sortingOptions: SortOption[] = [
@@ -129,25 +131,26 @@ const initialSorts: SortOption[] = [
 	},
 ];
 
-const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS) => {
+const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS, t: TFunction) => {
 	switch (status) {
 		case SUBSCRIPTION_STATUS.ACTIVE:
-			return <Chip variant='success' label='Active' />;
+			return <Chip variant='success' label={t('common:status.active')} />;
 		case SUBSCRIPTION_STATUS.CANCELLED:
-			return <Chip variant='failed' label='Cancelled' />;
+			return <Chip variant='failed' label={t('common:status.cancelled')} />;
 		case SUBSCRIPTION_STATUS.INCOMPLETE:
-			return <Chip variant='warning' label='Incomplete' />;
+			return <Chip variant='warning' label={t('common:status.incomplete')} />;
 		case SUBSCRIPTION_STATUS.TRIALING:
-			return <Chip variant='warning' label='Trialing' />;
+			return <Chip variant='warning' label={t('common:status.trialing')} />;
 		case SUBSCRIPTION_STATUS.DRAFT:
-			return <Chip variant='warning' label='Draft' />;
+			return <Chip variant='warning' label={t('common:status.draft')} />;
 		default:
-			return <Chip variant='default' label='Inactive' />;
+			return <Chip variant='default' label={t('common:status.inactive')} />;
 	}
 };
 
 const SubscriptionsPage = () => {
 	const navigate = useNavigate();
+	const { t } = useTranslation(['billing', 'common']);
 	const [cancelSubscriptionId, setCancelSubscriptionId] = useState<string | null>(null);
 
 	const columns: ColumnData<SubscriptionResponse>[] = useMemo(
@@ -165,7 +168,7 @@ const SubscriptionsPage = () => {
 			{
 				title: 'Status',
 				render: (row) => {
-					return getSubscriptionStatusChip(row.subscription_status);
+					return getSubscriptionStatusChip(row.subscription_status, t);
 				},
 			},
 			{
@@ -212,7 +215,7 @@ const SubscriptionsPage = () => {
 				},
 			},
 		],
-		[],
+		[t],
 	);
 
 	return (

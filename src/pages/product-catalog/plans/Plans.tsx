@@ -26,6 +26,7 @@ import formatDate from '@/utils/common/format_date';
 import toast from 'react-hot-toast';
 import { Copy, EllipsisVertical, EyeOff, Pencil, WandSparkles } from 'lucide-react';
 import { refetchQueries } from '@/core/services/tanstack/ReactQueryProvider';
+import { useTranslation } from 'react-i18next';
 
 const sortingOptions: SortOption[] = [
 	{
@@ -113,6 +114,7 @@ const initialSorts: SortOption[] = [
 ];
 
 const PlansPage = () => {
+	const { t } = useTranslation(['catalog', 'common']);
 	const [activePlan, setActivePlan] = useState<Plan | null>(null);
 	const [planDrawerOpen, setPlanDrawerOpen] = useState(false);
 	const [duplicateDialogOpen, setDuplicateDialogOpen] = useState(false);
@@ -249,14 +251,14 @@ const PlansPage = () => {
 			<Dialog
 				isOpen={archiveDialogOpen}
 				onOpenChange={setArchiveDialogOpen}
-				title='Archive plan'
-				description={`Are you sure you want to archive "${planToArchive?.name}"? This plan will no longer be available for new subscriptions.`}>
+				title={t('catalog:plans.archive.title')}
+				description={t('catalog:plans.archive.confirmDescription', { name: planToArchive?.name ?? '' })}>
 				<div className='flex justify-end gap-2'>
 					<Button variant='outline' onClick={() => setArchiveDialogOpen(false)}>
-						Cancel
+						{t('common:actions.cancel')}
 					</Button>
 					<Button variant='destructive' onClick={() => planToArchive && archivePlan(planToArchive.id)} disabled={isArchiving}>
-						{isArchiving ? 'Archiving…' : 'Archive'}
+						{isArchiving ? t('catalog:plans.archive.archiving') : t('common:actions.archive')}
 					</Button>
 				</div>
 			</Dialog>

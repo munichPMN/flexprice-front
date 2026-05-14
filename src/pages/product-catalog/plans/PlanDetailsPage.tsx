@@ -28,6 +28,7 @@ import { getPlanPriceSyncWorkflowFilters } from '@/constants/workflow';
 import { useBreadcrumbsStore } from '@/store/useBreadcrumbsStore';
 import { INVOICE_CADENCE } from '@/models';
 import { DataType, FilterOperator, SortDirection } from '@/types/common/QueryBuilder';
+import { useTranslation } from 'react-i18next';
 
 export const formatInvoiceCadence = (cadence: string): string => {
 	switch (cadence.toUpperCase()) {
@@ -59,6 +60,7 @@ type Params = {
 };
 
 const PlanDetailsPage = () => {
+	const { t } = useTranslation(['common']);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { planId } = useParams<Params>();
@@ -272,7 +274,7 @@ const PlanDetailsPage = () => {
 			<ApiDocsContent tags={['Plans']} />
 
 			<div className='border-b border-border mt-4 mb-6'>
-				<nav className='flex space-x-4' aria-label='Tabs'>
+				<nav className='flex space-x-4' aria-label={t('common:labels.tabs')}>
 					{tabs.map((tab, index) => {
 						return (
 							<button

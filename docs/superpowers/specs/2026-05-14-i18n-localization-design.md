@@ -33,7 +33,7 @@
 | `customers` | Customer list, customer detail, usage analytics | `src/pages/customers/**`, `*Customer*` molecules |
 | `developers` | Events debugger, API keys, service accounts, webhooks, workflows | `src/pages/developers/**`, `*Events*`, `*SecretKey*`, `*ServiceAccount*`, `*Webhook*`, `*Workflow*` |
 | `settings` | Org settings, team members, integrations, imports, exports | `src/pages/settings/**`, `*Tenant*`, `*Integration*`, `*Import*`, `*Export*` |
-| `customer-portal` | Customer-facing portal (white-label surface) | `src/components/customer-portal/**`, `src/pages/portal/**` |
+| `customer-portal` | Customer-facing portal (white-label surface) | `src/components/customer-portal/**`, `src/pages/customer-portal/**` |
 
 ### File Layout
 

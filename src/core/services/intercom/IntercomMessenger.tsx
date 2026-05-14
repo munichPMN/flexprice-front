@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import Intercom from '@intercom/messenger-js-sdk';
 import './index.css';
 import { BotMessageSquare } from 'lucide-react';
@@ -15,6 +16,7 @@ import { refetchQueries } from '../tanstack/ReactQueryProvider';
 
 /** Mounted only when Intercom is enabled with an app id; owns SDK init and onboarding/help behavior. */
 const IntercomMessengerImpl = () => {
+	const { t } = useTranslation('common');
 	const { user } = useUser();
 	const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
 	const isInitialized = useRef(false);
@@ -247,7 +249,7 @@ const IntercomMessengerImpl = () => {
 	return (
 		<Button size='sm' variant='outline' onClick={openIntercom}>
 			<BotMessageSquare absoluteStrokeWidth />
-			Help
+			{t('chrome.help')}
 		</Button>
 	);
 };

@@ -3,6 +3,7 @@ import { integrations } from './integrationsData';
 import { cn } from '@/lib/utils';
 import { Button, FormHeader, Page, Dialog } from '@/components/atoms';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import IntegrationDrawer from '@/components/molecules/IntegrationDrawer/IntegrationDrawer';
 import StripeConnectionDrawer from '@/components/molecules/StripeConnectionDrawer';
 import RazorpayConnectionDrawer from '@/components/molecules/RazorpayConnectionDrawer';
@@ -22,6 +23,8 @@ import ConnectionApi from '@/api/ConnectionApi';
 import { CONNECTION_PROVIDER_TYPE } from '@/models/Connection';
 
 const IntegrationDetails = () => {
+	const { t } = useTranslation('settings');
+	const { i18n } = useTranslation();
 	const { id: name } = useParams() as { id: string };
 	const integration = integrations.find((integration) => integration.name.toLocaleLowerCase() === name.toLocaleLowerCase());
 	const providerType =
@@ -94,7 +97,7 @@ const IntegrationDetails = () => {
 	};
 
 	if (!integration) {
-		return <div>Integration not found</div>;
+		return <div>{t('insightsTools.integrations.notFound')}</div>;
 	}
 
 	return (
@@ -109,7 +112,7 @@ const IntegrationDetails = () => {
 						<h3 className='font-semibold text-lg'>{integration.name}</h3>
 						{integration.premium && (
 							<div className='absolute top-2 right-2 bg-[#FEF08A] text-[#D97706] text-xs !font-semibold px-2 py-1 rounded-[6px] !opacity-55'>
-								Coming Soon
+								{t('insightsTools.integrations.comingSoon')}
 							</div>
 						)}
 					</div>
@@ -125,11 +128,11 @@ const IntegrationDetails = () => {
 				<div className='flex gap-2 items-center'>
 					{integration.premium ? (
 						<Button disabled variant='outline' className='flex gap-2 items-center'>
-							Coming Soon
+							{t('insightsTools.integrations.comingSoon')}
 						</Button>
 					) : hasActiveConnection ? null : (
 						<Button onClick={handleAdd} className='flex gap-2 items-center'>
-							Add a connection
+							{t('insightsTools.integrations.addConnection')}
 						</Button>
 					)}
 				</div>
@@ -243,7 +246,7 @@ const IntegrationDetails = () => {
 			{/* List all connections for this provider */}
 			{connections.length > 0 && (
 				<div className='mt-6'>
-					<FormHeader variant='form-component-title' title='Connected Accounts' />
+					<FormHeader variant='form-component-title' title={t('insightsTools.integrations.connectedAccountsTitle')} />
 					<div className='card'>
 						{connections.map((item, idx) => {
 							return (
@@ -290,8 +293,8 @@ const IntegrationDetails = () => {
 
 			{/* Delete Confirmation Dialog */}
 			<Dialog
-				title={`Are you sure you want to delete the connection "${connectionToDelete?.name}"?`}
-				description='This action cannot be undone.'
+				title={t('insightsTools.integrations.deleteConnectionConfirmTitle', { name: connectionToDelete?.name ?? '' })}
+				description={t('insightsTools.integrations.deleteConnectionIrreversible')}
 				titleClassName='text-lg font-normal text-gray-800'
 				isOpen={isDeleteDialogOpen}
 				onOpenChange={setIsDeleteDialogOpen}
@@ -299,10 +302,10 @@ const IntegrationDetails = () => {
 				<div className='flex flex-col gap-4 items-end justify-center'>
 					<div className='flex gap-4'>
 						<Button variant='outline' onClick={cancelDeleteConnection}>
-							Cancel
+							{i18n.t('actions.cancel', { ns: 'common' })}
 						</Button>
 						<Button onClick={confirmDeleteConnection} isLoading={isDeletingConnection} disabled={isDeletingConnection}>
-							Delete Connection
+							{t('insightsTools.integrations.deleteConnection')}
 						</Button>
 					</div>
 				</div>

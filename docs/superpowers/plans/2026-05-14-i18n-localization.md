@@ -4,7 +4,7 @@
 
 **Goal:** Fully localize the Flexprice frontend (English + Arabic) using eight feature namespaces, a lazy-loading i18next backend, and a hybrid extract→review→apply migration workflow.
 
-**Architecture:** `i18next-resources-to-backend` dynamically imports each `locales/{lang}/{namespace}.json` file on demand (Vite code-splits them automatically). A Node.js extract script generates draft JSON + replacement maps from ESLint violations; a companion apply script patches source files. Each namespace is migrated in order: common first (unblocks others), then billing, catalog, customers, developers, settings, customer-portal.
+**Architecture:** `i18next-resources-to-backend` dynamically imports each `locales/{lang}/{namespace}.json` file on demand (Vite code-splits them automatically). A Node.js extract script generates draft JSON + replacement maps from ESLint violations; a companion apply script patches source files. Each namespace is migrated in order: **common** first (unblocks others), then **customers**, **billing**, **catalog**, **developers**, **settings**, **customer-portal** (see design spec recommended order).
 
 **Tech Stack:** i18next v26, react-i18next v17, i18next-resources-to-backend v1.2, eslint-plugin-i18next (already installed), Node.js ESM scripts, Vite dynamic imports
 

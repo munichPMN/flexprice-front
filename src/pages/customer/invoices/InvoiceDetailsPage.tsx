@@ -7,8 +7,10 @@ import CreditNoteApi from '@/api/CreditNoteApi';
 import { CustomTabs } from '@/components/molecules';
 import { Loader, NoDataCard, Page, ShortPagination } from '@/components/atoms';
 import { ApiDocsContent, InvoicePaymentsTable, CreditNoteTable } from '@/components/molecules';
+import { useTranslation } from 'react-i18next';
 
 const InvoiceDetailsPage = () => {
+	const { t } = useTranslation('billing');
 	const { invoiceId } = useParams();
 	const { limit, offset } = usePagination();
 
@@ -54,14 +56,14 @@ const InvoiceDetailsPage = () => {
 		},
 		{
 			value: 'creditNotes',
-			label: 'Credit Notes',
+			label: t('invoices.details.creditNotes'),
 			content: creditNotesLoading ? (
 				<Loader />
 			) : (
 				<div>
 					{creditNotes?.items?.length === 0 ? (
 						<div className='my-6'>
-							<NoDataCard title='Credit Notes' subtitle='No credit notes found' />
+							<NoDataCard title={t('creditNotes.title')} subtitle={t('creditNotes.empty')} />
 						</div>
 					) : (
 						<>

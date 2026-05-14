@@ -16,6 +16,7 @@ import { refetchQueries } from '@/core/services/tanstack/ReactQueryProvider';
 import { isInheritedSubscription } from '@/utils/subscription/isInheritedSubscription';
 import { useNavigate } from 'react-router';
 import { RouteNames } from '@/core/routes/Routes';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 	subscription: Subscription;
@@ -23,6 +24,7 @@ interface Props {
 
 const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 	const navigate = useNavigate();
+	const { t } = useTranslation(['customers', 'common']);
 	const [state, setState] = useState({
 		// isPauseModalOpen: false,
 		// isResumeModalOpen: false,
@@ -215,20 +217,29 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 				className='card bg-white w-[560px] max-w-[90vw]'>
 				<div className='space-y-4'>
 					<FormHeader
-						title='Cancel Subscription'
+						title={t('customers:organisms.subscriptionAction.cancelTitle')}
 						variant='sub-header'
-						subtitle='This action cannot be undone. Choose cancellation and invoice behavior before continuing.'
+						subtitle={t('customers:organisms.subscriptionAction.cancelSubtitle')}
 						titleClassName='!mb-1'
 						subtitleClassName='!text-sm !max-w-[440px] !leading-6'
 					/>
 					<div className='space-y-4'>
 						<Select
-							label='Cancellation Type'
+							label={t('customers:organisms.subscriptionAction.cancellationType')}
 							value={state.cancelCancellationType}
 							options={[
-								{ label: 'Immediate', value: SUBSCRIPTION_CANCELLATION_TYPE.IMMEDIATE },
-								{ label: 'End of period', value: SUBSCRIPTION_CANCELLATION_TYPE.END_OF_PERIOD },
-								{ label: 'Scheduled date', value: SUBSCRIPTION_CANCELLATION_TYPE.SCHEDULED_DATE },
+								{
+									label: t('customers:organisms.subscriptionAction.cancellationImmediate'),
+									value: SUBSCRIPTION_CANCELLATION_TYPE.IMMEDIATE,
+								},
+								{
+									label: t('customers:organisms.subscriptionAction.cancellationEndOfPeriod'),
+									value: SUBSCRIPTION_CANCELLATION_TYPE.END_OF_PERIOD,
+								},
+								{
+									label: t('customers:organisms.subscriptionAction.cancellationScheduled'),
+									value: SUBSCRIPTION_CANCELLATION_TYPE.SCHEDULED_DATE,
+								},
 							]}
 							onChange={(value) => {
 								const next = value as SUBSCRIPTION_CANCELLATION_TYPE;
@@ -241,7 +252,7 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 						/>
 						{state.cancelCancellationType === SUBSCRIPTION_CANCELLATION_TYPE.SCHEDULED_DATE && (
 							<div className='space-y-1 w-full'>
-								<Label label='Cancel on' />
+								<Label label={t('customers:organisms.subscriptionAction.cancelOn')} />
 								<DatePicker
 									date={state.cancelScheduledAt}
 									setDate={(date) => setState((prev) => ({ ...prev, cancelScheduledAt: date }))}
@@ -249,17 +260,20 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 									popoverClassName='!w-full'
 									popoverTriggerClassName='!w-full'
 									popoverContentClassName='!w-full'
-									placeholder='Select cancellation date'
+									placeholder={t('customers:organisms.subscriptionAction.selectCancellationDate')}
 									minDate={minCancelScheduledAt}
 								/>
 							</div>
 						)}
 						<Select
-							label='Proration Behavior'
+							label={t('customers:organisms.subscriptionAction.prorationBehavior')}
 							value={state.cancelProrationBehavior}
 							options={[
-								{ label: 'None', value: SUBSCRIPTION_PRORATION_BEHAVIOR.NONE },
-								{ label: 'Create prorations', value: SUBSCRIPTION_PRORATION_BEHAVIOR.CREATE_PRORATIONS },
+								{ label: t('customers:organisms.subscriptionAction.prorationNone'), value: SUBSCRIPTION_PRORATION_BEHAVIOR.NONE },
+								{
+									label: t('customers:organisms.subscriptionAction.prorationCreate'),
+									value: SUBSCRIPTION_PRORATION_BEHAVIOR.CREATE_PRORATIONS,
+								},
 							]}
 							onChange={(value) =>
 								setState((prev) => ({
@@ -269,28 +283,30 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 							}
 						/>
 						<Toggle
-							title='Invoice behavior'
-							label='Generate invoice'
-							description='Enable to generate an invoice for usage till the cancellation date.'
+							title={t('customers:organisms.subscriptionAction.invoiceBehaviorTitle')}
+							label={t('customers:organisms.subscriptionAction.generateInvoice')}
+							description={t('customers:organisms.subscriptionAction.generateInvoiceDesc')}
 							checked={state.cancelGenerateInvoice}
 							onChange={(checked) => setState((prev) => ({ ...prev, cancelGenerateInvoice: checked }))}
 						/>
 						<Input
-							label='Reason (optional)'
+							label={t('customers:organisms.subscriptionAction.reasonOptional')}
 							value={state.cancelReason}
 							onChange={(value) => setState((prev) => ({ ...prev, cancelReason: value }))}
-							placeholder='Why is this subscription being cancelled?'
+							placeholder={t('customers:organisms.subscriptionAction.cancelReasonPlaceholder')}
 						/>
 					</div>
 					<div className='flex justify-end gap-3 pt-4'>
 						<Button variant='outline' onClick={() => resetCancelState()} disabled={isCancelLoading}>
-							No, Keep It
+							{t('customers:organisms.subscriptionAction.keepSubscription')}
 						</Button>
 						<Button
 							variant='destructive'
 							onClick={() => cancelSubscription(subscription.id)}
 							disabled={isCancelLoading || cancelScheduledInvalid}>
-							{isCancelLoading ? 'Cancelling...' : 'Yes, Cancel'}
+							{isCancelLoading
+								? t('customers:organisms.subscriptionAction.cancelling')
+								: t('customers:organisms.subscriptionAction.yesCancel')}
 						</Button>
 					</div>
 				</div>
@@ -303,14 +319,14 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 				className='bg-white rounded-lg p-6 w-[560px] max-w-[90vw]'>
 				<div className=''>
 					<FormHeader
-						title='Activate Subscription'
+						title={t('customers:organisms.subscriptionAction.activateTitle')}
 						variant='sub-header'
-						subtitle='Activating the subscription will start the billing cycle from the selected start date.'
+						subtitle={t('customers:organisms.subscriptionAction.activateSubtitle')}
 					/>
 					<Spacer className='!my-6' />
 					<div className='w-full'>
 						<DatePicker
-							label='Start Date'
+							label={t('customers:organisms.subscriptionAction.startDate')}
 							date={state.activateStartDate}
 							setDate={(date) => setState((prev) => ({ ...prev, activateStartDate: date || new Date() }))}
 							className='!w-full'
@@ -323,13 +339,13 @@ const SubscriptionActionButton: React.FC<Props> = ({ subscription }) => {
 							onClick={() => setState((prev) => ({ ...prev, isActivateModalOpen: false }))}
 							disabled={isActivating}
 							className='px-6'>
-							Cancel
+							{t('common:actions.cancel')}
 						</Button>
 						<Button
 							onClick={() => activateSubscription(subscription.id)}
 							disabled={isActivating || !state.activateStartDate}
 							className='px-6'>
-							{isActivating ? 'Activating...' : 'Activate'}
+							{isActivating ? t('customers:organisms.subscriptionAction.activating') : t('customers:organisms.subscriptionAction.activate')}
 						</Button>
 					</div>
 				</div>
