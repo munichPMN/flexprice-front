@@ -145,15 +145,7 @@ const AppSidebar: React.FC<React.ComponentProps<typeof Sidebar>> = ({ ...props }
 		},
 	];
 	return (
-		<Sidebar
-			collapsible='icon'
-			side={side}
-			{...props}
-			className={cn(
-				'border-gray-300 py-1 bg-[#f9f9f9]',
-				sidebarOpen ? 'px-3' : 'px-2',
-				side === 'right' ? 'border-l-[1.5px]' : 'border-r-[1.5px]',
-			)}>
+		<Sidebar collapsible='icon' side={side} {...props} className={cn('border-0 py-1 bg-[#f9f9f9]', sidebarOpen ? 'px-3' : 'px-2')}>
 			<SidebarHeader>
 				<EnvironmentSelector />
 			</SidebarHeader>
