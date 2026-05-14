@@ -18,6 +18,7 @@ export enum LandingContentAlign {
 // Template2 — white-label brands (no supportEmail — that lives in BrandConfig)
 export interface Template2Config {
 	tagline: string | null;
+	taglineColor: string | null; // CSS color for tagline text; defaults to white
 	loginBgImage: string | null;
 	landingBgColor: string | null;
 	landingLogo: string | null; // separate logo for the right panel (e.g. white logo on a dark bg image); falls back to brand.logo
