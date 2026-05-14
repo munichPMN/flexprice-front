@@ -133,6 +133,12 @@ function inferSection(filePath) {
 	const name = filePath.split('/').pop().replace(/\.(tsx|ts)$/, '');
 	// Remove common suffixes
 	const base = name.replace(/(Page|Table|Drawer|Modal|Form|Card|Widget|List|Section|Dialog|Chart).*$/, '');
+	if (!base) {
+		// File name is entirely a suffix word — use parent directory name
+		const parts = filePath.split('/');
+		const parentDir = parts.length >= 2 ? parts[parts.length - 2] : '';
+		return parentDir.toLowerCase().replace(/[^a-z0-9]/g, '') || 'unknown';
+	}
 	// Convert PascalCase to camelCase first segment
 	return (base.charAt(0).toLowerCase() + base.slice(1).replace(/[A-Z]/g, c => `_${c.toLowerCase()}`)).split('_')[0];
 }
@@ -169,6 +175,10 @@ for (const result of allFiles) {
 		// ESLint message format: "disallow literal string: <content>"
 		const raw = msg.message.replace(/^disallow literal string:\s*/i, '').replace(/^['"]|['"]$/g, '').trim();
 
+		// Skip JSX element/expression blobs (rule reports parent node source, not just the literal)
+		if (/^[<{]/.test(raw)) continue;
+		if (raw.includes('<') || raw.includes('>')) continue;
+
 		// Skip if too short, whitespace-only, or a code identifier
 		if (!raw || raw.length < 2 || /^[a-z][a-z0-9_-]*$/.test(raw)) continue;
 		// Skip URLs, hex colours, single chars
@@ -176,11 +186,17 @@ for (const result of allFiles) {
 
 		if (!keyMap[raw]) {
 			const keySegment = toKeySegment(raw);
+			if (!keySegment) continue; // pure symbols/punctuation produce empty segment
+
 			const fullKey = `${section}.${keySegment}`;
 			keyMap[raw] = fullKey;
 
 			if (!draftJson[section]) draftJson[section] = {};
-			draftJson[section][keySegment] = raw;
+			if (draftJson[section][keySegment] === undefined) {
+				draftJson[section][keySegment] = raw;
+			} else if (draftJson[section][keySegment] !== raw) {
+				console.warn(`  ⚠ Key collision: "${raw}" maps to "${section}.${keySegment}" (already has "${draftJson[section][keySegment]}")`);
+			}
 		}
 
 		replacements.push({
@@ -197,7 +213,10 @@ for (const result of allFiles) {
 // Write draft en/<namespace>.json (merge with existing if present)
 const jsonPath = `src/i18n/locales/en/${namespace}.json`;
 const existing = existsSync(jsonPath) ? JSON.parse(readFileSync(jsonPath, 'utf8')) : {};
-const merged = { ...existing, ...draftJson };
+const merged = { ...existing };
+for (const [section, keys] of Object.entries(draftJson)) {
+	merged[section] = { ...(existing[section] ?? {}), ...keys };
+}
 writeFileSync(jsonPath, JSON.stringify(merged, null, 2) + '\n');
 console.log(`✓ Draft JSON → ${jsonPath}  (${Object.values(draftJson).reduce((n, s) => n + Object.keys(s).length, 0)} new keys)`);
 
