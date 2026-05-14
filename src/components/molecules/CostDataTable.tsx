@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { FlexpriceTable, type ColumnData } from '@/components/molecules';
 import { CostAnalyticItem } from '@/types';
@@ -8,6 +9,7 @@ interface CostDataTableProps {
 }
 
 export const CostDataTable: React.FC<CostDataTableProps> = ({ items }) => {
+	const { t } = useTranslation('common');
 	// Define table columns
 	const columns: ColumnData<CostAnalyticItem>[] = [
 		{
@@ -52,7 +54,7 @@ export const CostDataTable: React.FC<CostDataTableProps> = ({ items }) => {
 
 	return (
 		<>
-			<h1 className='text-lg font-medium text-gray-900 mb-4'>Cost Breakdown</h1>
+			<h1 className='text-lg font-medium text-gray-900 mb-4'>{t('labels.costBreakdown')}</h1>
 			<FlexpriceTable columns={columns} data={tableData} showEmptyRow />
 		</>
 	);

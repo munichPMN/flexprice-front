@@ -1,5 +1,6 @@
 import { AddAddonToSubscriptionRequest } from '@/types/dto/Addon';
 import React, { useCallback, useMemo, useState, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AddButton, FormHeader, ActionButton } from '@/components/atoms';
 import FlexpriceTable, { ColumnData } from '../Table';
 import SubscriptionAddonModal from './SubscriptionAddonModal';
@@ -61,6 +62,7 @@ const SubscriptionAddonTable: React.FC<Props> = ({
 	billingPeriod,
 	currency,
 }) => {
+	const { t } = useTranslation('common');
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedAddon, setSelectedAddon] = useState<ExtendedAddon | null>(null);
 	const extendedData = useMemo(() => {
@@ -198,7 +200,7 @@ const SubscriptionAddonTable: React.FC<Props> = ({
 			/>
 			<div className='space-y-4'>
 				<div className='flex items-center justify-between'>
-					<FormHeader className='mb-0' title='Addons' variant='sub-header' />
+					<FormHeader className='mb-0' title={t('labels.addons')} variant='sub-header' />
 					<AddButton onClick={handleOpenCreate} disabled={disabled} />
 				</div>
 				<div className='rounded-[6px] border border-gray-300'>

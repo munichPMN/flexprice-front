@@ -162,7 +162,14 @@
 		"sampleCsv": "Sample CSV",
 		"chooseFileToUpload": "Choose File to Upload",
 		"maxFileSizeMsg": "Max File Size: 5 MB. .csv format accepted.",
-		"maxFileSizeSubtitle": "Max file size: 5 MB. Only .csv format is accepted."
+		"maxFileSizeSubtitle": "Max file size: 5 MB. Only .csv format is accepted.",
+		"noTaxesApplied": "No taxes applied to this invoice",
+		"costBreakdown": "Cost Breakdown",
+		"linkedCoupons": "Linked Coupons",
+		"idempotencyKey": "Idempotency key",
+		"payments": "Payments",
+		"tabs": "Tabs",
+		"documentation": "Documentation"
 	},
 	"nav": {
 		"home": "Home",

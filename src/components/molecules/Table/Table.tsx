@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FC, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
 // Types and Interfaces
@@ -175,6 +176,7 @@ const FlexpriceTable: FC<FlexpriceTableProps<any>> = ({
 	variant = 'default',
 	tableClassName,
 }) => {
+	const { t } = useTranslation('common');
 	const handleRowClick = (row: any, e: React.MouseEvent) => {
 		const target = e.target as HTMLElement;
 
@@ -292,7 +294,7 @@ const FlexpriceTable: FC<FlexpriceTableProps<any>> = ({
 							style={{ flex: width ? undefined : flex }}
 							width={width}
 							align={align}>
-							{lastRow && hideOnEmpty ? '' : '--'}
+							{lastRow && hideOnEmpty ? '' : t('labels.na')}
 						</TableCell>
 					);
 				})}
