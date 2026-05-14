@@ -81,8 +81,8 @@ export function parseRegionsConfig(
 	legacyEnvs: { indiaUrl?: string; usUrl?: string; selectionEnabled: boolean },
 ): RegionsConfig {
 	const regionsBlock = authRaw.regions as Record<string, unknown> | undefined;
-	if (Array.isArray(regionsBlock?.regions) && (regionsBlock.regions as unknown[]).length > 0) {
-		const validRegions: RegionOption[] = (regionsBlock.regions as unknown[]).filter(
+	if (Array.isArray(regionsBlock?.regions) && (regionsBlock?.regions as unknown[]).length > 0) {
+		const validRegions: RegionOption[] = (regionsBlock?.regions as unknown[]).filter(
 			(r): r is RegionOption =>
 				typeof r === 'object' &&
 				r !== null &&
@@ -92,7 +92,7 @@ export function parseRegionsConfig(
 				typeof (r as RegionOption).countryCode === 'string',
 		);
 		if (validRegions.length > 0) {
-			return { enabled: regionsBlock.enabled !== false, regions: validRegions };
+			return { enabled: regionsBlock?.enabled !== false, regions: validRegions };
 		}
 	}
 
