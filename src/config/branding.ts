@@ -52,7 +52,7 @@ export function deriveDirection(locale: Locale): Direction {
 export function parseBrandConfig(raw: Record<string, unknown>): BrandConfig {
 	return {
 		name: typeof raw.name === 'string' ? raw.name : 'Flexprice',
-		logo: typeof raw.logo === 'string' ? raw.logo : '/newlogobrowser.png',
+		logo: typeof raw.logo === 'string' ? raw.logo : '/comicon.png',
 		primaryColor: typeof raw.primaryColor === 'string' ? raw.primaryColor : '#7C3AED',
 		favicon: typeof raw.favicon === 'string' ? raw.favicon : '/favicon.ico',
 		supportEmail: typeof raw.supportEmail === 'string' ? raw.supportEmail : 'support@flexprice.io',
