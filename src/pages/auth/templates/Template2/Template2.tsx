@@ -11,89 +11,89 @@ import ForgotPasswordForm from '../../ForgotPasswordForm';
 import ResetPasswordForm from '../../ResetPasswordForm';
 
 interface Template2Props {
-  config: Template2Config;
-  currentTab: AuthTab;
-  switchTab: (tab: AuthTab) => void;
+	config: Template2Config;
+	currentTab: AuthTab;
+	switchTab: (tab: AuthTab) => void;
 }
 
 const Template2: React.FC<Template2Props> = ({ config, currentTab, switchTab }) => {
-  const { t } = useTranslation('auth');
-  const { logo, name } = useBrand();
+	const { t } = useTranslation('auth');
+	const { logo, name } = useBrand();
 
-  const renderForm = () => {
-    switch (currentTab) {
-      case AuthTab.SIGNUP:
-        return <SignupForm switchTab={switchTab} />;
-      case AuthTab.FORGOT_PASSWORD:
-        return <ForgotPasswordForm switchTab={switchTab} />;
-      case AuthTab.RESET_PASSWORD:
-        return <ResetPasswordForm switchTab={switchTab} />;
-      default:
-        return <LoginForm switchTab={switchTab} />;
-    }
-  };
+	const renderForm = () => {
+		switch (currentTab) {
+			case AuthTab.SIGNUP:
+				return <SignupForm switchTab={switchTab} />;
+			case AuthTab.FORGOT_PASSWORD:
+				return <ForgotPasswordForm switchTab={switchTab} />;
+			case AuthTab.RESET_PASSWORD:
+				return <ResetPasswordForm switchTab={switchTab} />;
+			default:
+				return <LoginForm switchTab={switchTab} />;
+		}
+	};
 
-  const rightPanelStyle: React.CSSProperties = config.loginBgImage
-    ? { backgroundImage: `url(${config.loginBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { backgroundColor: config.landingBgColor ?? '#f4f4f5' };
+	const rightPanelStyle: React.CSSProperties = config.loginBgImage
+		? { backgroundImage: `url(${config.loginBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+		: { backgroundColor: config.landingBgColor ?? '#f4f4f5' };
 
-  return (
-    <div className='flex w-full min-h-screen bg-white page !p-0 !flex-row'>
-      <div className='w-[45%] flex flex-col'>
-        <div className='flex-1 flex justify-center items-center'>
-          <div className='flex flex-col justify-center max-w-xl w-[55%] mx-auto'>
-            <div className='flex justify-center mb-4'>
-              <img src={logo} alt={`${name} Logo`} className='h-12' />
-            </div>
-            {currentTab === AuthTab.SIGNUP && (
-              <>
-                <h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('createAccount.heading')}</h2>
-                <p className='text-center text-gray-600 mb-10'>{t('createAccount.subheading', { brandName: name })}</p>
-                <div className='mb-6'>
-                  <RegionSelector />
-                </div>
-              </>
-            )}
-            {currentTab === AuthTab.LOGIN && (
-              <>
-                <h2 className='text-3xl font-medium text-center text-gray-800 mb-3'>{t('login.heading')}</h2>
-                <p className='text-center text-gray-600 mb-10'>{t('login.subheading')}</p>
-                <div className='mb-6'>
-                  <RegionSelector />
-                </div>
-              </>
-            )}
-            {currentTab === AuthTab.FORGOT_PASSWORD && (
-              <>
-                <h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('forgotPassword.heading')}</h2>
-                <p className='text-center text-gray-600 mb-8'>{t('forgotPassword.subheading')}</p>
-              </>
-            )}
-            {currentTab === AuthTab.RESET_PASSWORD && (
-              <>
-                <h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('resetPassword.heading')}</h2>
-                <p className='text-center text-gray-600 mb-8'>{t('resetPassword.subheading')}</p>
-              </>
-            )}
-            {renderForm()}
-            <div className='mt-6 flex justify-start'>
-              <LocaleSelector />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='w-[55%] min-h-screen' style={rightPanelStyle}>
-        {config.showLogoOnLanding && (
-          <div className='flex items-center justify-center h-full'>
-            <div className='text-center px-8'>
-              <img src={logo} alt={name} className='max-h-16 object-contain mx-auto mb-6' />
-              {config.tagline && <p className='text-xl font-medium'>{config.tagline}</p>}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+	return (
+		<div className='flex w-full min-h-screen bg-white page !p-0 !flex-row'>
+			<div className='w-[45%] flex flex-col'>
+				<div className='flex-1 flex justify-center items-center'>
+					<div className='flex flex-col justify-center max-w-xl w-[55%] mx-auto'>
+						<div className='flex justify-center mb-4'>
+							<img src={logo} alt={`${name} Logo`} className='h-12' />
+						</div>
+						{currentTab === AuthTab.SIGNUP && (
+							<>
+								<h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('createAccount.heading')}</h2>
+								<p className='text-center text-gray-600 mb-10'>{t('createAccount.subheading', { brandName: name })}</p>
+								<div className='mb-6'>
+									<RegionSelector />
+								</div>
+							</>
+						)}
+						{currentTab === AuthTab.LOGIN && (
+							<>
+								<h2 className='text-3xl font-medium text-center text-gray-800 mb-3'>{t('login.heading')}</h2>
+								<p className='text-center text-gray-600 mb-10'>{t('login.subheading')}</p>
+								<div className='mb-6'>
+									<RegionSelector />
+								</div>
+							</>
+						)}
+						{currentTab === AuthTab.FORGOT_PASSWORD && (
+							<>
+								<h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('forgotPassword.heading')}</h2>
+								<p className='text-center text-gray-600 mb-8'>{t('forgotPassword.subheading')}</p>
+							</>
+						)}
+						{currentTab === AuthTab.RESET_PASSWORD && (
+							<>
+								<h2 className='text-3xl font-medium text-center text-gray-800 mb-2'>{t('resetPassword.heading')}</h2>
+								<p className='text-center text-gray-600 mb-8'>{t('resetPassword.subheading')}</p>
+							</>
+						)}
+						{renderForm()}
+						<div className='mt-6 flex justify-start'>
+							<LocaleSelector />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className='w-[55%] min-h-screen' style={rightPanelStyle}>
+				{config.showLogoOnLanding && (
+					<div className='flex items-center justify-center h-full'>
+						<div className='text-center px-8'>
+							<img src={logo} alt={name} className='max-h-16 object-contain mx-auto mb-6' />
+							{config.tagline && <p className='text-xl font-medium'>{config.tagline}</p>}
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default Template2;

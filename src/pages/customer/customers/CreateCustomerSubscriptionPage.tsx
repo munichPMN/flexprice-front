@@ -486,7 +486,6 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 			}
 		}
 
-
 		return null;
 	};
 
@@ -589,13 +588,13 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 		const sanitizedAddons =
 			subscriptionState.addons && subscriptionState.addons.length > 0
 				? subscriptionState.addons.map((addon: AddAddonToSubscriptionRequest) => {
-					const commitments = addon.line_item_commitments;
-					const hasCommitments = commitments && Object.keys(commitments).length > 0;
-					return {
-						...addon,
-						line_item_commitments: hasCommitments ? commitments : undefined,
-					};
-				})
+						const commitments = addon.line_item_commitments;
+						const hasCommitments = commitments && Object.keys(commitments).length > 0;
+						return {
+							...addon,
+							line_item_commitments: hasCommitments ? commitments : undefined,
+						};
+					})
 				: undefined;
 
 		const inheritanceExternalIds = inheritanceCustomers.map((c) => c.external_id?.trim()).filter((id): id is string => Boolean(id));
@@ -724,7 +723,7 @@ const CreateCustomerSubscriptionPage: React.FC = () => {
 				subscriptionState.hasModifiedPlanCreditGrants
 					? sanitized.creditGrants.map(internalToCreateRequest)
 					: // Otherwise, only send if there are subscription-level grants
-					sanitized.creditGrants.length > 0
+						sanitized.creditGrants.length > 0
 						? sanitized.creditGrants.map(internalToCreateRequest)
 						: undefined,
 			enable_true_up: subscriptionState.enable_true_up,

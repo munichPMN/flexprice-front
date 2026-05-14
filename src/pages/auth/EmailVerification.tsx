@@ -84,8 +84,8 @@ const EmailVerification = () => {
 
 				<p className='mt-5 text-center text-sm text-zinc-500'>
 					{t('verification.needHelp')}{' '}
-					<a href={`mailto:${authPage.supportEmail}`} className='font-medium text-blue-600 hover:text-blue-500'>
-						{authPage.supportEmail}
+					<a href={`mailto:${authPage.config.supportEmail}`} className='font-medium text-blue-600 hover:text-blue-500'>
+						{authPage.config.supportEmail}
 					</a>
 				</p>
 			</div>

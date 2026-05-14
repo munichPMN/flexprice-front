@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TestimonialCard } from '@/components/molecules';
 import { Testimonial } from '@/types';
-import authBg from '../../../../assets/toolright.jpg';
+const authBg = '';
 import { LandingContentAlign, LandingTheme, useBrand } from '@/config/branding';
 import { Template1Config } from '@/config/authTemplates';
 import { cn } from '@/lib/utils';
@@ -121,7 +121,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ config }) => {
 		<section
 			className={cn(
 				'w-full min-h-full flex-1 pt-14 pb-12 flex flex-col',
-				isLeft ? 'items-start justify-center pl-16 pr-8' : 'items-center justify-center'
+				isLeft ? 'items-start justify-center pl-16 pr-8' : 'items-center justify-center',
 			)}
 			style={{
 				backgroundImage: `url(${bgImage})`,
@@ -134,7 +134,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({ config }) => {
 				className={cn(
 					'mb-[44px] max-w-xl',
 					isDark ? 'text-5xl font-bold text-white leading-tight' : 'text-[28px] font-normal text-zinc-950',
-					isLeft ? 'text-start' : 'text-center'
+					isLeft ? 'text-start' : 'text-center',
 				)}>
 				{config.tagline ?? t('landing.defaultTagline')}
 			</h2>
@@ -168,7 +168,12 @@ const LandingSection: React.FC<LandingSectionProps> = ({ config }) => {
 						<div className='w-full max-w-3xl grid grid-cols-3 grid-rows-2 gap-y-12 gap-x-12 justify-items-center items-center'>
 							{customerLogos.map((logo) => (
 								<div key={logo} className='flex items-center justify-center'>
-									<img src={logo} alt='customer logo' className='max-h-10 object-contain transition-all duration-200' style={{ maxWidth: 140 }} />
+									<img
+										src={logo}
+										alt='customer logo'
+										className='max-h-10 object-contain transition-all duration-200'
+										style={{ maxWidth: 140 }}
+									/>
 								</div>
 							))}
 						</div>
