@@ -10,31 +10,33 @@ import { Trash2 } from 'lucide-react';
 import { SubscriptionResponse } from '@/types/dto/Subscription';
 import SubscriptionCancelDialog from '@/components/molecules/SubscriptionCancelDialog/SubscriptionCancelDialog';
 import { isInheritedSubscription } from '@/utils/subscription/isInheritedSubscription';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
 	data: Subscription[];
 	onEdit?: (subscription: Subscription) => void;
 }
-const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS) => {
-	switch (status) {
-		case SUBSCRIPTION_STATUS.ACTIVE:
-			return <Chip variant='success' label='Active' />;
-		case SUBSCRIPTION_STATUS.CANCELLED:
-			return <Chip variant='failed' label='Cancelled' />;
-		case SUBSCRIPTION_STATUS.INCOMPLETE:
-			return <Chip variant='warning' label='Incomplete' />;
-		case SUBSCRIPTION_STATUS.TRIALING:
-			return <Chip variant='warning' label='Trialing' />;
-		case SUBSCRIPTION_STATUS.DRAFT:
-			return <Chip variant='warning' label='Draft' />;
-		default:
-			return <Chip variant='default' label='Inactive' />;
-	}
-};
-
 const SubscriptionTable: FC<Props> = ({ data, onEdit }) => {
+	const { t } = useTranslation('common');
 	const navigate = useNavigate();
 	const [cancelSubscriptionId, setCancelSubscriptionId] = useState<string | null>(null);
+
+	const getSubscriptionStatusChip = (status: SUBSCRIPTION_STATUS) => {
+		switch (status) {
+			case SUBSCRIPTION_STATUS.ACTIVE:
+				return <Chip variant='success' label={t('status.active')} />;
+			case SUBSCRIPTION_STATUS.CANCELLED:
+				return <Chip variant='failed' label={t('status.cancelled')} />;
+			case SUBSCRIPTION_STATUS.INCOMPLETE:
+				return <Chip variant='warning' label={t('status.incomplete')} />;
+			case SUBSCRIPTION_STATUS.TRIALING:
+				return <Chip variant='warning' label={t('status.trialing')} />;
+			case SUBSCRIPTION_STATUS.DRAFT:
+				return <Chip variant='warning' label={t('status.draft')} />;
+			default:
+				return <Chip variant='default' label={t('status.inactive')} />;
+		}
+	};
 
 	const columns: ColumnData<SubscriptionResponse>[] = [
 		{
@@ -88,7 +90,7 @@ const SubscriptionTable: FC<Props> = ({ data, onEdit }) => {
 						}}
 						customActions={[
 							{
-								text: 'Cancel',
+								text: t('actions.cancel'),
 								icon: <Trash2 />,
 								enabled: row.subscription_status !== SUBSCRIPTION_STATUS.CANCELLED,
 								onClick: () => setCancelSubscriptionId(row.id),
