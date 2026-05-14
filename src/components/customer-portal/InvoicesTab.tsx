@@ -215,7 +215,7 @@ const InvoicesTab = () => {
 					placeholder='Search invoices...'
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
-					className='pl-10 bg-white border-[#E9E9E9]'
+					className='ps-10 bg-white border-[#E9E9E9]'
 				/>
 			</div>
 
@@ -225,10 +225,10 @@ const InvoicesTab = () => {
 					<table className='w-full'>
 						<thead>
 							<tr className='border-b border-[#E9E9E9] bg-zinc-50'>
-								<th className='text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Date</th>
-								<th className='text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Invoice #</th>
-								<th className='text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Status</th>
-								<th className='text-right px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Amount</th>
+								<th className='text-start px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Date</th>
+								<th className='text-start px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Invoice #</th>
+								<th className='text-start px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Status</th>
+								<th className='text-end px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Amount</th>
 								<th className='text-center px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider'>Download</th>
 							</tr>
 						</thead>
@@ -242,7 +242,7 @@ const InvoicesTab = () => {
 										{invoice.invoice_number || `INV-${invoice.id.slice(0, 8)}`}
 									</td>
 									<td className='px-4 py-3'>{getStatusChip(invoice)}</td>
-									<td className='px-4 py-3 text-sm text-zinc-900 text-right font-medium'>
+									<td className='px-4 py-3 text-sm text-zinc-900 text-end font-medium'>
 										{currencySymbol}
 										{formatAmount(String(invoice.total ?? 0))}
 									</td>

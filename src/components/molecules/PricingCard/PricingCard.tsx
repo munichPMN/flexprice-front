@@ -196,7 +196,7 @@ const UsageChargeTooltip: React.FC<{ charge: UsageCharge }> = ({ charge }) => {
 						<div key={index} className='flex flex-col gap-1'>
 							<div className='flex items-center justify-between gap-6'>
 								<div className='!font-normal text-muted-foreground'>{formatRange(tier, index, charge.tiers || [])} units</div>
-								<div className='text-right'>
+								<div className='text-end'>
 									<div className='!font-normal text-muted-foreground'>
 										{getCurrencySymbol(charge.currency || '')}
 										{formatAmount(tier.unit_amount)} per unit
@@ -276,10 +276,10 @@ const PricingCard: React.FC<PricingCardProps> = ({
 							{config.text === '0' ? `${getCurrencySymbol(price.currency || '')}0` : displayAmount}
 						</span>
 						{config.showBillingPeriod && (
-							<span className={cn('ml-2 text-gray-500', visualModern ? 'text-xs' : 'text-sm text3')}>
+							<span className={cn('ms-2 text-gray-500', visualModern ? 'text-xs' : 'text-sm text3')}>
 								/{formatBillingPeriodForPrice(price.billingPeriod || '')}
 								{config.subtext && (!visualModern || isSetupPreview) && (
-									<span className={cn('ml-1', visualModern ? 'text-[11px] font-semibold text-indigo-600' : 'font-medium text-lg')}>
+									<span className={cn('ms-1', visualModern ? 'text-[11px] font-semibold text-indigo-600' : 'font-medium text-lg')}>
 										{config.subtext}
 									</span>
 								)}
@@ -308,7 +308,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 									)}>
 									<span className={cn('min-w-0 flex-1', !visualModern && 'leading-snug')}>{charge.meter_name}</span>
 									<div className='flex items-center gap-1.5 shrink-0'>
-										<span className={cn('whitespace-nowrap text-right font-medium', visualModern ? 'text-slate-800' : 'text-gray-700')}>
+										<span className={cn('whitespace-nowrap text-end font-medium', visualModern ? 'text-slate-800' : 'text-gray-700')}>
 											{visualModern ? formatUsageChargeCompact(charge) : formatUsageCharge(charge)}
 										</span>
 										{charge.billing_model === 'TIERED' && charge.tiers && (

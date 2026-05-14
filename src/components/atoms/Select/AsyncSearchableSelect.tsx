@@ -207,7 +207,7 @@ const AsyncSearchableSelect = <T = any,>({
 				onSelect={() => handleSelect(option.value)}
 				disabled={option.disabled}
 				className={cn(
-					'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none',
+					'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 ps-8 pe-2 text-sm outline-none',
 					'focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
 					option.disabled && 'select-none cursor-not-allowed',
 				)}>
@@ -218,7 +218,7 @@ const AsyncSearchableSelect = <T = any,>({
 				</span>
 
 				<div className='flex items-center space-x-2 w-full'>
-					<div className='flex flex-col mr-2 w-full'>
+					<div className='flex flex-col me-2 w-full'>
 						<span className='break-words'>{option.label}</span>
 						{option.description && <span className='text-sm text-gray-500 break-words whitespace-normal'>{option.description}</span>}
 					</div>
@@ -243,7 +243,7 @@ const AsyncSearchableSelect = <T = any,>({
 					className={cn(
 						'flex w-full items-center space-x-2 justify-between',
 						option.disabled && 'opacity-50 pointer-events-none',
-						option.suffixIcon && 'pr-8',
+						option.suffixIcon && 'pe-8',
 						hideSelectedTick && '!pl-0',
 					)}>
 					{option.prefixIcon && option.prefixIcon}
@@ -313,7 +313,7 @@ const AsyncSearchableSelect = <T = any,>({
 							{isLoading && (
 								<div className='flex items-center justify-center py-6'>
 									<Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-									<span className='ml-2 text-sm text-muted-foreground'>Searching...</span>
+									<span className='ms-2 text-sm text-muted-foreground'>Searching...</span>
 								</div>
 							)}
 							{isError && (
@@ -330,7 +330,7 @@ const AsyncSearchableSelect = <T = any,>({
 										) : (
 											<CommandItem disabled>
 												<div className='flex items-center space-x-2 w-full'>
-													<div className='flex flex-col mr-2 w-full'>
+													<div className='flex flex-col me-2 w-full'>
 														<span className='break-words'>{noOptionsText}</span>
 													</div>
 												</div>

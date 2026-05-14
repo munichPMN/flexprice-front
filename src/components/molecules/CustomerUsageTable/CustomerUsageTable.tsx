@@ -134,7 +134,7 @@ const CustomerUsageTable: FC<Props> = ({ data, allowRedirect = true }) => {
 				const displayContent = (
 					<span>
 						{entityName}
-						{additionalCount > 0 && <span className='text-[#64748B] text-sm ml-1'>+{additionalCount}</span>}
+						{additionalCount > 0 && <span className='text-[#64748B] text-sm ms-1'>+{additionalCount}</span>}
 					</span>
 				);
 

@@ -27,11 +27,11 @@ const CreditNoteLineItemTable: FC<Props> = ({ data, total_amount, currency, titl
 			<div className='w-full p-4 '>
 				<FormHeader className='!mb-0' title={title} variant='form-component-title' titleClassName='font-medium' />
 				<div className='overflow-x-auto'>
-					<table className='table-auto w-full border-collapse text-left text-sm text-gray-800 my-4 px-4'>
+					<table className='table-auto w-full border-collapse text-start text-sm text-gray-800 my-4 px-4'>
 						<thead className='border-b border-gray-200'>
 							<tr>
 								<th className='py-2 px-2 text-gray-600 font-semibold text-sm'>Name</th>
-								<th className='py-2 px-2 text-gray-600 text-right font-semibold text-sm'>Credit Amount</th>
+								<th className='py-2 px-2 text-gray-600 text-end font-semibold text-sm'>Credit Amount</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -39,7 +39,7 @@ const CreditNoteLineItemTable: FC<Props> = ({ data, total_amount, currency, titl
 								return (
 									<tr key={item.id || index}>
 										<td className='py-3 px-2 text-gray-800'>{item.display_name ?? '--'}</td>
-										<td className='py-3 px-2 text-right text-[#2A9D90]'>{formatAmount(item.amount ?? 0, item.currency)}</td>
+										<td className='py-3 px-2 text-end text-[#2A9D90]'>{formatAmount(item.amount ?? 0, item.currency)}</td>
 									</tr>
 								);
 							})}

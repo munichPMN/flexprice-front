@@ -70,7 +70,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 					return (
 						<Tooltip
 							delayDuration={0}
-							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							className='max-w-[320px] whitespace-normal text-start leading-relaxed'
 							content={
 								<div className='space-y-1'>
 									<div className='font-semibold'>Inherited subscription</div>
@@ -86,7 +86,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 				if (kind === SUBSCRIPTION_HIERARCHY_DISPLAY_KIND.PARENT) {
 					return (
 						<Tooltip
-							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							className='max-w-[320px] whitespace-normal text-start leading-relaxed'
 							content={
 								<div className='space-y-1'>
 									<div className='font-semibold'>Parent subscription</div>
@@ -106,7 +106,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 					return (
 						<Tooltip
 							delayDuration={0}
-							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							className='max-w-[320px] whitespace-normal text-start leading-relaxed'
 							content={
 								<div className='space-y-1'>
 									<div className='font-semibold'>Grouped invoicing</div>
@@ -125,7 +125,7 @@ const SubscriptionTable: FC<SubscriptionTableProps> = ({ data, onRowClick, allow
 					return (
 						<Tooltip
 							delayDuration={0}
-							className='max-w-[320px] whitespace-normal text-left leading-relaxed'
+							className='max-w-[320px] whitespace-normal text-start leading-relaxed'
 							content={
 								<div className='space-y-1'>
 									<div className='font-semibold'>Delegated invoicing</div>

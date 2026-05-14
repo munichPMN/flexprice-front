@@ -245,7 +245,7 @@ const AsyncMultiSearchableSelect = <T = unknown,>({
 										)}
 									</div>
 								</div>
-								<div className='flex items-center gap-1 ml-2 shrink-0'>
+								<div className='flex items-center gap-1 ms-2 shrink-0'>
 									<XIcon
 										className='h-4 w-4 cursor-pointer text-muted-foreground hover:text-destructive'
 										onClick={(e) => {
@@ -259,7 +259,7 @@ const AsyncMultiSearchableSelect = <T = unknown,>({
 							</div>
 						) : (
 							<div className='flex items-center justify-between w-full'>
-								<span className='text-muted-foreground truncate pl-1 font-normal'>{placeholder}</span>
+								<span className='text-muted-foreground truncate ps-1 font-normal'>{placeholder}</span>
 								<ChevronDown className='h-4 w-4 text-muted-foreground shrink-0' />
 							</div>
 						)}
@@ -289,7 +289,7 @@ const AsyncMultiSearchableSelect = <T = unknown,>({
 							{showLoading && (
 								<div className='flex items-center justify-center py-6'>
 									<Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-									<span className='ml-2 text-sm text-muted-foreground'>Searching...</span>
+									<span className='ms-2 text-sm text-muted-foreground'>Searching...</span>
 								</div>
 							)}
 							{isError && shouldFetch && (
@@ -318,7 +318,7 @@ const AsyncMultiSearchableSelect = <T = unknown,>({
 														disabled={isDisabled}>
 														<div
 															className={cn(
-																'mr-2 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border border-primary',
+																'me-2 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border border-primary',
 																isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible',
 															)}>
 															<CheckIcon className='h-4 w-4' />

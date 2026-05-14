@@ -221,7 +221,7 @@ const UsageBreakdownTable: React.FC<{ items: UsageAnalyticItem[] }> = ({ items }
 			<button
 				type='button'
 				className={cn(
-					'group -ml-1 inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-left transition-colors',
+					'group -ms-1 inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-start transition-colors',
 					isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
 				)}
 				onClick={() => {
@@ -291,7 +291,7 @@ const UsageBreakdownTable: React.FC<{ items: UsageAnalyticItem[] }> = ({ items }
 											bucket.items.length === 0 && 'cursor-default',
 										)}>
 										<TableCell className='pl-0 py-2.5 align-middle'>
-											<div className='inline-flex items-center gap-2 text-left'>
+											<div className='inline-flex items-center gap-2 text-start'>
 												<span className='font-semibold text-gray-900 text-[13px]'>{bucket.groupName}</span>
 												{bucket.items.length > 0 ? (
 													<img src={isExpanded ? CHEVRON_UP_SVG : CHEVRON_DOWN_SVG} alt='' className='h-4 w-4 shrink-0' aria-hidden />

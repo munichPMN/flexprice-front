@@ -67,17 +67,17 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ customerId, subscriptionDat
 						{details.map((detail, index) => (
 							<div key={index} className='grid grid-cols-2 gap-4'>
 								<div className='text-sm font-light text-gray-600'>{detail.label}</div>
-								<div className='text-sm font-normal text-gray-800 text-right'>{detail.value || '--'}</div>
+								<div className='text-sm font-normal text-gray-800 text-end'>{detail.value || '--'}</div>
 							</div>
 						))}
 						<div className='grid grid-cols-2 gap-4'>
 							{subscriptionData && (
 								<>
 									<div className='text-sm font-light text-gray-600'>Subscription Amount</div>
-									<div className='text-sm font-normal text-gray-800 text-right'>{subscriptionData.display_amount || '--'}</div>
+									<div className='text-sm font-normal text-gray-800 text-end'>{subscriptionData.display_amount || '--'}</div>
 
 									<div className='text-sm font-light text-gray-600'>Subscription Start Date</div>
-									<div className='text-sm font-normal text-gray-800 text-right'>
+									<div className='text-sm font-normal text-gray-800 text-end'>
 										{formatDate(subscriptionData.start_time.toString()) || '--'}
 									</div>
 								</>

@@ -83,22 +83,22 @@ const PriceActionMenu: FC<PriceActionMenuProps> = ({
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='end' className='w-48'>
 					<DropdownMenuItem onClick={() => onOverride(price)}>
-						<Pencil className='mr-2 h-4 w-4' />
+						<Pencil className='me-2 h-4 w-4' />
 						{isOverridden ? 'Edit Override' : 'Override Price'}
 					</DropdownMenuItem>
 					{isOverridden && (
 						<DropdownMenuItem onClick={() => onReset(price.id)}>
-							<RotateCcw className='mr-2 h-4 w-4' />
+							<RotateCcw className='me-2 h-4 w-4' />
 							Reset Override
 						</DropdownMenuItem>
 					)}
 					<DropdownMenuItem onClick={() => onCommitment(price)}>
-						<Target className='mr-2 h-4 w-4' />
+						<Target className='me-2 h-4 w-4' />
 						{hasCommitment ? 'Edit Commitment' : 'Configure Commitment'}
 					</DropdownMenuItem>
 					{!isOverridden && (
 						<DropdownMenuItem onClick={() => onOpenCoupon(price.id)}>
-							<Tag className='mr-2 h-4 w-4' />
+							<Tag className='me-2 h-4 w-4' />
 							Apply Coupon
 						</DropdownMenuItem>
 					)}

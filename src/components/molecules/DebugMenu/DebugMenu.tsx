@@ -271,7 +271,7 @@ const DebugMenu = () => {
 										size='sm'
 										onClick={handleStartStreaming}
 										disabled={isLoading || isStreaming}>
-										{isStreaming ? <Loader2 className='mr-2 size-3.5 animate-spin' /> : <Rocket className='mr-2 size-3.5' />}
+										{isStreaming ? <Loader2 className='me-2 size-3.5 animate-spin' /> : <Rocket className='me-2 size-3.5' />}
 										{isLoading ? 'Loading...' : isStreaming ? 'Streaming...' : 'Start Streaming'}
 									</Button>
 								</>

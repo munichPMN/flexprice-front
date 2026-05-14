@@ -45,7 +45,7 @@ const InvoicesTable = ({ invoices, currencySymbol, onOpenDownloadFormat, downloa
 					{(['DATE', 'INVOICE #', 'STATUS', 'AMOUNT', 'DOWNLOAD'] as const).map((col) => (
 						<th
 							key={col}
-							className={`px-4 py-3 text-xs font-medium uppercase tracking-wider ${col === 'AMOUNT' ? 'text-right' : col === 'DOWNLOAD' ? 'text-center' : 'text-left'}`}
+							className={`px-4 py-3 text-xs font-medium uppercase tracking-wider ${col === 'AMOUNT' ? 'text-end' : col === 'DOWNLOAD' ? 'text-center' : 'text-start'}`}
 							style={{ color: 'var(--portal-text-secondary, #71717a)' }}>
 							{col}
 						</th>
@@ -62,7 +62,7 @@ const InvoicesTable = ({ invoices, currencySymbol, onOpenDownloadFormat, downloa
 							{invoice.invoice_number || `INV-${invoice.id.slice(0, 8)}`}
 						</td>
 						<td className='px-4 py-3'>{getStatusChip(invoice)}</td>
-						<td className='px-4 py-3 text-sm text-right font-medium' style={{ color: 'var(--portal-text-primary, #09090b)' }}>
+						<td className='px-4 py-3 text-sm text-end font-medium' style={{ color: 'var(--portal-text-primary, #09090b)' }}>
 							{currencySymbol}
 							{formatAmount(String(invoice.total ?? 0))}
 						</td>
@@ -210,7 +210,7 @@ const InvoicesWidget = () => {
 					placeholder='Search invoices...'
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
-					className='w-full pl-10 pr-4 py-2.5 text-sm rounded-lg outline-none focus:ring-1 transition-colors'
+					className='w-full ps-10 pe-4 py-2.5 text-sm rounded-lg outline-none focus:ring-1 transition-colors'
 					style={{
 						backgroundColor: 'var(--portal-surface, white)',
 						border: '1px solid var(--portal-border, #E9E9E9)',

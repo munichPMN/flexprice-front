@@ -43,7 +43,7 @@ const EventFilter: FC<Props> = ({ eventFilters, setEventFilters, error, disabled
 							key={index}
 							className={cn('relative', isHorizontal ? 'flex h-full w-full gap-4' : 'bg-white rounded-lg border border-input')}>
 							<div className={cn(isHorizontal ? 'flex-1 flex gap-4' : 'flex flex-col gap-4 p-6')}>
-								<div className={cn('w-full', !isHorizontal && 'relative pr-12')}>
+								<div className={cn('w-full', !isHorizontal && 'relative pe-12')}>
 									<Input
 										type='text'
 										label='Key'

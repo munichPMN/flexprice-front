@@ -31,7 +31,7 @@ const SidebarPricingPromoCard: FC<SidebarPricingPromoCardProps> = ({ onCreateWit
 			<div className='pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/65 to-transparent' aria-hidden />
 
 			<div className='relative z-10 flex flex-col gap-5 p-4'>
-				<h2 className='text-left text-base font-semibold leading-snug tracking-normal text-gray-900 antialiased'>
+				<h2 className='text-start text-base font-semibold leading-snug tracking-normal text-gray-900 antialiased'>
 					Describe your Pricing. Let AI Build It.
 				</h2>
 

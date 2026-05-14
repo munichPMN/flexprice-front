@@ -31,7 +31,7 @@ const JsonCodeBlock: FC<JsonCodeBlockProps> = ({ value, title, onCopy, className
 					<p className='text-xs font-medium text-foreground'>Payload</p>
 				)}
 				<Button onClick={handleCopy} variant='ghost' size='sm' className='h-7'>
-					<Copy size={12} className='mr-1' />
+					<Copy size={12} className='me-1' />
 					<span className='text-xs'>Copy</span>
 				</Button>
 			</div>

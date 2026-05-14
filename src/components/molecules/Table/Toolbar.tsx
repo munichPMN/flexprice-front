@@ -58,7 +58,7 @@ const Toolbar = ({ config, filters, onFilterChange }: ToolbarProps) => {
 					<Popover>
 						<PopoverTrigger disabled asChild>
 							<Button variant='outline' size='xs' className='text-gray-700 hover:bg-gray-50 border-gray-300'>
-								<ArrowUpDown className='w-4 h-4 mr-2 text-gray-500' />
+								<ArrowUpDown className='w-4 h-4 me-2 text-gray-500' />
 								Sort
 							</Button>
 						</PopoverTrigger>

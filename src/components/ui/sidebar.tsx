@@ -263,7 +263,7 @@ const SidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<'main
 			ref={ref}
 			className={cn(
 				'relative flex min-h-svh flex-1 flex-col bg-background',
-				'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-[6px] md:peer-data-[variant=inset]:shadow',
+				'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ms-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-[6px] md:peer-data-[variant=inset]:shadow',
 				className,
 			)}
 			{...props}
@@ -378,7 +378,7 @@ const SidebarMenuItem = React.forwardRef<HTMLLIElement, React.ComponentProps<'li
 SidebarMenuItem.displayName = 'SidebarMenuItem';
 
 const sidebarMenuButtonVariants = cva(
-	'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-[6px] py-0 px-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:!stroke-[1.5px]',
+	'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-[6px] py-0 px-2 text-start text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pe-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:!stroke-[1.5px]',
 	{
 		variants: {
 			variant: {
@@ -565,7 +565,7 @@ const SidebarMenuSubButton = React.forwardRef<
 			data-active={isActive}
 			className={cn(
 				// Base styles with proper vertical centering and consistent sizing
-				'flex min-w-0 -translate-x-px items-center justify-start gap-2 overflow-hidden rounded-[6px] ml-2 px-3 text-[14px] font-normal outline-none transition-colors duration-200',
+				'flex min-w-0 -translate-x-px items-center justify-start gap-2 overflow-hidden rounded-[6px] ms-2 px-3 text-[14px] font-normal outline-none transition-colors duration-200',
 				// Interactive states with consistent hover behavior using the same colors as reference UI
 				'hover:bg-[#F4F4F5] hover:text-[#18181B]',
 				'focus-visible:ring-2 focus-visible:ring-blue-600',

@@ -37,9 +37,9 @@ function Calendar({ className, classNames, showOutsideDays = true, timezone, onT
 					head_cell: 'text-muted-foreground rounded-[6px] w-8 font-normal text-[0.8rem]',
 					row: 'flex w-full mt-2',
 					cell: cn(
-						'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-[6px]',
+						'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-e-[6px]',
 						props.mode === 'range'
-							? '[&:has(>.day-range-end)]:rounded-r-[6px] [&:has(>.day-range-start)]:rounded-l-[6px] first:[&:has([aria-selected])]:rounded-l-[6px] last:[&:has([aria-selected])]:rounded-r-[6px]'
+							? '[&:has(>.day-range-end)]:rounded-e-[6px] [&:has(>.day-range-start)]:rounded-s-[6px] first:[&:has([aria-selected])]:rounded-s-[6px] last:[&:has([aria-selected])]:rounded-e-[6px]'
 							: '[&:has([aria-selected])]:rounded-[6px]',
 					),
 					day: cn(buttonVariants({ variant: 'ghost' }), 'h-8 w-8 p-0 font-normal aria-selected:opacity-100'),

@@ -92,11 +92,11 @@ const EmptyPage: FC<Props> = ({ onAddClick, tags, heading, children, addButtonLa
 								{/* Content below image */}
 								<div className='flex-1 flex flex-col justify-between mt-4'>
 									<div>
-										<h3 className='text-slate-800 text-base font-medium group-hover:text-gray-600 transition-colors duration-200 text-left'>
+										<h3 className='text-slate-800 text-base font-medium group-hover:text-gray-600 transition-colors duration-200 text-start'>
 											{item.title}
 										</h3>
 									</div>
-									<div className='flex items-center gap-1 mt-8 text-slate-400 group-hover:text-gray-500 transition-all duration-200 text-left'>
+									<div className='flex items-center gap-1 mt-8 text-slate-400 group-hover:text-gray-500 transition-all duration-200 text-start'>
 										<span className='text-xs font-regular'>Learn More</span>
 										<ArrowRight className='w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200' />
 									</div>

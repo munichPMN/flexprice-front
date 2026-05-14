@@ -141,7 +141,7 @@ const FilterAsyncSelect = <T = any,>({
 						)}
 						{isLoading && searchQuery !== '' && (
 							<div className='flex items-center justify-center py-4 border-b'>
-								<Loader2 className='h-4 w-4 animate-spin text-muted-foreground mr-2' />
+								<Loader2 className='h-4 w-4 animate-spin text-muted-foreground me-2' />
 								<span className='text-sm text-muted-foreground'>Searching...</span>
 							</div>
 						)}
@@ -172,7 +172,7 @@ const FilterAsyncSelect = <T = any,>({
 										disabled={option.disabled}
 										className='cursor-pointer'>
 										<span className='truncate flex-1'>{option.label}</span>
-										<Check className={cn('ml-auto h-4 w-4 shrink-0', value === option.value ? 'opacity-100' : 'opacity-0')} />
+										<Check className={cn('ms-auto h-4 w-4 shrink-0', value === option.value ? 'opacity-100' : 'opacity-0')} />
 									</CommandItem>
 								))}
 							</CommandGroup>

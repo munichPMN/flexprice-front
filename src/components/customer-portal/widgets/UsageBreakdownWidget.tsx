@@ -145,7 +145,7 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 		return (
 			<button
 				type='button'
-				className='group -ml-1 inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-left transition-colors'
+				className='group -ms-1 inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-start transition-colors'
 				style={{ color: 'var(--portal-text-primary, #374151)' }}
 				onClick={() => {
 					if (sortField !== field) {
@@ -218,7 +218,7 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 					<Table>
 						<TableHeader className='h-10' style={{ borderBottom: '1px solid var(--portal-border, #e5e7eb)' }}>
 							<TableRow style={{ borderBottom: '1px solid var(--portal-border, #e5e7eb)' }}>
-								<TableHead className='pl-3 font-semibold text-[13px] w-[35%]' style={{ color: 'var(--portal-text-primary, #374151)' }}>
+								<TableHead className='ps-3 font-semibold text-[13px] w-[35%]' style={{ color: 'var(--portal-text-primary, #374151)' }}>
 									Feature
 								</TableHead>
 								<TableHead className='font-semibold text-[13px]' style={{ color: 'var(--portal-text-primary, #374151)' }}>
@@ -251,8 +251,8 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 												bucket.items.length === 0 && 'border-b-0 cursor-default',
 											)}
 											style={rowStyle}>
-											<TableCell className='pl-3 py-2.5 align-middle'>
-												<div className='inline-flex items-center gap-2 text-left'>
+											<TableCell className='ps-3 py-2.5 align-middle'>
+												<div className='inline-flex items-center gap-2 text-start'>
 													<span className='font-semibold text-[13px]' style={{ color: 'var(--portal-text-primary, #111827)' }}>
 														{bucket.groupName}
 													</span>
@@ -295,7 +295,7 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 													className='h-10 align-middle border-b'
 													style={rowStyle}>
 													<TableCell
-														className='py-2.5 pl-3 font-normal text-[13px] align-middle'
+														className='py-2.5 ps-3 font-normal text-[13px] align-middle'
 														style={{ color: 'var(--portal-text-primary, #374151)' }}>
 														{row.name || row.feature?.name || row.event_name || 'Unknown'}
 													</TableCell>
@@ -315,7 +315,7 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 									key={`ungrouped:${row.feature_id ?? row.price_id ?? row.meter_id ?? index}`}
 									className='h-10 align-middle border-b'
 									style={rowStyle}>
-									<TableCell className='pl-3 py-2.5 font-normal text-[13px]' style={{ color: 'var(--portal-text-primary, #374151)' }}>
+									<TableCell className='ps-3 py-2.5 font-normal text-[13px]' style={{ color: 'var(--portal-text-primary, #374151)' }}>
 										<span>{row.name || row.feature?.name || row.event_name || 'Unknown'}</span>
 									</TableCell>
 									<TableCell className='py-2.5 font-normal text-[13px]' style={{ color: 'var(--portal-text-secondary, #6b7280)' }}>
@@ -330,7 +330,7 @@ const UsageBreakdownWidget = ({ analyticsParams, label }: UsageBreakdownWidgetPr
 								<TableRow style={rowStyle}>
 									<TableCell
 										colSpan={3}
-										className='pl-3 py-4 font-normal text-[13px]'
+										className='ps-3 py-4 font-normal text-[13px]'
 										style={{ color: 'var(--portal-text-secondary, #6b7280)' }}>
 										--
 									</TableCell>

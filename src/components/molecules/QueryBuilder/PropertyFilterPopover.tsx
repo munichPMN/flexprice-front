@@ -289,7 +289,7 @@ const PropertyFilterPopover: React.FC<Props> = ({
 					<ListFilter className='size-5' />
 					<span>Filter</span>
 					{appliedFilters > 0 && (
-						<Badge variant='secondary' className='ml-1 h-5 rounded px-1.5 font-mono text-xs'>
+						<Badge variant='secondary' className='ms-1 h-5 rounded px-1.5 font-mono text-xs'>
 							{appliedFilters}
 						</Badge>
 					)}
@@ -307,7 +307,7 @@ const PropertyFilterPopover: React.FC<Props> = ({
 									<h4 className='text-base font-medium leading-none'>No filters applied</h4>
 									<p className='text-muted-foreground text-sm'>Add filters to refine your data.</p>
 								</div>
-								<Button variant='ghost' size='icon' className='h-7 w-7 -mr-1' onClick={() => setIsOpen(false)}>
+								<Button variant='ghost' size='icon' className='h-7 w-7 -me-1' onClick={() => setIsOpen(false)}>
 									<X className='h-3.5 w-3.5' />
 								</Button>
 							</div>
@@ -334,7 +334,7 @@ const PropertyFilterPopover: React.FC<Props> = ({
 						<div className='flex flex-col gap-1.5 !z-50'>
 							<div className='flex justify-between items-center'>
 								<h4 className='text-sm font-medium leading-none'>Filter by</h4>
-								<Button variant='ghost' size='icon' className='h-7 w-7 -mr-1' onClick={() => setIsOpen(false)}>
+								<Button variant='ghost' size='icon' className='h-7 w-7 -me-1' onClick={() => setIsOpen(false)}>
 									<X className='h-3.5 w-3.5' />
 								</Button>
 							</div>

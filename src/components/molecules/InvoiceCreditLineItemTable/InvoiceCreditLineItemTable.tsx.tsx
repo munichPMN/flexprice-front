@@ -28,14 +28,14 @@ const InvoiceCreditLineItemTable: FC<Props> = ({ data, total_amount, currency, t
 				<FormHeader className='!mb-0' title={title} variant='form-component-title' titleClassName='font-semibold' />
 
 				<div className='overflow-x-auto'>
-					<table className='table-auto w-full border-collapse text-left text-sm text-gray-800 my-4 px-4'>
+					<table className='table-auto w-full border-collapse text-start text-sm text-gray-800 my-4 px-4'>
 						<thead className='border-b border-gray-200'>
 							<tr>
 								<th className='py-2 px-2 text-gray-600'>Subscription</th>
 
 								<th className='py-2 px-2 text-gray-600 text-center'>Credit Quantity</th>
 								<th className='py-2 px-2 text-gray-600 text-center'>Unit Price</th>
-								<th className='py-2 px-2 text-gray-600 text-right'> Credit Amount</th>
+								<th className='py-2 px-2 text-gray-600 text-end'> Credit Amount</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -45,7 +45,7 @@ const InvoiceCreditLineItemTable: FC<Props> = ({ data, total_amount, currency, t
 										<td className='py-3 px-2 text-gray-800'>{item.display_name ?? '--'}</td>
 										<td className='py-3 px-2 text-center text-gray-800'>{item.quantity ?? '--'}</td>
 										<td className='py-3 px-2 text-center text-gray-800'>{'--'}</td>
-										<td className='py-3 px-2 text-right text-[#2A9D90]'>{formatAmount(item.amount ?? '--', item.currency)}</td>
+										<td className='py-3 px-2 text-end text-[#2A9D90]'>{formatAmount(item.amount ?? '--', item.currency)}</td>
 									</tr>
 								);
 							})}

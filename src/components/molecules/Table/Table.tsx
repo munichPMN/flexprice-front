@@ -136,7 +136,7 @@ const CellContent: FC<{
 		onCellClick && 'cursor-pointer',
 		fieldVariant === 'interactive' && 'data-interactive="true"',
 		fieldVariant === 'link' && 'cursor-pointer hover:underline',
-		colIndex === 0 && '!pl-2',
+		colIndex === 0 && '!ps-2',
 	);
 
 	if (render) {
@@ -209,7 +209,7 @@ const FlexpriceTable: FC<FlexpriceTableProps<any>> = ({
 							variant === 'no-bordered' && 'border-b-0',
 							className,
 						)}>
-						<span className={cn(index === 0 && 'pl-2')}>{children ? children : title}</span>
+						<span className={cn(index === 0 && 'ps-2')}>{children ? children : title}</span>
 					</TableHead>
 				))}
 			</TableRow>

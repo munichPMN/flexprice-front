@@ -202,7 +202,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 						{customDisplay ? (
 							customDisplay(selectedValues.length) || (
 								<div className='flex items-center justify-between w-full'>
-									<span className='text-muted-foreground truncate pl-1 font-normal'>{placeholder}</span>
+									<span className='text-muted-foreground truncate ps-1 font-normal'>{placeholder}</span>
 									<ChevronDown className='h-4 w-4 text-muted-foreground shrink-0' />
 								</div>
 							)
@@ -258,7 +258,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 								</div>
 
 								{/* Controls container - minimal spacing */}
-								<div className='flex items-center gap-1 ml-2 shrink-0'>
+								<div className='flex items-center gap-1 ms-2 shrink-0'>
 									<XIcon
 										className='h-4 w-4 cursor-pointer text-muted-foreground hover:text-destructive'
 										onClick={(event) => {
@@ -272,7 +272,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 							</div>
 						) : (
 							<div className='flex items-center justify-between w-full'>
-								<span className='text-muted-foreground truncate pl-1 font-normal'>{placeholder}</span>
+								<span className='text-muted-foreground truncate ps-1 font-normal'>{placeholder}</span>
 								<ChevronDown className='h-4 w-4 text-muted-foreground shrink-0' />
 							</div>
 						)}
@@ -287,7 +287,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 								<CommandItem key='all' onSelect={toggleAll} className='cursor-pointer'>
 									<div
 										className={cn(
-											'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+											'me-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
 											selectedValues.length === options.filter((o) => !o.disabled).length
 												? 'bg-primary text-primary-foreground'
 												: 'opacity-50 [&_svg]:invisible',
@@ -307,12 +307,12 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 											disabled={isDisabled}>
 											<div
 												className={cn(
-													'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+													'me-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
 													isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible',
 												)}>
 												<CheckIcon className='h-4 w-4' />
 											</div>
-											{option.icon && <option.icon className='mr-2 h-4 w-4 text-muted-foreground' />}
+											{option.icon && <option.icon className='me-2 h-4 w-4 text-muted-foreground' />}
 											<span>{option.label}</span>
 										</CommandItem>
 									);

@@ -177,7 +177,7 @@ const EnvironmentSelector: React.FC<Props> = ({ disabled = false, className }) =
 								<SelectItem value={option.value} className='flex-1 pr-9'>
 									<div className='flex items-center gap-2 text-muted-foreground min-w-0'>
 										{option.prefixIcon}
-										<span className='block flex-1 min-w-0 truncate pr-2 max-w-[calc(var(--radix-select-trigger-width)-110px)]'>
+										<span className='block flex-1 min-w-0 truncate pe-2 max-w-[calc(var(--radix-select-trigger-width)-110px)]'>
 											{option.label}
 										</span>
 									</div>

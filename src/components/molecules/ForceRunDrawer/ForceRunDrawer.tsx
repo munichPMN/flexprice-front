@@ -100,7 +100,7 @@ const ForceRunDrawer: FC<ForceRunDrawerProps> = ({ isOpen, onOpenChange, onConfi
 					</RadioGroup>
 
 					{runType === RunType.CUSTOM && (
-						<div className='space-y-5 pt-3 pl-6 border-l-2 border-gray-200'>
+						<div className='space-y-5 pt-3 ps-6 border-s-2 border-gray-200'>
 							<div className='space-y-1'>
 								<DateTimePicker
 									title='Start Time'

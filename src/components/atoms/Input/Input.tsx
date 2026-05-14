@@ -181,7 +181,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 						'focus-within:border-black',
 						className,
 					)}>
-					{inputPrefix && <div className='mr-2'>{inputPrefix}</div>}
+					{inputPrefix && <div className='me-2'>{inputPrefix}</div>}
 					<input
 						{...props}
 						id={id}
@@ -205,7 +205,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 						}}
 					/>
 					{suffix && (
-						<div className='ml-2 flex shrink-0 items-center self-stretch pl-2 text-sm tabular-nums leading-none text-muted-foreground'>
+						<div className='ms-2 flex shrink-0 items-center self-stretch ps-2 text-sm tabular-nums leading-none text-muted-foreground'>
 							{suffix}
 						</div>
 					)}

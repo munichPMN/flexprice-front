@@ -212,7 +212,7 @@ const EnvironmentCopier: React.FC<Props> = ({ isOpen, onOpenChange, sourceEnviro
 						Cancel
 					</Button>
 					<Button onClick={handleClone} disabled={isSubmitDisabled}>
-						<Copy className='h-4 w-4 mr-1.5' />
+						<Copy className='h-4 w-4 me-1.5' />
 						{isPending ? 'Copying...' : 'Copy Environment'}
 					</Button>
 				</div>

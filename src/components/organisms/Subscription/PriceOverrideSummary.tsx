@@ -101,7 +101,7 @@ const PriceOverrideSummary: FC<Props> = ({ overrides, prices, className }) => {
 							return (
 								<div key={override.price_id} className='flex items-center justify-between text-sm text-muted-foreground'>
 									<span className='truncate'>{price.meter?.name || price.description || 'Charge'}</span>
-									<span className='ml-2 flex-shrink-0 text-xs'>{overrideDescription}</span>
+									<span className='ms-2 flex-shrink-0 text-xs'>{overrideDescription}</span>
 								</div>
 							);
 						})}

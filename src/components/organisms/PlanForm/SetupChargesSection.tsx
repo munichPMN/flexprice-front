@@ -52,7 +52,7 @@ export const AddChargesButton = ({ onClick, label, className }: AddChargesButton
 	<button
 		onClick={onClick}
 		className={cn(
-			'shrink-0 cursor-pointer flex gap-2 items-center justify-center bg-[#F4F4F5] rounded-[6px] px-2.5 h-9 w-fit text-left',
+			'shrink-0 cursor-pointer flex gap-2 items-center justify-center bg-[#F4F4F5] rounded-[6px] px-2.5 h-9 w-fit text-start',
 			className,
 		)}>
 		<Plus size={16} className='shrink-0' />

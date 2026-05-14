@@ -49,9 +49,9 @@ const CustomPopoverDemo: React.FC = () => {
 					<CustomPopover
 						trigger={
 							<Button variant='outline'>
-								<User className='h-4 w-4 mr-2' />
+								<User className='h-4 w-4 me-2' />
 								Account
-								<ChevronsUpDown className='h-4 w-4 ml-2' />
+								<ChevronsUpDown className='h-4 w-4 ms-2' />
 							</Button>
 						}
 						contentClassName='p-0 w-56'>
@@ -76,7 +76,7 @@ const CustomPopoverDemo: React.FC = () => {
 						<CustomPopover
 							trigger={
 								<Button variant='outline'>
-									<Settings className='h-4 w-4 mr-2' />
+									<Settings className='h-4 w-4 me-2' />
 									Settings
 								</Button>
 							}

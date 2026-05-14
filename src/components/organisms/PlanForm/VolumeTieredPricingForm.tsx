@@ -133,7 +133,7 @@ const VolumeTieredPricingForm: FC<Props> = ({ setTieredPrices, tieredPrices, cur
 			<div className={cn('w-full', tieredPrices.length > 0 ? '' : 'hidden')}>
 				<table className='table-auto w-full border-collapse border border-gray-200 overflow-x-auto'>
 					<thead>
-						<tr className='bg-gray-100 text-left border-b'>
+						<tr className='bg-gray-100 text-start border-b'>
 							<th className='px-4 py-2 font-normal bg-white text-nowrap text-[#71717A]'>From {'(>)'}</th>
 							<th className='px-4 py-2 font-normal bg-white text-nowrap text-[#71717A]'>Up to {'(<=)'}</th>
 							<th className='px-4 py-2 font-normal bg-white text-nowrap text-[#71717A]'>{`Per unit price `}</th>

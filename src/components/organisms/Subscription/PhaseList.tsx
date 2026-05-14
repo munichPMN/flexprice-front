@@ -379,12 +379,12 @@ const PhaseList: React.FC<PhaseListProps> = ({
 								<div className='text-xs text-gray-500 mt-1'>
 									Phase {index + 1}
 									{phase.coupons && phase.coupons.length > 0 && (
-										<span className='ml-2 text-blue-600'>
+										<span className='ms-2 text-blue-600'>
 											• {phase.coupons.length} coupon{phase.coupons.length > 1 ? 's' : ''}
 										</span>
 									)}
 									{phase.line_item_coupons && Object.keys(phase.line_item_coupons).length > 0 && (
-										<span className='ml-2 text-green-600'>
+										<span className='ms-2 text-green-600'>
 											• {Object.keys(phase.line_item_coupons).length} line item coupon
 											{Object.keys(phase.line_item_coupons).length > 1 ? 's' : ''}
 										</span>

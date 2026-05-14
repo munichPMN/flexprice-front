@@ -85,7 +85,7 @@ export const ErrorFallback = ({ error, errorInfo, errorId, resetError }: ErrorFa
 			aria-labelledby='error-title'>
 			<div className='max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
 				{/* Left Side - Error Content */}
-				<div className='flex flex-col items-center lg:items-start text-center lg:text-left'>
+				<div className='flex flex-col items-center lg:items-start text-center lg:text-start'>
 					<div className='mb-8 relative'>
 						<div className='absolute inset-0 bg-blue-DEFAULT/10 rounded-full blur-2xl -z-10 scale-150'></div>
 						<div className={`absolute -top-4 -right-4 ${animateIcon ? 'animate-bounce' : 'animate-pulse'}`}>
@@ -263,7 +263,7 @@ export const ErrorFallback = ({ error, errorInfo, errorId, resetError }: ErrorFa
 							</button>
 
 							{showDetails && (
-								<div className='mt-4 text-left overflow-auto max-h-80 space-y-4'>
+								<div className='mt-4 text-start overflow-auto max-h-80 space-y-4'>
 									<div>
 										<h3 className='text-sm font-medium mb-2 text-muted-foreground flex items-center gap-2'>
 											<span className='inline-block w-2 h-2 rounded-full bg-destructive'></span>

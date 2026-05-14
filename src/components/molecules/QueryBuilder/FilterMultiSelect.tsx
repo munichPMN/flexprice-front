@@ -88,7 +88,7 @@ const FilterMultiSelect: React.FC<FilterMultiSelectProps> = ({
 												onChange(newValue);
 											}}>
 											<span className='truncate'>{option.label}</span>
-											<Check className={cn('ml-auto h-4 w-4', value.includes(option.value) ? 'opacity-100' : 'opacity-0')} />
+											<Check className={cn('ms-auto h-4 w-4', value.includes(option.value) ? 'opacity-100' : 'opacity-0')} />
 										</CommandItem>
 									))}
 								</CommandGroup>

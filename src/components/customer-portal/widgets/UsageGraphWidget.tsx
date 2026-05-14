@@ -98,7 +98,7 @@ const UsageGraphWidget = ({ config, analyticsParams, label }: UsageGraphWidgetPr
 								</div>
 							</div>
 							{/* X-axis labels */}
-							<div className='flex justify-between pl-12'>
+							<div className='flex justify-between ps-12'>
 								{['', '', '', ''].map((_, i) => (
 									<Skeleton key={i} className='h-3 w-12' style={{ opacity: 0.4 }} />
 								))}

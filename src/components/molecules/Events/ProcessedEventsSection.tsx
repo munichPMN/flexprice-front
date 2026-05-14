@@ -61,7 +61,7 @@ const ProcessedEventsSection: FC<ProcessedEventsSectionProps> = ({ events, onOpe
 									<button
 										type='button'
 										onClick={() => onOpenSubscription?.(pe.subscription_id)}
-										className='text-blue-600 hover:text-blue-700 hover:underline text-left text-xs transition-colors'>
+										className='text-blue-600 hover:text-blue-700 hover:underline text-start text-xs transition-colors'>
 										{pe.subscription_id}
 									</button>
 								)}

@@ -50,14 +50,14 @@ const TierBreakdown: FC<{
 		<div className='space-y-3'>
 			<div className='font-medium border-b border-gray-200 pb-2 text-base text-gray-900'>
 				{tierMode === TIER_MODE.VOLUME ? 'Volume' : 'Slab'} Tier Pricing
-				{hasOverrides && <span className='text-xs text-orange-600 ml-2'>(Overridden)</span>}
+				{hasOverrides && <span className='text-xs text-orange-600 ms-2'>(Overridden)</span>}
 			</div>
 			<div className='space-y-2'>
 				{tiers.map((tier, index) => (
 					<div key={index} className='flex flex-col gap-1'>
 						<div className='flex items-center justify-between gap-6'>
 							<div className='text-sm text-muted-foreground'>{formatRange(tier, index, tiers)} units</div>
-							<div className='text-right'>
+							<div className='text-end'>
 								<div className='text-sm text-muted-foreground'>
 									{symbol}
 									{formatAmount(tier.unit_amount)} per unit
@@ -202,7 +202,7 @@ const OverrideChanges: FC<{
 					return (
 						<div key={index} className='text-sm text-gray-600 space-y-1'>
 							<div className='font-medium'>{tierHeader}:</div>
-							<div className='ml-2 space-y-1'>
+							<div className='ms-2 space-y-1'>
 								{tierDetails.split(', ').map((detail, detailIndex) => (
 									<div key={detailIndex} className='text-xs'>
 										• {detail}

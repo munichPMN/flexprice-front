@@ -90,7 +90,7 @@ const SortDropdown: React.FC<Props> = ({ options, value = [], onChange, classNam
 					<ArrowUpDown className='size-5' />
 					<span>Sort</span>
 					{appliedSorts > 0 && (
-						<Badge variant='secondary' className='ml-1 h-5 rounded px-1.5 font-mono text-xs'>
+						<Badge variant='secondary' className='ms-1 h-5 rounded px-1.5 font-mono text-xs'>
 							{appliedSorts}
 						</Badge>
 					)}
@@ -108,7 +108,7 @@ const SortDropdown: React.FC<Props> = ({ options, value = [], onChange, classNam
 									<h4 className='text-base font-medium leading-none'>No sorting applied</h4>
 									<p className='text-muted-foreground text-sm'>Add sorting to organize your data.</p>
 								</div>
-								<Button variant='ghost' size='icon' className='h-7 w-7 -mr-1' onClick={() => setIsOpen(false)}>
+								<Button variant='ghost' size='icon' className='h-7 w-7 -me-1' onClick={() => setIsOpen(false)}>
 									<X className='h-3.5 w-3.5' />
 								</Button>
 							</div>
@@ -122,7 +122,7 @@ const SortDropdown: React.FC<Props> = ({ options, value = [], onChange, classNam
 						<div className='flex flex-col gap-1.5'>
 							<div className='flex justify-between items-center'>
 								<h4 className='text-sm font-medium leading-none'>Sort by</h4>
-								<Button variant='ghost' size='icon' className='h-7 w-7 -mr-1' onClick={() => setIsOpen(false)}>
+								<Button variant='ghost' size='icon' className='h-7 w-7 -me-1' onClick={() => setIsOpen(false)}>
 									<X className='h-3.5 w-3.5' />
 								</Button>
 							</div>

@@ -104,9 +104,11 @@ export const DateTimePicker: React.FC<Props> = ({ date, setDate, disabled, place
 						type='button'
 						disabled={disabled}
 						className={cn(
-							'flex w-full items-center gap-2 rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm text-left',
+							'flex w-full items-center gap-2 rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm text-start',
 							'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
 							'disabled:cursor-not-allowed disabled:opacity-50',
+							date && 'border-primary-foreground',
+							disabled && 'bg-gray-100',
 							!date && 'text-muted-foreground',
 						)}>
 						<CalendarIcon className='h-4 w-4 shrink-0 text-muted-foreground' />

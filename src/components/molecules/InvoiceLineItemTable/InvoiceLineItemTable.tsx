@@ -83,15 +83,15 @@ const InvoiceLineItemTable: FC<Props> = ({
 					<table className='w-full border-collapse'>
 						<thead>
 							<tr className='border-b border-gray-200'>
-								<th className='py-3 px-0 text-left text-sm font-medium text-gray-900'>Subscription</th>
+								<th className='py-3 px-0 text-start text-sm font-medium text-gray-900'>Subscription</th>
 								{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-									<th className='py-3 px-4 text-right text-sm font-medium text-gray-900'>Description</th>
+									<th className='py-3 px-4 text-end text-sm font-medium text-gray-900'>Description</th>
 								)}
 								{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-									<th className='py-3 px-4 text-right text-sm font-medium text-gray-900'>Interval</th>
+									<th className='py-3 px-4 text-end text-sm font-medium text-gray-900'>Interval</th>
 								)}
-								<th className='py-3 px-4 text-right text-sm font-medium text-gray-900'>Quantity</th>
-								<th className='py-3 px-0 text-right text-sm w-36 font-medium text-gray-900'>Amount</th>
+								<th className='py-3 px-4 text-end text-sm font-medium text-gray-900'>Quantity</th>
+								<th className='py-3 px-0 text-end text-sm w-36 font-medium text-gray-900'>Amount</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -100,17 +100,17 @@ const InvoiceLineItemTable: FC<Props> = ({
 									<tr key={index} className='border-b border-gray-100'>
 										<td className='py-4 px-0 text-sm  text-gray-900'>{item.display_name ?? '--'}</td>
 										{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-											<td className='py-4 px-4 text-sm text-gray-600 text-right'>
+											<td className='py-4 px-4 text-sm text-gray-600 text-end'>
 												{item.price_type ? getPriceTypeLabel(item.price_type) : '--'}
 											</td>
 										)}
 										{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-											<td className='py-4 px-4 text-sm text-gray-600 text-right'>
+											<td className='py-4 px-4 text-sm text-gray-600 text-end'>
 												{item.period_start && item.period_end ? formatBillingPeriod(item.period_start, item.period_end) : '--'}
 											</td>
 										)}
-										<td className='py-4 px-4 text-right text-sm text-gray-600'>{item.quantity ? item.quantity : '--'}</td>
-										<td className='py-4 px-0 text-right w-36  text-sm text-gray-600'>{formatAmount(item.amount ?? 0, item.currency)}</td>
+										<td className='py-4 px-4 text-end text-sm text-gray-600'>{item.quantity ? item.quantity : '--'}</td>
+										<td className='py-4 px-0 text-end w-36  text-sm text-gray-600'>{formatAmount(item.amount ?? 0, item.currency)}</td>
 									</tr>
 								);
 							})}

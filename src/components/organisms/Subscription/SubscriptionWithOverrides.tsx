@@ -91,7 +91,7 @@ const SubscriptionWithOverrides: FC<Props> = ({ prices, onCreateSubscription, cl
 											</div>
 											{/* Show package details only when relevant */}
 											{override.billing_model === 'PACKAGE' && override.transform_quantity && (
-												<div className='text-xs text-blue-600 ml-4'>{override.transform_quantity.divide_by} units</div>
+												<div className='text-xs text-blue-600 ms-4'>{override.transform_quantity.divide_by} units</div>
 											)}
 										</div>
 									);

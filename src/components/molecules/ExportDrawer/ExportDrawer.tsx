@@ -466,7 +466,7 @@ const ExportDrawer: FC<ExportDrawerProps> = ({ isOpen, onOpenChange, connectionI
 									addMetadataField();
 								}
 							}}
-							className='w-full flex items-center px-3 py-2.5 text-left hover:bg-gray-100 rounded-md transition-colors gap-2'>
+							className='w-full flex items-center px-3 py-2.5 text-start hover:bg-gray-100 rounded-md transition-colors gap-2'>
 							<div className='text-gray-500 shrink-0'>
 								{isMetadataExpanded ? <ChevronDown className='h-4 w-4' /> : <ChevronRight className='h-4 w-4' />}
 							</div>

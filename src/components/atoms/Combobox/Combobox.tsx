@@ -86,7 +86,7 @@ const Combobox = ({
 					disabled={disabled}
 					className={cn('justify-between', typeof width === 'number' ? `w-[${width}px]` : `w-[${width}]`, triggerClassName)}>
 					<p className='font-normal'>{selectedOption?.label || placeholder}</p>
-					<ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+					<ChevronsUpDown className='ms-2 h-4 w-4 shrink-0 opacity-50' />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent
@@ -105,7 +105,7 @@ const Combobox = ({
 										renderOption(option)
 									) : (
 										<div className='flex items-center gap-2 '>
-											<Check className={cn('mr-2 h-4 w-4', value === option.value ? 'opacity-100' : 'opacity-0')} />
+											<Check className={cn('me-2 h-4 w-4', value === option.value ? 'opacity-100' : 'opacity-0')} />
 											{option.label}
 										</div>
 									)}

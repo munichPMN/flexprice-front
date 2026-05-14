@@ -118,7 +118,7 @@ export const RevenueTrendCard: React.FC<RevenueTrendCardProps> = ({ revenueData,
 									<div className='flex-1'>
 										<p className={getTypographyClass('body-default', 'font-medium text-zinc-900')}>{month.month}</p>
 									</div>
-									<div className='text-right'>
+									<div className='text-end'>
 										<p className={`text-lg font-semibold ${month.revenue === 0 ? 'text-zinc-400' : 'text-zinc-900'}`}>
 											{month.revenue === 0
 												? '--'

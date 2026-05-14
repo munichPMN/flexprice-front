@@ -79,15 +79,15 @@ const SubscriptionPreviewLineItemTable: FC<Props> = ({
 				<table className='w-full border-collapse'>
 					<thead>
 						<tr className='border-b border-gray-200'>
-							<th className='py-3 px-0 text-left text-sm font-medium text-gray-900'>Subscription</th>
+							<th className='py-3 px-0 text-start text-sm font-medium text-gray-900'>Subscription</th>
 							{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-								<th className='py-3 px-4 text-left text-sm font-medium text-gray-900'>Description</th>
+								<th className='py-3 px-4 text-start text-sm font-medium text-gray-900'>Description</th>
 							)}
 							{invoiceType === INVOICE_TYPE.SUBSCRIPTION && (
-								<th className='py-3 px-4 text-left text-sm font-medium text-gray-900'>Interval</th>
+								<th className='py-3 px-4 text-start text-sm font-medium text-gray-900'>Interval</th>
 							)}
 							<th className='py-3 px-4 text-center text-sm font-medium text-gray-900'>Quantity</th>
-							<th className='py-3 px-0 text-right text-sm font-medium text-gray-900'>Amount</th>
+							<th className='py-3 px-0 text-end text-sm font-medium text-gray-900'>Amount</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -104,7 +104,7 @@ const SubscriptionPreviewLineItemTable: FC<Props> = ({
 										</td>
 									)}
 									<td className='py-4 px-4 text-center text-sm text-gray-600'>{item.quantity ? item.quantity : '--'}</td>
-									<td className='py-4 px-0 text-right text-sm text-gray-900 '>{formatAmount(item.amount ?? 0, item.currency)}</td>
+									<td className='py-4 px-0 text-end text-sm text-gray-900 '>{formatAmount(item.amount ?? 0, item.currency)}</td>
 								</tr>
 							);
 						})}
@@ -118,30 +118,30 @@ const SubscriptionPreviewLineItemTable: FC<Props> = ({
 					{/* Subtotal - always show if exists */}
 					{subtotal !== undefined && subtotal !== null && Number(subtotal) !== 0 && (
 						<div className='flex flex-row justify-end items-center py-1'>
-							<div className='w-40 text-right text-base font-medium text-gray-900'>Subtotal</div>
-							<div className='flex-1 text-right text-sm text-gray-900 font-medium'>{formatAmount(Number(subtotal), currency ?? '')}</div>
+							<div className='w-40 text-end text-base font-medium text-gray-900'>Subtotal</div>
+							<div className='flex-1 text-end text-sm text-gray-900 font-medium'>{formatAmount(Number(subtotal), currency ?? '')}</div>
 						</div>
 					)}
 
 					{/* Discount - only show if provided and > 0 */}
 					{discount && Number(discount) > 0 && (
 						<div className='flex flex-row justify-end items-center py-1'>
-							<div className='w-40 text-right text-base font-medium text-gray-900'>Discount</div>
-							<div className='flex-1 text-right text-sm text-gray-900 font-medium'>−{formatAmount(Number(discount), currency ?? '')}</div>
+							<div className='w-40 text-end text-base font-medium text-gray-900'>Discount</div>
+							<div className='flex-1 text-end text-sm text-gray-900 font-medium'>−{formatAmount(Number(discount), currency ?? '')}</div>
 						</div>
 					)}
 					{/* Tax - only show if provided and > 0 */}
 					{tax !== undefined && tax !== null && Number(tax) !== 0 && (
 						<div className='flex flex-row justify-end items-center py-1'>
-							<div className='w-40 text-right text-base font-medium text-gray-900'>Tax</div>
-							<div className='flex-1 text-right text-sm text-gray-900 font-medium'>{formatAmount(Number(tax), currency ?? '')}</div>
+							<div className='w-40 text-end text-base font-medium text-gray-900'>Tax</div>
+							<div className='flex-1 text-end text-sm text-gray-900 font-medium'>{formatAmount(Number(tax), currency ?? '')}</div>
 						</div>
 					)}
 
 					{/* Net payable - always show, default to 0 if not provided */}
 					<div className='flex flex-row justify-end border-t border-gray-200 items-center py-3'>
 						<div className='w-40 flex items-center gap-2 justify-end text-sm text-gray-900 font-medium'>Net payable</div>
-						<div className='flex-1 text-right text-sm text-gray-900 font-semibold'>
+						<div className='flex-1 text-end text-sm text-gray-900 font-semibold'>
 							{formatAmount(Number(amount_due ?? 0), currency ?? '')}
 						</div>
 					</div>

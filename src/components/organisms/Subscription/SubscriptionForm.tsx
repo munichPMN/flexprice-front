@@ -944,7 +944,7 @@ const SubscriptionForm = ({
 							<AccordionTrigger className='px-5 py-4'>
 								<span className='flex min-w-0 flex-1 items-center'>
 									<span className='min-w-0 flex-1 truncate'>Free trial</span>
-									<span className='ml-auto flex shrink-0 items-center pl-2'>
+									<span className='ms-auto flex shrink-0 items-center ps-2'>
 										<BillingAccordionInfoTooltip
 											ariaLabel='About free trial'
 											description='Optional trial length for this subscription in days. Leave empty to use the plan default (or no trial if the plan defines none).'
@@ -972,7 +972,7 @@ const SubscriptionForm = ({
 							<AccordionTrigger className='px-5 py-4'>
 								<span className='flex min-w-0 flex-1 items-center'>
 									<span className='min-w-0 flex-1 truncate'>Proration behavior</span>
-									<span className='ml-auto flex shrink-0 items-center pl-2'>
+									<span className='ms-auto flex shrink-0 items-center ps-2'>
 										<BillingAccordionInfoTooltip
 											ariaLabel='About proration'
 											description='When enabled, mid-cycle subscription changes generate proration line items so invoices reflect time spent on each price.'
@@ -1000,7 +1000,7 @@ const SubscriptionForm = ({
 							<AccordionTrigger className='px-5 py-4'>
 								<span className='flex min-w-0 flex-1 items-center'>
 									<span className='min-w-0 flex-1 truncate'>Auto invoice threshold</span>
-									<span className='ml-auto flex shrink-0 items-center pl-2'>
+									<span className='ms-auto flex shrink-0 items-center ps-2'>
 										<BillingAccordionInfoTooltip
 											ariaLabel='About auto invoice threshold'
 											description='Usage amount that can trigger an invoice before the period ends. Available when charges are usage-based; fixed-price subscription charges disable this field.'

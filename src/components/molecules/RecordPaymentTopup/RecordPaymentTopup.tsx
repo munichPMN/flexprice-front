@@ -403,11 +403,11 @@ const RecordPaymentTopup: FC<Props> = ({
 					{formData.payment_method_type && renderPaymentMethodFields()}
 
 					<div className='pt-2 flex justify-end'>
-						<Button variant='outline' onClick={() => onOpenChange(false)} className='mr-2'>
+						<Button variant='outline' onClick={() => onOpenChange(false)} className='me-2'>
 							Cancel
 						</Button>
 						<Button onClick={handleSubmit} disabled={isPending || !formData.payment_method_type} isLoading={isPending}>
-							{isPending && <LoaderCircleIcon className='w-4 h-4 animate-spin mr-2' />}
+							{isPending && <LoaderCircleIcon className='w-4 h-4 animate-spin me-2' />}
 							Record
 						</Button>
 					</div>

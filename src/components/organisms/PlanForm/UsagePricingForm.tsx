@@ -654,10 +654,10 @@ const UsagePricingForm: FC<Props> = ({
 
 			<Spacer height={'16px'} />
 			<div className='flex justify-end'>
-				<Button onClick={handleCancel} variant='secondary' className='mr-4 text-zinc-900'>
+				<Button onClick={handleCancel} variant='secondary' className='me-4 text-zinc-900'>
 					{price.internal_state === PriceInternalState.EDIT ? 'Delete' : 'Cancel'}
 				</Button>
-				<Button onClick={handleSubmit} variant='default' className='mr-4 font-normal'>
+				<Button onClick={handleSubmit} variant='default' className='me-4 font-normal'>
 					{price.internal_state === PriceInternalState.EDIT ? 'Update' : 'Add'}
 				</Button>
 			</div>

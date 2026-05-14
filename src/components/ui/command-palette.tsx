@@ -126,7 +126,7 @@ const CommandItem = React.forwardRef<
 		{...props}>
 		{children}
 		<span
-			className='ml-auto flex size-6 shrink-0 items-center justify-center rounded bg-white p-1 shadow-sm dark:bg-white/10 text-muted-foreground/90 opacity-0 transition-opacity group-data-[selected=true]:opacity-100'
+			className='ms-auto flex size-6 shrink-0 items-center justify-center rounded bg-white p-1 shadow-sm dark:bg-white/10 text-muted-foreground/90 opacity-0 transition-opacity group-data-[selected=true]:opacity-100'
 			aria-hidden>
 			<CornerDownLeft className='size-4' />
 		</span>

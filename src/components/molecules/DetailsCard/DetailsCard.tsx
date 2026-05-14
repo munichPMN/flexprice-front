@@ -40,7 +40,7 @@ const Tag: FC<{ tag: NonNullable<Detail['tag']> }> = ({ tag }) => {
 	};
 
 	return (
-		<span className={cn('text-xs px-2 py-0.5 rounded ml-2 inline-block', variantClasses[tag.variant || 'default'], tag.className)}>
+		<span className={cn('text-xs px-2 py-0.5 rounded ms-2 inline-block', variantClasses[tag.variant || 'default'], tag.className)}>
 			{tag.text}
 		</span>
 	);
@@ -78,7 +78,7 @@ const DetailsCard: FC<Props> = ({
 
 		return cn(
 			variantClasses[detail.valueVariant || 'default'],
-			variant === 'right-aligned' ? 'text-right' : 'text-left',
+			variant === 'right-aligned' ? 'text-end' : 'text-start',
 			detail.valueClassName,
 		);
 	};

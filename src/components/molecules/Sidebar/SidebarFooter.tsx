@@ -57,7 +57,7 @@ const SidebarFooter = () => {
 				tooltip={'Documentation'}
 				className={cn(`flex items-center justify-between gap-2 hover:bg-muted transition-colors my-0 py-1 `)}>
 				<span className='flex items-center gap-2'>
-					<BookOpen className={cn('size-5 mr-1 !stroke-[1.5px]')} />
+					<BookOpen className={cn('size-5 me-1 !stroke-[1.5px]')} />
 					<span className='text-sm select-none'>{'Documentation'}</span>
 				</span>
 				<ExternalLink />
@@ -71,7 +71,7 @@ const SidebarFooter = () => {
 							<div className='size-5 text-xs   bg-primary text-primary-foreground flex justify-center items-center rounded-full flex-shrink-0 font-medium'>
 								{user?.email ? user.email.charAt(0).toUpperCase() : 'F'}
 							</div>
-							<div className={cn('min-w-0 flex-1 text-left', sidebarOpen ? '' : 'hidden')}>
+							<div className={cn('min-w-0 flex-1 text-start', sidebarOpen ? '' : 'hidden')}>
 								<p className='text-xs text-muted-foreground truncate'>{user?.email}</p>
 							</div>
 						</div>
