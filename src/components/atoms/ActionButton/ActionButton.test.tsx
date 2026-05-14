@@ -105,7 +105,6 @@ describe('ActionButton Component', () => {
 		});
 
 		it('should render with custom trigger icon', () => {
-			/* eslint-disable-next-line i18next/no-literal-string -- test-only marker text */
 			const customIcon = <span data-testid='custom-icon'>Custom</span>;
 
 			render(

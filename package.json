@@ -16,12 +16,7 @@
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui",
-    "validate:i18n": "node scripts/validate-i18n-locales.mjs",
-    "lint": "eslint src vite.config.ts vitest.config.ts .storybook",
-    "lint:report": "eslint src vite.config.ts vitest.config.ts .storybook -f json -o scripts/.eslint-i18n-report.json",
-    "lint:i18n-audit": "node scripts/eslint-i18n-audit.mjs",
-    "lint:i18n-audit:ui": "node scripts/eslint-i18n-audit.mjs --ui --write-summary=docs/superpowers/reports/i18n-audit-ui-summary.json",
-    "lint:i18n-audit:tests": "node scripts/eslint-i18n-audit.mjs --with-tests"
+    "lint": "eslint src vite.config.ts vitest.config.ts .storybook"
   },
   "dependencies": {
     "@csvbox/react": "^1.1.11",
@@ -117,7 +112,6 @@
     "eslint-plugin-i18next": "^6.1.4",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "eslint-plugin-storybook": "^0.11.1",
     "globals": "^15.12.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
@@ -130,11 +124,6 @@
     "typescript-eslint": "^8.15.0",
     "vite": "^6.4.1",
     "vitest": "^3.1.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
