@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BILLING_MODEL, Price, PRICE_TYPE, TIER_MODE, CreatePriceTier } from '@/models';
@@ -220,12 +221,35 @@ const OverrideTooltip: FC<{
 					sideOffset={5}
 					className='bg-white border border-gray-200 shadow-lg text-sm text-gray-900 px-4 py-3 rounded-lg max-w-[300px]'>
 					<div className='space-y-2'>
-						<div className='font-medium text-gray-900'>{t('catalog:chargeValue.priceOverrideApplied')}</div>
-						{changes.map((change, index) => (
-							<div key={index} className='text-sm text-gray-600'>
-								• {change}
-							</div>
-						))}
+						<div className='font-medium text-gray-900'>Price Override Applied</div>
+						{changes.map((change, index) => {
+							// Check if this is a tier change that should be formatted as a table
+							if (change.startsWith('Tier ') && change.includes(':')) {
+								const tierInfo = change.split(': ');
+								const tierHeader = tierInfo[0];
+								const tierDetails = tierInfo[1];
+
+								return (
+									<div key={index} className='text-sm text-gray-600 space-y-1'>
+										<div className='font-medium'>{tierHeader}:</div>
+										<div className='ml-2 space-y-1'>
+											{tierDetails.split(', ').map((detail, detailIndex) => (
+												<div key={detailIndex} className='text-xs'>
+													• {detail}
+												</div>
+											))}
+										</div>
+									</div>
+								);
+							}
+
+							// Regular change format
+							return (
+								<div key={index} className='text-sm text-gray-600'>
+									• {change}
+								</div>
+							);
+						})}
 					</div>
 				</TooltipContent>
 			</Tooltip>
