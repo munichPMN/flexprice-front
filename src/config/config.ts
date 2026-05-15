@@ -196,5 +196,3 @@ export function initTypography(): void {
 	if (typeof document === 'undefined') return;
 	document.documentElement.style.setProperty('--font-sans', config.typography.fontFamily);
 }
-
- 
