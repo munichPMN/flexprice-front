@@ -35,6 +35,14 @@ jobs:
         # Pretty-printed JSON contains newlines — must use multiline GITHUB_OUTPUT
         # syntax or only the first line is captured and the rest breaks parsing.
         run: |
+          if [ -z "${DEPLOYMENTS_CONFIG// }" ]; then
+            echo "::error::DEPLOYMENTS_CONFIG secret is empty or not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          if ! echo "$DEPLOYMENTS_CONFIG" | jq -e 'type == "array" and length > 0' > /dev/null 2>&1; then
+            echo "::error::DEPLOYMENTS_CONFIG must be a non-empty JSON array (see workflow header comment)."
+            exit 1
+          fi
           delimiter='DEPLOYMENTS_MATRIX_JSON_EOF'
           {
             echo "matrix<<${delimiter}"
@@ -46,12 +54,14 @@ jobs:
 
   deploy:
     needs: setup
+    if: ${{ needs.setup.result == 'success' && needs.setup.outputs.matrix != '' && needs.setup.outputs.matrix != '[]' }}
     name: Deploy / ${{ matrix.deployment.name }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        deployment: ${{ fromJSON(needs.setup.outputs.matrix) }}
+        # Fallback avoids "fromJSON: empty input" when setup fails or output is unset.
+        deployment: ${{ fromJSON(needs.setup.outputs.matrix != '' && needs.setup.outputs.matrix || '[]') }}
 
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
