@@ -6,6 +6,7 @@ zerops:
         - npm install
         - npm run build
       deployFiles:
-        - dist/*
+        - dist
     run:
       base: static@latest
+      site: dist
