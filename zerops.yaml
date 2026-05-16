@@ -9,3 +9,4 @@ zerops:
         - dist
     run:
       base: static@latest
+      site: dist
