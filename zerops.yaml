@@ -3,10 +3,8 @@ zerops:
     build:
       base: nodejs@22
       buildCommands:
-        - npm install
-        - npm run build
-      deployFiles:
-        - dist
+        - npm install 
+        - npm run build 
+        - mv dist/* .
     run:
       base: static@latest
-      site: dist
