@@ -3,9 +3,9 @@ zerops:
     build:
       base: nodejs@22
       buildCommands:
-        - npm install
+        - npm ci
         - npm run build
       deployFiles:
-        - dist
+        - dist/~
     run:
       base: static@latest
